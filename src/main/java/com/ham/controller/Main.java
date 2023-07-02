@@ -9,15 +9,34 @@ import com.ham.member.TestService;
 @Controller
 public class Main {
 	
-	@Autowired
-	private TestService service;
-	
-	@GetMapping("/home.do")
-	public String m1() {
-
-		System.out.println(service.test());
+	@GetMapping("/index.do")
+	public String index() {
 		
-		return "home";
+		return "index";
+	}
+	
+	@GetMapping("/login.do")
+	public String login() {
+		
+		return "member/login";
+	}
+	
+	@GetMapping("/user_type.do")
+	public String usertype() {
+		
+		return "member/user_type";
+	}
+	
+	@GetMapping("/member_signup.do")
+	public String memberSignup() {
+		
+		return "member/member_signup";
+	}
+	
+	@GetMapping("/business_signup.do")
+	public String businessSignup() {
+		
+		return "member/business_signup";
 	}
 
 }

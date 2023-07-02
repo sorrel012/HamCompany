@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'GoryeongStrawberry';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.title {
+    font-family: 'GoryeongStrawberry';
+}
+
+.col-6 {
+    overflow: hidden;
+}
+
+.col-6 > img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.col-6 > img {
+    object-fit: cover;
+    width: 500px;
+    transition: all 0.2s linear;   
+}

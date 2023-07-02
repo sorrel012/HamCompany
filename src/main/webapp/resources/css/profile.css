@@ -1,0 +1,8 @@
+.nav-item.active > a {
+    color: tomato !important; 
+    font-weight: bold;
+}
+
+.text-hover:hover {
+    font-weight: bold;
+}
