@@ -187,4 +187,16 @@ public class Main {
 		return "portfolio/portfolio_view";
 	}
 	
+	@GetMapping("/campaign.do")
+	public String campaign() {
+		
+		return "inc/campaign";
+	}
+	
+	@GetMapping("/addinquiry.do")
+	public String addinquiry() {
+		
+		return "inc/addinquiry";
+	}
+	
 }
