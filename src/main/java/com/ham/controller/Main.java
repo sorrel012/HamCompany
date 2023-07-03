@@ -178,13 +178,13 @@ public class Main {
 	@GetMapping("/portfolio.do")
 	public String portfolio() {
 		
-		return "board/portfolio";
+		return "portfolio/portfolio";
 	}
 	
 	@GetMapping("/portfolio_view.do")
 	public String portfolioView() {
 		
-		return "board/portfolio_view";
+		return "portfolio/portfolio_view";
 	}
 	
 }
