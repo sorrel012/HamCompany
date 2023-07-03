@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+.text-start  {
+    margin-bottom: 20px;
+}
+
+.fw-bold.active {
+    color: tomato !important; 
+    font-weight: bold;
+}
+
+.profile-view {
+    background-color: #F1F1F1;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-img {
+    width: 200px;
+    border-radius: 80px;
+}
+
+.profile-content {
+    width: 93%;
+    height: 93%;
+}
+
+.userinfo {
+    width: 600px;
+    margin-right: 125px;
+}
+
+.userinfo td {
+    padding: 0;
+}
+
+
+.profile-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userinfo tr:nth-child(odd) > td {
+    padding-bottom: 0;
+    vertical-align: bottom;
+    font-weight: 800;
+}
+
+.userinfo tr:nth-child(odd) > td:after {
+    content: "";
+    display: block;
+    width: 100px;
+    border-bottom: 1px solid black;
+  }
+
+
+.infotbl, .careertbl, .introtbl{
+    margin-top: 100px;
+    margin-left: 30px;
+    height: auto;
+}
+
+
+.tbltitle:after {
+    content: "";
+    display: block;
+    width: 130px;
+    border-bottom: 1px solid black;
+  }
+
+  .tbltitle {
+    font-weight: 800;
+    font-size: larger;
+  }
+
+#ckpro-btns {
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.btn2 {
+    background-color: #7D8184;
+}
+
+.careertbl span {
+    color: blue;
+}
+
+.careertbl {
+    border-spacing: 30px;
+    border-collapse: separate;
+}
+
+.worktbl td:nth-child(1) {
+    font-weight: 800;
+}

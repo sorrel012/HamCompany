@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+.card {
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+.mybtn {
+	border: none;
+	border-radius: 5px;
+	padding: 7px 15px;
+	color: white;
+	background-color: #DB4444;
+}
+
+.rcs {
+	margin-right: 20px;
+}
+
+.scroll::-webkit-scrollbar {
+	display: none;
+}
+
+.headline {
+	display: flex;
+	justify-content: space-between;
+}
+
+.side-headline {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.container-lg {
+	border: 1px solid black;
+	border-radius: 5px;
+	height: 960px;
+}
+
+.list {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid black;
+}
+
+.container-sm :last-child {
+	border-bottom: none !important;
+}
+
+.list-head {
+	margin: 10px;
+	display: flex;
+}
+
+.profile {
+	width: 50px;
+	height: 50px;
+}
+
+.profile-detail {
+	display: flex;
+	flex-direction: column;
+	margin-left: 5px;
+}
+
+.name {
+	margin: 3px;
+	font-weight: bold;
+}
+
+.time {
+	color: gray;
+	margin: 3px;
+	font-size: 13px;
+}
+
+.content {
+	margin-left: 70px;
+}
+
+.list-footer {
+	margin-left: 70px;
+}
+
+.page {
+	display: flex;
+	margin: 20px;
+	justify-content: center;
+}
+
+.page-link {
+	width: 50px;
+	text-align: center;
+	color: white;
+	background-color: tomato;
+}
+
+.title:hover {
+	color: tomato;
+	cursor: pointer;
+}

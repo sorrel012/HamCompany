@@ -1,10 +1,7 @@
 package com.ham.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.ham.member.TestService;
 
 @Controller
 public class Main {
@@ -38,5 +35,156 @@ public class Main {
 		
 		return "member/business_signup";
 	}
+	
+	@GetMapping("/shopping_list.do")
+	public String shoppingList() {
+		
+		return "shop/shopping_list";
+	}
+	
+	@GetMapping("/shopping_view.do")
+	public String shoppingView() {
+		
+		return "shop/shopping_view";
+	}
+	
+	@GetMapping("/payment.do")
+	public String payment() {
+		
+		return "shop/payment";
+	}
+	
+	@GetMapping("/business_profile.do")
+	public String businessProfile() {
+		
+		return "member/business_profile";
+	}
+	
+	@GetMapping("/wish_list.do")
+	public String wishList() {
+		
+		return "member/wish_list";
+	}
+	
+	@GetMapping("/order_list.do")
+	public String orderList() {
+		
+		return "member/order_list";
+	}
+	
+	@GetMapping("/mylisten_list.do")
+	public String myListenList() {
+		
+		return "member/mylisten_list";
+	}
+	
+	@GetMapping("/myportfolio.do")
+	public String myPortfolio() {
+		
+		return "member/myportfolio";
+	}
+	
+	@GetMapping("/addportfolio.do")
+	public String addPortfolio() {
+		
+		return "member/addportfolio";
+	}
+	
+	@GetMapping("/support_detail.do")
+	public String supportDetail() {
 
+		return "member/support_detail";
+	}
+
+	
+	@GetMapping("/myspeak_list.do")
+	public String mySpeakList() {
+		
+		return "member/myspeak_list";
+	}
+	
+	@GetMapping("/jobapply.do") 
+	public String jobApply() {
+		
+		return "member/jobapply";
+	}
+	
+	@GetMapping("/speaklist.do")
+	public String speakList() {
+		
+		return "board/speaklist";
+	}
+	
+	@GetMapping("/speakdetail.do")
+	public String speakDetail() {
+		
+		return "board/speakdetail";
+	}
+	
+	@GetMapping("/speakadd.do")
+	public String speakAdd() {
+		
+		return "board/speakadd";
+	}
+	
+	@GetMapping("/listenlist.do")
+	public String listenList() {
+		
+		return "board/listenlist";
+	}
+	
+	@GetMapping("/listendetail.do")
+	public String listenDetail() {
+		
+		return "board/listendetail";
+	}
+	
+	@GetMapping("/listenadd.do")
+	public String listenAdd() {
+		
+		return "board/listenadd";
+	}
+	
+	@GetMapping("/checkprofile.do")
+	public String checkProfile() {
+		
+		return "admin/checkprofile";
+	}
+	
+	@GetMapping("/checkblacklist.do")
+	public String checkBlackList() {
+		
+		return "admin/checkblacklist";
+	}
+	
+	@GetMapping("/checkinquiry.do")
+	public String checkInquiry() {
+		
+		return "admin/checkinquiry";
+	}
+	
+	@GetMapping("/checkprofile_view.do")
+	public String checkProfileView() {
+		
+		return "admin/checkprofile_view";
+	}
+	
+	@GetMapping("/matching.do")
+	public String matching() {
+		
+		return "admin/matching";
+	}
+	
+	@GetMapping("/portfolio.do")
+	public String portfolio() {
+		
+		return "board/portfolio";
+	}
+	
+	@GetMapping("/portfolio_view.do")
+	public String portfolioView() {
+		
+		return "board/portfolio_view";
+	}
+	
 }
