@@ -24,6 +24,20 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<!-- 파일 업로드 설정 -->
+	<multipart-config>
+	
+		<!-- 첨부파일의 최대 크기 100MB -->
+		<max-file-size>104857600</max-file-size>
+		
+		<!-- 한번에 업로드할 수 있는 파일들의 총 크기 500MB -->
+		<max-request-size>524288000</max-request-size>
+		
+		<!-- 업로드에 사용할 메모리 용량 100MB -->
+		<file-size-threshold>104857600</file-size-threshold>
+	
+	</multipart-config>
 
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>

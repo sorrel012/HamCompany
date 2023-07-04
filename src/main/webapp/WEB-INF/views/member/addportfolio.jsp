@@ -62,42 +62,42 @@
 				</div>
 			</div>
 			
-			<form class="form-control p-3 bg-secondary bg-opacity-10" action="#">
+			<form method="POST" class="form-control p-3 bg-secondary bg-opacity-10" action="/storeportfolio.do" enctype="multipart/form-data" id="p-form">
 			<div class="container-lg">
 				<div class="mb-3">
 					<div class="mb-2 fw-bold">제목</div>
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" name="p_subject" required>
 				</div>
 				<div class="mb-2 fw-bold p-matop p-mabottom">작업정보</div>				
 					<div class="d-flex flex-column mb-2">
 						<div class="mb-1">서비스 종류</div>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="p_service" required>
 					</div>
 					<div class="d-flex flex-column mb-2">
 						<div class="mb-1">지역정보</div>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="p_location" required>
 					</div>
 					<div class="d-flex flex-column mb-2">
 						<div class="mb-1">작업 소요 시간</div>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="p_time" required>
 					</div>
 					<div class="d-flex flex-column mb-2">
 						<div class="mb-1">작업 년도</div>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="p_year" required>
 					</div>
 					<div class="mb-3 w-100 p-matop">
-						<label for="formFile" class="form-label fw-bold">이미지 첨부</label> <input
-							class="form-control" type="file" id="formFile">
+						<label for="formFile" class="form-label fw-bold">이미지 첨부</label> 
+						<input class="form-control" type="file" id="formFile" name="attach" multiple required>
 					</div>									
 				</div>
 				<div class="p-right p-matop">
-					<button type="button" class="btn btn-primary w-5 fs-5 p-maright"style="background-color: #5179D9;">등록</button>
+					<button type="submit" class="btn btn-primary w-5 fs-5 p-maright"style="background-color: #5179D9;">등록</button>
 				</div>
+				
 			</form>
 		</div>
 
 	</div>
-
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>	

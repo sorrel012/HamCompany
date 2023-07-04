@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ham.mapper.PortfolioMapper">
+
+	<insert id="add">
+	
+		<selectKey keyProperty="p_seq" order="BEFORE" resultType="String">
+			select p_seq.nextval from dual;
+		</selectKey>
+		
+		insert into tblPortfolio (p_seq, m_id, p_subject, p_service, p_location, p_time, p_year)
+			values (#{p_seq}, #{m_id}, #{p_subject}, #{p_sevice}, #{p_location}, #{p_time}, #{p_year})
+		
+	</insert>
+	
+	<insert id="addGallery">
+	
+		insert into tblPGallery (pg_seq, pg_name, p_seq)
+			values(pg_seq.nextval, #{pg_name}, #{p_seq})
+		
+	</insert>
+
+</mapper>

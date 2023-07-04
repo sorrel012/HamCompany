@@ -60,7 +60,7 @@
 						<h3 class="h3 pb-2 m-0 fw-bold">나의 포트폴리오</h3>
 					</div>
 					<div>
-						<button class="btn">포트폴리오 등록</button>
+						<button class="btn" onclick="location.href='/addportfolio.do';">포트폴리오 등록</button>
 					</div>
 				</div>
 			</div>
