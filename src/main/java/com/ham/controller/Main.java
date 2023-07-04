@@ -54,29 +54,7 @@ public class Main {
 		return "shop/payment";
 	}
 	
-	@GetMapping("/business_profile.do")
-	public String businessProfile() {
-		
-		return "member/business_profile";
-	}
 	
-	@GetMapping("/wish_list.do")
-	public String wishList() {
-		
-		return "member/wish_list";
-	}
-	
-	@GetMapping("/order_list.do")
-	public String orderList() {
-		
-		return "member/order_list";
-	}
-	
-	@GetMapping("/mylisten_list.do")
-	public String myListenList() {
-		
-		return "member/mylisten_list";
-	}
 	
 	@GetMapping("/myportfolio.do")
 	public String myPortfolio() {

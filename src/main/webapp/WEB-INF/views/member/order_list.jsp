@@ -33,23 +33,19 @@
 				<div class="mb-1 fw-bold">회원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">사업자 프로필</a></li>
+						class="text-decoration-none text-dark" href="/business_profile.do">사업자 프로필</a></li>
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">포트폴리오</a></li>
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">위시리스트</a></li>
+						class="text-decoration-none text-dark" href="/wish_list.do">위시리스트</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">주문 정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">주문 내역</a></li>
-					</li>
+						class="text-decoration-none text-dark" href="/order_list.do">주문 내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">커뮤니티</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">작성한 글</a></li>
-					</li>
+						class="text-decoration-none text-dark" href="/mylisten_list.do">들어볼텨</a></li>
 				</ul>
 			</nav>
 		</div>

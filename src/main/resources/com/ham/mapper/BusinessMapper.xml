@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ham.mapper.BusinessMapper">
+
+	<select id="profile" resultType="com.ham.domain.BusinessDTO">
+		select * from tblBusiness b
+		inner join tblBdetail bd
+		on b.b_id = bd.b_id
+		where b.b_id = #{b_id}
+	</select>
+	
+	<update id="updateprofile1" parameterType="com.ham.domain.BusinessDTO">
+	    UPDATE tblBusiness
+	    SET b_email = #{b_email},
+	        b_tel = #{b_tel}
+	    WHERE b_id = #{b_id}
+	</update>
+	
+	<update id="updateprofile2" parameterType="com.ham.domain.BusinessDTO">
+	    UPDATE tblBdetail
+	    SET bd_address = #{bd_address},
+	        bd_address_detail = #{bd_address_detail}
+	    WHERE b_id = #{b_id}
+	</update>
+	
+	<update id="updateprofile3" parameterType="com.ham.domain.BusinessDTO">
+	    UPDATE tblBusiness
+	    SET b_pw = #{b_pw}
+	    WHERE b_id = #{b_id}
+	</update>
+
+</mapper>
