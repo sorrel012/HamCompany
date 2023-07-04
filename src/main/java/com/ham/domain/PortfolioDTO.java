@@ -1,5 +1,7 @@
 package com.ham.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,6 +13,8 @@ public class PortfolioDTO {
 	private String p_service;
 	private String p_location;
 	private String p_time;
-	private String pyear;
+	private String p_year;
+	
+	private List<PGalleryDTO> gallery;
 
 }

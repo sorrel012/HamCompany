@@ -31,9 +31,69 @@ public class myPageController {
 	}
 
 	@GetMapping("/myportfolio.do")
-	public String myPortfolio() {
+	public String myPortfolio(Model model, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		*/
+		String id = "wain1719";
+				
+		List<PortfolioDTO> list = pservice.list(id);
+		
+		model.addAttribute("list", list);
 
 		return "member/myportfolio";
+	}
+	
+	@GetMapping("/editportfolio.do")
+	public String editPortfolio(Model model, String p_seq) {
+
+		List<PortfolioDTO> list = pservice.edit(p_seq);
+		
+		model.addAttribute("list", list);
+		
+		return "member/editportfolio";
+	}
+
+	@PostMapping("/updateportfolio.do")
+	public String updatePortfolio(Model model, PortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		dto.setM_id(id); */
+		dto.setM_id("wain1719");
+		
+		List<String> files = new ArrayList<String>();
+		
+		for (MultipartFile file : attach) {
+			
+			try {
+
+				UUID uuid = UUID.randomUUID();
+
+				String filename = uuid + "_" + file.getOriginalFilename();
+				
+				files.add(filename);
+
+				file.transferTo(new File(req.getRealPath("/resources/img/portfolio") + "\\" + filename));
+				//C:\OneDrive\project\함해볼텨\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ham\resources\img\portfolio
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		@GetMapping("/deleteGallery.do")
+		public String deleteGallery(Model model, String pg_name) {
+		
+		pservice.update(dto, files);
+
+		return "redirect:/myportfolio.do";
 	}
 
 	@GetMapping("/addportfolio.do")

@@ -5,9 +5,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>HamCompany</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/myportfolio.css" />
 </head>
 <body>
 
@@ -69,121 +70,22 @@
 					<tr class="text-center">
 						<td class="col-2">번호</td>
 						<td class="col-6">포트폴리오 제목</td>
-						<td class="col-2">작성날짜</td>
+						<td class="col-2">서비스 종류</td>
 						<td class="col-2">관리</td>
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto">
 					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
+						<td class="col-2 text-truncate" style="height: 60px;">${dto.p_seq}</td>
+						<td class="col-6 text-truncate" style="height: 60px;"><a class="text-black text-decoration-none text-hover" href="/portfolio.do?p_seq=${dto.p_seq}">${dto.p_subject}</a></td>
+						<td class="col-2 text-truncate" style="height: 60px;">${dto.p_service}</td>
 						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
+							<button class="btn" onclick="location.href='/editportfolio.do?p_seq=${dto.p_seq}';">수정</button>
 							<button class="btn bg-secondary">삭제</button>
 						</td>
 					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
-					<tr class="text-center align-middle">
-						<td class="col-2 text-truncate" style="height: 60px;">1</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-truncate" style="height: 60px;">2023-04-01</td>
-						<td class="col-2 text-truncate" style="height: 60px;">
-							<button class="btn">수정</button>
-							<button class="btn bg-secondary">삭제</button>
-						</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">

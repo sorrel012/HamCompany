@@ -35,4 +35,41 @@ public class PortfolioServiceImpl implements PortfolioService {
 		}
 		
 	}
+	
+	@Override
+	public List<PortfolioDTO> list(String id) {
+		
+		List<PortfolioDTO> list = mapper.list(id);
+		
+		return list;
+	}
+	
+	@Override
+	public List<PortfolioDTO> edit(String p_seq) {
+
+		List<PortfolioDTO> list = mapper.edit(p_seq);
+		
+		return list;
+	}
+	
+	@Override
+	public void update(PortfolioDTO dto, List<String> files) {
+
+		mapper.update(dto);
+		
+		for(int i=0; i<files.size(); i++) {
+			
+			if(files.get(i).equals("")) {
+				continue;
+			}
+			
+			PGalleryDTO gdto = new PGalleryDTO();
+			gdto.setP_seq(dto.getP_seq());
+			gdto.setPg_name(files.get(i));
+			
+			//mapper.updateGallery(gdto);
+			
+		}
+		
+	}
 }

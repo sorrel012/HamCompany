@@ -1,0 +1,44 @@
+.p-matop {
+	margin-top: 30px !important;
+}
+
+.p-matop-small {
+	margin-top: 10px !important;
+}
+
+.p-mabottom {
+	margin-bottom: 10px !important;
+}
+
+.p-maright {
+	margin-right: 13px; 
+}
+
+.p-right {
+	text-align: right;
+}
+
+.p-vertical {
+	display: flex;
+	margin-bottom: 5px;
+}
+
+.p-maright-small {
+	margin-right: 5px;
+}
+
+.p-patop-small {
+	padding-top: 1px;
+}
+
+#delTag {
+	text-decoration: none;
+	padding-top: 2px;
+}
+
+#delTag:hover {
+	color: #d00606;
+	font-weight: bold;
+}
+
+
