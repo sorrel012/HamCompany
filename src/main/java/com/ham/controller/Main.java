@@ -54,6 +54,12 @@ public class Main {
 		return "shop/payment";
 	}
 	
+	@GetMapping("/user_profile.do")
+	public String userProfile() {
+		
+		return "member/user_profile";
+	}
+	
 	@GetMapping("/business_profile.do")
 	public String businessProfile() {
 		
@@ -103,7 +109,7 @@ public class Main {
 		return "member/myspeak_list";
 	}
 	
-	@GetMapping("/jobapply.do") 
+	@GetMapping("/jobapply.do")
 	public String jobApply() {
 		
 		return "member/jobapply";
