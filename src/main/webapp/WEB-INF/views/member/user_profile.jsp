@@ -46,8 +46,6 @@
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="#">들어볼텨</a></li>
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">말해볼텨</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -59,9 +57,9 @@
 			</div>
 			<form class="form-control p-4 bg-secondary bg-opacity-10">
 				<div class="fw-bold d-lg-flex align-items-center">
-					<div class="w-50 me-5">
+					<div class="w-50 me-5 a-email">
 						<p class="m-0 mb-2 w-auto">이메일</p>
-						<input class="form-control" type="email" value="user@gamil.com"
+						<input class="form-control" type="email" value="user@gmail.com"
 							readonly>
 					</div>
 					<div class="w-50">
@@ -71,6 +69,11 @@
 								style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
 								type="text" value="서울시 강남구" readonly>
 							<button class="btn w-25">검색</button>
+						</div>
+						<div class="d-flex btn-group a-detail">
+							<input class="form-control"
+								style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
+								type="text" value="상세주소" readonly>
 						</div>
 					</div>
 				</div>

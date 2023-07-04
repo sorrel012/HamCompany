@@ -28,7 +28,7 @@
 			</nav>
 		</section>
 
-		<div class="col-3 container-lg">
+		<div class="col-sm-3 col-md-3 col-lg-2 container-lg">
 			<nav class="nav d-flex flex-column">
 				<div class="mb-1 fw-bold">회원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
@@ -40,7 +40,7 @@
 				<div class="mb-1 fw-bold">지원 정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">지원 내역 확인</a></li>
+						class="text-decoration-none text-dark" href="#">지원 내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">커뮤니티</div>
 				<ul class="list-unstyled ps-3 mb-2">
