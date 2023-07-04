@@ -32,22 +32,22 @@
 			<nav class="nav d-flex flex-column">
 				<div class="mb-1 fw-bold">회원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
-					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">프로필</a></li>
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">포트폴리오</a></li>
+						class="text-decoration-none text-dark" href="/user_profile.do">프로필</a></li>
+					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/myportfolio.do">포트폴리오</a></li>
 				</ul>
-				<div class="mb-1 fw-bold">지원 정보</div>
+				<div class="mb-1 fw-bold">지원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">지원 내역</a></li>
+						class="text-decoration-none text-dark" href="/support_detail.do">지원 내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">커뮤니티</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">들어볼텨</a></li>
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">말해볼텨</a></li>
+						class="text-decoration-none text-dark" href="/mylisten_list.do">들어볼텨</a></li>
+					<li class="nav-item pb-1 active"><a
+						class="text-decoration-none text-dark" href="/myspeak_list.do">말해볼텨</a></li>
 				</ul>
 			</nav>
 		</div>
