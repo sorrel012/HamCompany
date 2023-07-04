@@ -22,8 +22,8 @@
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
-					<li class="breadcrumb-item" aria-current="page">지원 정보</li>
-					<li class="breadcrumb-item" aria-current="page">지원 내역</li>
+					<li class="breadcrumb-item" aria-current="page">회원정보</li>
+					<li class="breadcrumb-item" aria-current="page">포트폴리오</li>
 				</ol>
 			</nav>
 		</section>
@@ -37,7 +37,7 @@
 					<li class="nav-item pb-1 active"><a
 						class="text-decoration-none text-dark" href="#">포트폴리오</a></li>
 				</ul>
-				<div class="mb-1 fw-bold">지원 정보</div>
+				<div class="mb-1 fw-bold">지원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="#">지원 내역</a></li>

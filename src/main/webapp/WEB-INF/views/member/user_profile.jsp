@@ -37,7 +37,7 @@
 					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="#">포트폴리오</a></li>
 				</ul>
-				<div class="mb-1 fw-bold">지원 정보</div>
+				<div class="mb-1 fw-bold">지원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="#">지원 내역 확인</a></li>
