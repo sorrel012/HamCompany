@@ -21,7 +21,7 @@ import com.ham.domain.PortfolioDTO;
 import com.ham.member.PortfolioService;
 
 @Controller
-public class myPageController {
+public class myPortfolioController {
 	
 	@Autowired
 	private PortfolioService pservice;
@@ -48,6 +48,7 @@ public class myPageController {
 
 		return "member/myportfolio";
 	}
+	
 	@GetMapping("/addportfolio.do")
 	public String addPortfolio() {
 
@@ -163,18 +164,6 @@ public class myPageController {
 		return "redirect:/myportfolio.do";
 	}
 
-	@GetMapping("/jobapply.do")
-	public String jobApply() {
-
-		return "member/jobapply";
-	}
-
-	@GetMapping("/support_detail.do")
-	public String supportDetail() {
-
-		return "member/support_detail";
-	}
-
 	@GetMapping("/mylisten_list.do")
 	public String myListenList() {
 
@@ -185,6 +174,18 @@ public class myPageController {
 	public String mySpeakList() {
 
 		return "member/myspeak_list";
+	}
+
+	@GetMapping("/jobapply.do")
+	public String jobApply() {
+
+		return "member/jobapply";
+	}
+
+	@GetMapping("/support_detail.do")
+	public String supportDetail() {
+
+		return "member/support_detail";
 	}
 	
 }
