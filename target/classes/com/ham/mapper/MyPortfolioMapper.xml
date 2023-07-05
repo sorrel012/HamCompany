@@ -21,14 +21,14 @@
 		
 	</insert>
 	
-	<resultMap type="com.ham.domain.PGalleryDTO" id="galleryMap">
+	<resultMap type="com.ham.domain.MyPGalleryDTO" id="galleryMap">
 		<id property="pg_seq" column="pg_seq"/>
 		<result property="pg_seq" column="pg_seq"/>
 		<result property="pg_name" column="pg_name"/>
 		<result property="p_seq" column="p_seq"/>
 	</resultMap>
 	
-	<resultMap type="com.ham.domain.PortfolioDTO" id="portfolioMap">
+	<resultMap type="com.ham.domain.MyPortfolioDTO" id="portfolioMap">
 		<id property="p_seq" column="p_seq"/>
 		<result property="p_seq" column="p_seq" />
 		<result property="m_id" column="m_id" />
@@ -76,7 +76,7 @@
 		    order by p.p_seq, pg.pg_seq
 	</select>
 	
-	<select id="getgallery" resultType="com.ham.domain.PGalleryDTO">
+	<select id="getgallery" resultType="com.ham.domain.MyPGalleryDTO">
 		select 
 			pg_seq,
 			pg_name,

@@ -3,7 +3,7 @@ package com.ham.domain;
 import lombok.Data;
 
 @Data
-public class PGalleryDTO {
+public class MyPGalleryDTO {
 
 	private String pg_seq;
 	private String p_seq;
