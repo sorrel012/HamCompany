@@ -4,11 +4,6 @@
     margin-bottom: 20px;
 }
 
-.fw-bold.active {
-    color: tomato !important; 
-    font-weight: bold;
-}
-
 .profile-view {
     background-color: #F1F1F1;
     display: flex;
@@ -68,10 +63,10 @@
     border-bottom: 1px solid black;
   }
 
-  .tbltitle {
-    font-weight: 800;
-    font-size: larger;
-  }
+.tbltitle {
+  font-weight: 800;
+  font-size: larger;
+}
 
 #ckpro-btns {
     margin-top: 100px;

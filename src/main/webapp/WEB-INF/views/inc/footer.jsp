@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
- <!-- footer -->
  <footer class="container-fluid footer p-0">
    <img src="/resources/img/footer.jpg" alt="footer이미지">
    <div class="container-fluid p-2 bg-dark" style="height: 50px;">

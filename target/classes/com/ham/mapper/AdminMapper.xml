@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ham.mapper.AdminMapper">
+
+	<select id="userList" resultType="com.ham.domain.JopAplDTO">
+		SELECT 
+		    m.m_name AS m_Name,
+		    j.ja_intro AS jaIntro,
+		    to_char(j.ja_regdate, 'yyyy-mm-dd') AS jaRegDate,
+		    f.f_name AS f_Name,
+		    (SELECT COUNT(*) FROM tbljobapl) AS count
+		FROM tbljobapl j
+		    INNER JOIN tblmember m
+		        ON j.m_id = m.m_id
+		    INNER JOIN tblfdetail fd
+		        ON j.fd_seq = fd.fd_seq
+		    INNER JOIN tblfield f
+		        ON fd.f_seq = f.f_seq
+	</select>
+	
+	<select id="blackList" resultType="com.ham.domain.BlackListDTO">
+		SELECT
+			bl_writer as blWriter,
+			bl_badmember as blBadmember,
+			bl_title as blTitle,
+			bl_status as blStatus,
+			to_char(bl_regdate, 'yyyy-mm-dd') as blRegdate
+		FROM tblBlacklist
+	</select>
+
+</mapper>

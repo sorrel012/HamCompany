@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			<table class="table table-hover">
+			<table class="row table table-hover m-0">
 				<thead class="table-light">
 					<tr class="row text-center">
 						<td class="col-2">문의자</td>

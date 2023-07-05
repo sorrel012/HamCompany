@@ -9,6 +9,13 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
     <link rel="stylesheet" href="/resources/css/checkprofile.css" />
+    
+    <style type="text/css">
+	   	#list2 {
+	   	    color: tomato !important; 
+	   		font-weight: bold;
+	   	}
+    </style>
 </head>
 <body>
 
@@ -29,20 +36,8 @@
 			</nav>
 		</section>
 
-		<div class="col-sm-3 col-md-3 col-lg-2 container-lg">
-			<nav class="nav d-flex flex-column">
-				<div class="mb-1 fw-bold">회원 관리</div>
-				<ul class="list-unstyled ps-3 mb-2">
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">인재 프로필</a></li>
-					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">불량 회원</a></li>
-				</ul>
-				<div class="fw-bold mb-2">인재 매칭</div>
-				<div class="fw-bold mb-2">고객 문의</div>
-
-			</nav>
-		</div>
+		<!-- sidebar -->
+		<%@ include file="/WEB-INF/views/inc/admin_sidebar.jsp" %>
 
 		<div class="col-sm-9 col-md-9 col-lg-10 container-lg">
 			<div class="container-lg mb-4 p-0">
@@ -64,106 +59,25 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto">
 					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
+						<td class="col-2 text-truncate">${dto.blBadmember}</td>
 						<td class="col-4 text-truncate"><a
 							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
+								${dto.blTitle} </a></td>
+						<c:if test="${dto.blStatus == '경고'}">
+						<td class="col-2 text-danger fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<c:if test="${dto.blStatus == '처리중'}">
+						<td class="col-2 text-success fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<c:if test="${dto.blStatus == '반려'}">
+						<td class="col-2 text-primary fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<td class="col-2 text-truncate">${dto.blWriter}</td>
+						<td class="col-2 text-truncate">${dto.blRegdate}</td>
 					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">
