@@ -163,19 +163,7 @@ public class myPortfolioController {
 		
 		return "redirect:/myportfolio.do";
 	}
-
-	@GetMapping("/mylisten_list.do")
-	public String myListenList() {
-
-		return "member/mylisten_list";
-	}
-
-	@GetMapping("/myspeak_list.do")
-	public String mySpeakList() {
-
-		return "member/myspeak_list";
-	}
-
+	
 	@GetMapping("/jobapply.do")
 	public String jobApply() {
 
