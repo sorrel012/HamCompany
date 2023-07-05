@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/mypage.css" />
 </head>
 <body>
 
@@ -16,7 +17,7 @@
 
 
 	<div
-		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4">
+		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4 p-height">
 
 		<section class="container-lg mb-4">
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -72,33 +73,15 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto">
 					<tr class="text-center">
-						<td class="col-2 text-wrap">1</td>
-						<td class="col-4 text-wrap"><a
-							class="text-dark text-wrap text-decoration-none text-hover"
-							href="#"> 익일지급이라하곤 말이 바뀌는 곳 가도 될지? </a></td>
-						<td class="col-2 text-wrap">2023-06-26</td>
-						<td class="col-2 text-wrap">12</td>
-						<td class="col-2 text-wrap">4</td>
+						<td class="col-2 text-wrap">${dto.hr_seq}</td>
+						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" href="/listenlist.do?hr_seq=${dto.hr_seq}"> ${dto.hr_subject} </a></td>
+						<td class="col-2 text-wrap">${dto.hr_regdate}</td>
+						<td class="col-2 text-wrap">${dto.hr_hit}</td>
+						<td class="col-2 text-wrap">${dto.hr_comment}</td>
 					</tr>
-					<tr class="text-center">
-						<td class="col-2 text-wrap">1</td>
-						<td class="col-4 text-wrap"><a
-							class="text-dark text-wrap text-decoration-none text-hover"
-							href="#"> 익일지급이라하곤 말이 바뀌는 곳 가도 될지? </a></td>
-						<td class="col-2 text-wrap">2023-06-26</td>
-						<td class="col-2 text-wrap">12</td>
-						<td class="col-2 text-wrap">4</td>
-					</tr>
-					<tr class="text-center">
-						<td class="col-2 text-wrap">1</td>
-						<td class="col-4 text-wrap"><a
-							class="text-dark text-wrap text-decoration-none text-hover"
-							href="#"> 익일지급이라하곤 말이 바뀌는 곳 가도 될지? </a></td>
-						<td class="col-2 text-wrap">2023-06-26</td>
-						<td class="col-2 text-wrap">12</td>
-						<td class="col-2 text-wrap">4</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">

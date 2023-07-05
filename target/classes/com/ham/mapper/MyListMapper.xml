@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ham.mapper.MyListMapper">
+
+	<select id="llist" resultType="com.ham.domain.MyHReviewDTO">
+		select 
+			hr_seq,
+			m_id,
+			hr_subject,
+			hr_company,
+			hr_regdate,
+			hr_content,
+			fd_seq,
+			hr_hit
+		from tblHReview
+			where m_id=#{id}
+	</select>
+	
+	<select id="lcomment" resultType="String">
+		select 
+			count(hrc_content) as hr_comment
+		from tblHRComment
+			where hr_seq=#{hr_seq}
+	</select>
+
+</mapper>
