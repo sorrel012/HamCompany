@@ -18,13 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
-import com.ham.member.PortfolioService;
+import com.ham.member.MyPortfolioService;
 
 @Controller
 public class myPortfolioController {
 	
 	@Autowired
-	private PortfolioService pservice;
+	private MyPortfolioService pservice;
 
 	@GetMapping("/user_profile.do")
 	public String userProfile() {
