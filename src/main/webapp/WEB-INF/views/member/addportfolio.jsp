@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>HamCompany</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
-	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/myprofile.css" />
 	<link rel="stylesheet" href="/resources/css/myportfolio.css" />
 </head>
 <body>

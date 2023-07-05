@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>HamCompany</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
-	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/myprofile.css" />
 	<link rel="stylesheet" href="/resources/css/myportfolio.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>

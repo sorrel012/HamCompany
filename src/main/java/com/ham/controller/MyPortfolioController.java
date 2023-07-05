@@ -26,12 +26,6 @@ public class MyPortfolioController {
 	@Autowired
 	private MyPortfolioService service;
 
-	@GetMapping("/user_profile.do")
-	public String userProfile() {
-
-		return "member/user_profile";
-	}
-
 	@GetMapping("/myportfolio.do")
 	public String myPortfolio(Model model, HttpServletRequest req) {
 		
