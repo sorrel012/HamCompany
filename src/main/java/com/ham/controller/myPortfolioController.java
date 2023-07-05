@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ham.domain.PGalleryDTO;
-import com.ham.domain.PortfolioDTO;
+import com.ham.domain.MyPGalleryDTO;
+import com.ham.domain.MyPortfolioDTO;
 import com.ham.member.MyPortfolioService;
 
 @Controller
@@ -42,7 +42,7 @@ public class myPortfolioController {
 		*/
 		String id = "wain1719";
 				
-		List<PortfolioDTO> list = service.list(id);
+		List<MyPortfolioDTO> list = service.list(id);
 		
 		model.addAttribute("list", list);
 
@@ -56,7 +56,7 @@ public class myPortfolioController {
 	}
 	
 	@PostMapping("/storeportfolio.do")
-	public String storePortfolio(Model model, PortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req) {
+	public String storePortfolio(Model model, MyPortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req) {
 		
 		//접속자 아이디
 		HttpSession session = req.getSession();
@@ -94,7 +94,7 @@ public class myPortfolioController {
 	@GetMapping("/editportfolio.do")
 	public String editPortfolio(Model model, String p_seq) {
 
-		List<PortfolioDTO> list = service.edit(p_seq);
+		List<MyPortfolioDTO> list = service.edit(p_seq);
 		
 		model.addAttribute("list", list);
 		
@@ -102,15 +102,15 @@ public class myPortfolioController {
 	}
 
 	@PostMapping("/updateportfolio.do")
-	public String updatePortfolio(Model model, PortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req) {
+	public String updatePortfolio(Model model, MyPortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req) {
 		
 		List<String> files = new ArrayList<String>();
 		
 		String[] orgFiles = req.getParameterValues("pg_name");
 
-		List<PGalleryDTO> gallery = service.gallerylist(dto.getP_seq());
+		List<MyPGalleryDTO> gallery = service.gallerylist(dto.getP_seq());
 		
-		for(PGalleryDTO gdto : gallery) {
+		for(MyPGalleryDTO gdto : gallery) {
 			
 			String name = gdto.getPg_name();
 			

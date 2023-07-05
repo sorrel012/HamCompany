@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ham.domain.PGalleryDTO;
-import com.ham.domain.PortfolioDTO;
+import com.ham.domain.MyPGalleryDTO;
+import com.ham.domain.MyPortfolioDTO;
 import com.ham.mapper.MyPortfolioMapper;
 
 @Service
@@ -16,7 +16,7 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 	private MyPortfolioMapper mapper;
 
 	@Override
-	public void add(PortfolioDTO dto, List<String> files) {
+	public void add(MyPortfolioDTO dto, List<String> files) {
 		
 		mapper.add(dto);
 		
@@ -26,7 +26,7 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 				continue;
 			}
 			
-			PGalleryDTO gdto = new PGalleryDTO();
+			MyPGalleryDTO gdto = new MyPGalleryDTO();
 			gdto.setP_seq(dto.getP_seq());
 			gdto.setPg_name(files.get(i));
 			
@@ -37,25 +37,25 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 	}
 	
 	@Override
-	public List<PortfolioDTO> list(String id) {
+	public List<MyPortfolioDTO> list(String id) {
 		
-		List<PortfolioDTO> list = mapper.list(id);
-		
-		return list;
-	}
-	
-	@Override
-	public List<PortfolioDTO> edit(String p_seq) {
-
-		List<PortfolioDTO> list = mapper.edit(p_seq);
+		List<MyPortfolioDTO> list = mapper.list(id);
 		
 		return list;
 	}
 	
 	@Override
-	public List<PGalleryDTO> gallerylist(String p_seq) {
+	public List<MyPortfolioDTO> edit(String p_seq) {
 
-		List<PGalleryDTO> list = mapper.getgallery(p_seq);
+		List<MyPortfolioDTO> list = mapper.edit(p_seq);
+		
+		return list;
+	}
+	
+	@Override
+	public List<MyPGalleryDTO> gallerylist(String p_seq) {
+
+		List<MyPGalleryDTO> list = mapper.getgallery(p_seq);
 		
 		return list;
 	}
@@ -68,7 +68,7 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 	}
 	
 	@Override
-	public void update(PortfolioDTO dto, List<String> files) {
+	public void update(MyPortfolioDTO dto, List<String> files) {
 
 		mapper.update(dto);
 		
@@ -78,7 +78,7 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 				continue;
 			}
 			
-			PGalleryDTO gdto = new PGalleryDTO();
+			MyPGalleryDTO gdto = new MyPGalleryDTO();
 			gdto.setP_seq(dto.getP_seq());
 			gdto.setPg_name(files.get(i));
 			

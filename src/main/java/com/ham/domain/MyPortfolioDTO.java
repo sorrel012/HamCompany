@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class PortfolioDTO {
+public class MyPortfolioDTO {
 	
 	private String p_seq;
 	private String m_id;
@@ -15,6 +15,6 @@ public class PortfolioDTO {
 	private String p_time;
 	private String p_year;
 	
-	private List<PGalleryDTO> gallery;
+	private List<MyPGalleryDTO> gallery;
 
 }

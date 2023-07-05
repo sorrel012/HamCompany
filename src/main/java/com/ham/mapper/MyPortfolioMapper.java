@@ -2,24 +2,24 @@ package com.ham.mapper;
 
 import java.util.List;
 
-import com.ham.domain.PGalleryDTO;
-import com.ham.domain.PortfolioDTO;
+import com.ham.domain.MyPGalleryDTO;
+import com.ham.domain.MyPortfolioDTO;
 
 public interface MyPortfolioMapper {
 
-	void add(PortfolioDTO dto);
+	void add(MyPortfolioDTO dto);
 
-	void addGallery(PGalleryDTO gdto);
+	void addGallery(MyPGalleryDTO gdto);
 
-	List<PortfolioDTO> list(String id);
+	List<MyPortfolioDTO> list(String id);
 
-	List<PortfolioDTO> edit(String p_seq);
+	List<MyPortfolioDTO> edit(String p_seq);
 
-	void update(PortfolioDTO dto);
+	void update(MyPortfolioDTO dto);
 
-	void updateGallery(PGalleryDTO gdto);
+	void updateGallery(MyPGalleryDTO gdto);
 
-	List<PGalleryDTO> getgallery(String p_seq);
+	List<MyPGalleryDTO> getgallery(String p_seq);
 
 	void delFile(String name);
 
