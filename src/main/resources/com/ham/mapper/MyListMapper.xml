@@ -24,4 +24,23 @@
 			where hr_seq=#{hr_seq}
 	</select>
 
+	<select id="slist" resultType="com.ham.domain.MySpeakMDTO">
+		select 
+			sm_seq,
+			m_id,
+			sm_subject,
+			sm_content,
+			sm_regdate,
+			sm_hit
+		from tblSpeakM
+			where m_id=#{id}
+	</select>
+	
+	<select id="scomment" resultType="String">
+		select 
+			count(smc_content) as sm_comment
+		from tblSMComment
+			where sm_seq=#{sm_seq}
+	</select>
+
 </mapper>

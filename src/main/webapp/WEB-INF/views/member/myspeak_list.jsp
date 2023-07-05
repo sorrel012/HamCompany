@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/mypage.css" />
 </head>
 <body>
 
@@ -16,14 +17,14 @@
 
 
 	<div
-		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4">
+		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4 p-height">
 
 		<section class="container-lg mb-4">
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">커뮤니티</li>
-					<li class="breadcrumb-item" aria-current="page">들어볼텨</li>
+					<li class="breadcrumb-item" aria-current="page">말해볼텨</li>
 				</ol>
 			</nav>
 		</section>
@@ -57,7 +58,7 @@
 				<div
 					class="container-lg text-start border-bottom border-2 border-dark d-flex">
 					<div class="text-start">
-						<h3 class="h3 pb-2 m-0 fw-bold">들어볼텨 <small style="font-size : 18px;">작성한 글</small></h3>
+						<h3 class="h3 pb-2 m-0 fw-bold">말해볼텨 <small style="font-size : 18px;">작성한 글</small></h3>
 					</div>
 				</div>
 			</div>
@@ -72,33 +73,15 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto">
 					<tr class="text-center">
-						<td class="col-2 text-wrap">1</td>
-						<td class="col-4 text-wrap"><a
-							class="text-dark text-wrap text-decoration-none text-hover"
-							href="#"> 익일지급이라하곤 말이 바뀌는 곳 가도 될지? </a></td>
-						<td class="col-2 text-wrap">2023-06-26</td>
-						<td class="col-2 text-wrap">12</td>
-						<td class="col-2 text-wrap">4</td>
+						<td class="col-2 text-wrap">${dto.sm_seq}</td>
+						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" href="/speaklist.do?sm_seq=${dto.sm_seq}"> ${dto.sm_subject} </a></td>
+						<td class="col-2 text-wrap">${dto.sm_regdate}</td>
+						<td class="col-2 text-wrap">${dto.sm_hit}</td>
+						<td class="col-2 text-wrap">${dto.sm_comment}</td>
 					</tr>
-					<tr class="text-center">
-						<td class="col-2 text-wrap">1</td>
-						<td class="col-4 text-wrap"><a
-							class="text-dark text-wrap text-decoration-none text-hover"
-							href="#"> 익일지급이라하곤 말이 바뀌는 곳 가도 될지? </a></td>
-						<td class="col-2 text-wrap">2023-06-26</td>
-						<td class="col-2 text-wrap">12</td>
-						<td class="col-2 text-wrap">4</td>
-					</tr>
-					<tr class="text-center">
-						<td class="col-2 text-wrap">1</td>
-						<td class="col-4 text-wrap"><a
-							class="text-dark text-wrap text-decoration-none text-hover"
-							href="#"> 익일지급이라하곤 말이 바뀌는 곳 가도 될지? </a></td>
-						<td class="col-2 text-wrap">2023-06-26</td>
-						<td class="col-2 text-wrap">12</td>
-						<td class="col-2 text-wrap">4</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">
