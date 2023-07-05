@@ -21,7 +21,7 @@ import com.ham.domain.MyPortfolioDTO;
 import com.ham.member.MyPortfolioService;
 
 @Controller
-public class myPortfolioController {
+public class MyPortfolioController {
 	
 	@Autowired
 	private MyPortfolioService service;

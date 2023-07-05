@@ -15,7 +15,7 @@ import com.ham.domain.MySpeakMDTO;
 import com.ham.member.MyListService;
 
 @Controller
-public class myListController {
+public class MyListController {
 	
 	@Autowired
 	private MyListService service;
