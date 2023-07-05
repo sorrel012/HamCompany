@@ -5,7 +5,7 @@ import java.util.List;
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
 
-public interface PortfolioMapper {
+public interface MyPortfolioMapper {
 
 	void add(PortfolioDTO dto);
 

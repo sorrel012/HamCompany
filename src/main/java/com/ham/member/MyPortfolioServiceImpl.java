@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
-import com.ham.mapper.PortfolioMapper;
+import com.ham.mapper.MyPortfolioMapper;
 
 @Service
-public class PortfolioServiceImpl implements PortfolioService {
+public class MyPortfolioServiceImpl implements MyPortfolioService {
 	
 	@Autowired
-	private PortfolioMapper mapper;
+	private MyPortfolioMapper mapper;
 
 	@Override
 	public void add(PortfolioDTO dto, List<String> files) {

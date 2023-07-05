@@ -5,7 +5,7 @@ import java.util.List;
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
 
-public interface PortfolioService {
+public interface MyPortfolioService {
 
 	void add(PortfolioDTO dto, List<String> files);
 
