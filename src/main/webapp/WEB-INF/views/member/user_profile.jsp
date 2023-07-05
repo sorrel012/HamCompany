@@ -57,33 +57,33 @@
 				<h3 class="h3 mb-3 pb-2 fw-bold border-bottom border-2 border-dark">프로필</h3>
 			</div>
 			<form id="editform1" method="POST" class="form-control p-4 bg-secondary bg-opacity-10" action="/user_profile_update.do">
-				<%-- <input type="hidden" id="b_pw" name="b_id" value="${dto.b_id}"> --%>
+				<input type="hidden" id="b_pw" name="m_id" value="${dto.m_id}"> 
 				<div class="fw-bold d-lg-flex align-items-center">
 					<div class="w-50 me-5 a-email">
 						<p class="m-0 mb-2 w-auto">이메일</p>
-						<input class="form-control" type="email" id="email" name="u_email" value="user@gmail.com">
+						<input class="form-control" type="email" id="email" name="m_email" value="${dto.m_email}">
 					</div>
 					<div class="w-50">
 						<p class="m-0 mt-sm-2 mt-md-2 mt-lg-0 mb-2 w-auto">주소</p>
 						<div class="d-flex btn-group">
-							<input class="form-control" id="sample6_address" name="u_address" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" type="text" value="서울시 강남구" readonly>
+							<input class="form-control" id="sample6_address" name="m_address" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" type="text" value="${dto.m_address}" readonly>
 							<input type="button" class="btn w-25 search-btn" value="주소 검색" onclick="sample6_execDaumPostcode()">
 						</div>
 						<div class="d-flex btn-group a-detail">							
-							<input class="form-control mt-2" id="address_detail" name="u_address_detail"							
+							<input class="form-control mt-2" id="address_detail" name="m_address_detail"							
 								style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
-								type="text" value="상세주소" required onchange="checkFields()">
+								type="text" value="${dto.m_address_detail}" required onchange="checkFields()">
 						</div>
 					</div>
 				</div>
 				<div class="fw-bold d-lg-flex align-items-center mt-4">
 					<div class="w-50 me-5">
 						<p class="m-0 mb-2 w-auto">연락처</p>
-						<input class="form-control" type="text" id="phone" name="u_tel" value="010-1234-1234">
+						<input class="form-control" type="text" id="phone" name="m_tel" value="${dto.m_tel}">
 					</div>
 					<div class="w-50">
 						<p class="m-0 mt-sm-2 mt-md-2 mt-lg-0 mb-2 w-auto">생년월일</p>
-						<input class="form-control" type="date" value="1995-07-04" readonly>
+						<input class="form-control" type="date" value="${dto.m_birth}" readonly>
 					</div>
 				</div>
 				<div class="mt-4 text-end">
@@ -96,8 +96,7 @@
 						<p class="m-0 mb-2 w-auto">비밀번호 변경</p>
 						<input class="form-control mb-2" type="password" placeholder="현재 비밀번호" id="nowpw"> 
                   		<input class="form-control mb-2" type="password" placeholder="새 비밀번호" id="newpw"> 
-                  		<input class="form-control mb-2" type="password" name="b_pw" placeholder="새 비밀번호 확인" id="newpw2">
-						<%-- <input type="hidden" id="correct_pw" value="${dto.b_pw}"> --%>
+                  		<input class="form-control mb-2" type="password" name="new_pw" placeholder="새 비밀번호 확인" id="newpw2">
 						<p id="status-message"></p>
                   		<p id="status-message2"></p>						
 					</div>
@@ -120,9 +119,9 @@
 					</div>
 					<div class="modal-body">수정을 진행하시겠습니까?</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-secondary btn-border"
 							data-bs-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary"
+						<button type="submit" class="btn btn-primary btn-border"
 							onclick="submitForm()">확인</button>
 					</div>
 				</div>
@@ -141,9 +140,9 @@
 					</div>
 					<div class="modal-body">수정을 진행하시겠습니까?</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-secondary btn-border"
 							data-bs-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary"
+						<button type="submit" class="btn btn-primary btn-border"
 							onclick="submitForm2()">확인</button>
 					</div>
 				</div>
@@ -190,7 +189,7 @@
 	//현재 비밀번호가 올바른지 확인
 	document.getElementById('nowpw').addEventListener('keyup', function() {
 	    var enteredPassword = document.getElementById('nowpw').value;
-	    var correctPassword = document.getElementById('correct_pw').value; // 여기에 실제 사용자의 비밀번호를 입력해야 합니다.
+	    var correctPassword = '${dto.m_pw}'; // 여기에 실제 사용자의 비밀번호를 입력해야 합니다.
 	    var statusElement = document.getElementById('status-message');
 	    
 	    if (enteredPassword === correctPassword) {
@@ -198,7 +197,7 @@
 	        statusElement.style.color = 'blue';
 	        
 	    } else {
-	        showStatusMessage('올바르지 않은 비밀번호입니다.');
+	        showStatusMessage('잘못된 비밀번호입니다.');
 	        statusElement.style.color = 'red'; 
 	    }
 	    checkbtn();
