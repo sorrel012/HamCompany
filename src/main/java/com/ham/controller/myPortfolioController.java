@@ -24,7 +24,7 @@ import com.ham.member.MyPortfolioService;
 public class myPortfolioController {
 	
 	@Autowired
-	private MyPortfolioService pservice;
+	private MyPortfolioService service;
 
 	@GetMapping("/user_profile.do")
 	public String userProfile() {
@@ -42,7 +42,7 @@ public class myPortfolioController {
 		*/
 		String id = "wain1719";
 				
-		List<PortfolioDTO> list = pservice.list(id);
+		List<PortfolioDTO> list = service.list(id);
 		
 		model.addAttribute("list", list);
 
@@ -86,7 +86,7 @@ public class myPortfolioController {
 			
 		}
 		
-		pservice.add(dto, files);
+		service.add(dto, files);
 
 		return "redirect:/myportfolio.do";
 	}
@@ -94,7 +94,7 @@ public class myPortfolioController {
 	@GetMapping("/editportfolio.do")
 	public String editPortfolio(Model model, String p_seq) {
 
-		List<PortfolioDTO> list = pservice.edit(p_seq);
+		List<PortfolioDTO> list = service.edit(p_seq);
 		
 		model.addAttribute("list", list);
 		
@@ -108,7 +108,7 @@ public class myPortfolioController {
 		
 		String[] orgFiles = req.getParameterValues("pg_name");
 
-		List<PGalleryDTO> gallery = pservice.gallerylist(dto.getP_seq());
+		List<PGalleryDTO> gallery = service.gallerylist(dto.getP_seq());
 		
 		for(PGalleryDTO gdto : gallery) {
 			
@@ -116,7 +116,7 @@ public class myPortfolioController {
 			
 			if (!Arrays.asList(orgFiles).contains(name)) {
 				//파일을 삭제했으면 DB에서 삭제
-				pservice.delFile(name);
+				service.delFile(name);
 				
 		    }
 			
@@ -151,7 +151,7 @@ public class myPortfolioController {
 			
 		}
 				
-		pservice.update(dto, files);
+		service.update(dto, files);
 		
 		return "redirect:/myportfolio.do";
 	}
@@ -159,7 +159,7 @@ public class myPortfolioController {
 	@GetMapping("/delportfolio.do")
 	public String delPortfolio(String p_seq) {
 		
-		pservice.delete(p_seq);
+		service.delete(p_seq);
 		
 		return "redirect:/myportfolio.do";
 	}
