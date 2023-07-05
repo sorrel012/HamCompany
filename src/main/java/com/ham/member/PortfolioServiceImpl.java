@@ -88,4 +88,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 		
 	}
 	
+	@Override
+	public void delete(String p_seq) {
+		
+		mapper.deleteGallery(p_seq);
+		mapper.delete(p_seq);
+		
+	}
+	
 }

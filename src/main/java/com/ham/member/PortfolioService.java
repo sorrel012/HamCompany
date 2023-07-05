@@ -19,4 +19,6 @@ public interface PortfolioService {
 
 	void delFile(String name);
 
+	void delete(String p_seq);
+
 }

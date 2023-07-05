@@ -105,5 +105,15 @@
 		insert into tblPGallery (pg_seq, pg_name, p_seq)
 			values(pg_seq.nextval, #{pg_name}, #{p_seq})		
 	</insert>
+	
+	<delete id="delete">
+		delete from tblPortfolio 
+			where p_seq=#{p_seq}
+	</delete>
+	
+	<delete id="deleteGallery">
+		delete from tblPGallery
+			where p_seq=#{p_seq}
+	</delete>
 
 </mapper>

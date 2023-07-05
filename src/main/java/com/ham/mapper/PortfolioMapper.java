@@ -23,4 +23,8 @@ public interface PortfolioMapper {
 
 	void delFile(String name);
 
+	void delete(String p_seq);
+
+	void deleteGallery(String p_seq);
+
 }

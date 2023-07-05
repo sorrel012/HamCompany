@@ -154,6 +154,14 @@ public class myPageController {
 		
 		return "redirect:/myportfolio.do";
 	}
+	
+	@GetMapping("/delportfolio.do")
+	public String delPortfolio(String p_seq) {
+		
+		pservice.delete(p_seq);
+		
+		return "redirect:/myportfolio.do";
+	}
 
 	@GetMapping("/jobapply.do")
 	public String jobApply() {

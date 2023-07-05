@@ -82,7 +82,7 @@
 						<td class="col-2 text-truncate" style="height: 60px;">${dto.p_service}</td>
 						<td class="col-2 text-truncate" style="height: 60px;">
 							<button class="btn" onclick="location.href='/editportfolio.do?p_seq=${dto.p_seq}';">수정</button>
-							<button class="btn bg-secondary">삭제</button>
+							<button class="btn bg-secondary" onclick="location.href='delportfolio.do?p_seq=${dto.p_seq}';">삭제</button>
 						</td>
 					</tr>
 					</c:forEach>
