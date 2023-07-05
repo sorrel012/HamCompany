@@ -17,7 +17,7 @@
 
 
 	<div
-		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4">
+		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4 p-height">
 
 		<section class="container-lg mb-4">
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">

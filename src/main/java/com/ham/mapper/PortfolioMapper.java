@@ -19,4 +19,8 @@ public interface PortfolioMapper {
 
 	void updateGallery(PGalleryDTO gdto);
 
+	List<PGalleryDTO> getgallery(String p_seq);
+
+	void delFile(String name);
+
 }

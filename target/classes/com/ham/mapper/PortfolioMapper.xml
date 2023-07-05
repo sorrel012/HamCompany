@@ -76,6 +76,21 @@
 		    order by p.p_seq, pg.pg_seq
 	</select>
 	
+	<select id="getgallery" resultType="com.ham.domain.PGalleryDTO">
+		select 
+			pg_seq,
+			pg_name,
+			p_seq
+		from tblPGallery
+			where p_seq = #{p_seq}
+		    	order by pg_seq		
+	</select>	
+	
+	<delete id="delFile">
+		delete from tblPGallery
+			where pg_name=#{name}	
+	</delete>
+	
 	<update id="update">		
 		update tblPortfolio set
 			p_subject = #{p_subject}, 
@@ -86,11 +101,9 @@
 				where p_seq = #{p_seq}		
 	</update>
 	
-	<update id="updateGallery">
-	
+	<insert id="updateGallery">	
 		insert into tblPGallery (pg_seq, pg_name, p_seq)
-			values(pg_seq.nextval, #{pg_name}, #{p_seq})
-		
-	</update>
+			values(pg_seq.nextval, #{pg_name}, #{p_seq})		
+	</insert>
 
 </mapper>

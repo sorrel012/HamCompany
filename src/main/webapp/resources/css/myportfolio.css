@@ -31,14 +31,18 @@
 	padding-top: 1px;
 }
 
-#delTag {
+.delTag {
 	text-decoration: none;
 	padding-top: 2px;
 }
 
-#delTag:hover {
+.delTag:hover {
 	color: #d00606;
 	font-weight: bold;
+}
+
+.p-height {
+	margin-bottom: 150px;
 }
 
 

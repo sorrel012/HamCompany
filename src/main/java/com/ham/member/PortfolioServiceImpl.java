@@ -53,6 +53,21 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 	
 	@Override
+	public List<PGalleryDTO> gallerylist(String p_seq) {
+
+		List<PGalleryDTO> list = mapper.getgallery(p_seq);
+		
+		return list;
+	}
+	
+	@Override
+	public void delFile(String name) {
+		
+		mapper.delFile(name);
+		
+	}
+	
+	@Override
 	public void update(PortfolioDTO dto, List<String> files) {
 
 		mapper.update(dto);
@@ -67,9 +82,10 @@ public class PortfolioServiceImpl implements PortfolioService {
 			gdto.setP_seq(dto.getP_seq());
 			gdto.setPg_name(files.get(i));
 			
-			//mapper.updateGallery(gdto);
+			mapper.updateGallery(gdto);
 			
 		}
 		
 	}
+	
 }

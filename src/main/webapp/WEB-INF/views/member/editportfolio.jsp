@@ -97,10 +97,11 @@
 	 								<div class="p-vertical">
 	 									<span class="material-symbols-outlined p-maright-small">photo_camera</span>
 	 									<span class="p-maright p-patop-small">${fileNameArray[1]}</span>
-			                			<a href='#this' id="delTag" onclick="location.href='/deleteGallery.do?pg_name=${pgallery.pg_name}';">삭제</a>
+	 									<input type="hidden" name="pg_name" value="${pgallery.pg_name}">
+			                			<a href='#this' class="delTag">삭제</a>
 			                		</div>
-						   </c:forEach>	
-			            </div>
+						   	</c:forEach>	
+						</div>
 						<input class="form-control p-matop-small" type="file" id="formFile" name="attach" multiple>
 					</div>									
 				</div>
@@ -121,6 +122,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 
+	$(".delTag").on("click", function(e){
+	   e.preventDefault();
+	   deleteFile($(this));
+	});
+	
+	function deleteFile(obj) {
+	    obj.parent().remove();
+	}
+	
 </script>
 </body>
 </html>
