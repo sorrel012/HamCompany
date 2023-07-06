@@ -189,5 +189,20 @@
 		from tblSMComment
 			where sm_seq=#{sm_seq}
 	</select>
+	
+	<select id="flist" resultType="com.ham.domain.MyFieldDTO">
+		select 
+			f_seq,
+			f_name
+		from tblField
+	</select>
+	
+	<select id="fdlist" resultType="com.ham.domain.MyFDetailDTO">
+		select 
+			fd_seq,
+			f_seq,
+			fd_name
+		from tblFDetail
+	</select>
 
 </mapper>

@@ -17,7 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ham.domain.MyFDetailDTO;
+import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
+import com.ham.domain.MyJACareerDTO;
+import com.ham.domain.MyJAEduDTO;
+import com.ham.domain.MyJALicenseDTO;
+import com.ham.domain.MyJobAPLDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
@@ -271,9 +277,34 @@ public class MyUserController {
 	}
 	
 	@GetMapping("/jobapply.do")
-	public String jobApply() {
+	public String jobApply(Model model) {
 
+		List<MyFieldDTO> fdto = service.flist();
+		List<MyFDetailDTO> fddto = service.fdlist();
+
+		model.addAttribute("fdto", fdto);
+		model.addAttribute("fddto", fddto);
+		
 		return "member/jobapply";
+	}
+	
+	@PostMapping("/jobapply_ins.do")
+	public String jobApplyInsert(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto, HttpServletRequest req) {
+
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		*/
+		String id = "violet123";
+		
+		jobdto.setM_id(id);
+		
+		System.out.println(jobdto);
+		System.out.println(edudto);
+		System.out.println(licdto);
+		
+		return "member/support_detail";
 	}
 
 	@GetMapping("/support_detail.do")
@@ -281,7 +312,6 @@ public class MyUserController {
 
 		return "member/support_detail";
 	}
-	
 	
 	
 }

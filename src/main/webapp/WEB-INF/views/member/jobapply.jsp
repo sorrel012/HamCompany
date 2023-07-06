@@ -23,7 +23,8 @@
 		</div>
 
 		<hr>
-
+		
+		<form method="POST" action="/jobapply_ins.do" enctype="multipart/form-data">
 		<!-- 학력 -->
 		<div class="mb-5">
 			<div class="fw-bold mt-5 fs-4 mb-2">학력</div>
@@ -31,23 +32,22 @@
 				<div class="d-flex mb-4">
 					<div class="col-1 text-truncate">학교(전공)</div>
 
-					<input type="text" class="form-control w-50"
-						id="floatingInputValue" placeholder="학교명을 입력하세요.">
+					<input type="text" class="form-control w-50" id="floatingInputValue" name="jae_content">
 
 				</div>
 				<div class="d-flex">
 					<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업여부</div>
 
 					<div class="form-check me-4">
-						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> 
+						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault1" value="재학 중"> 
 						<label class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
 					</div>
 					<div class="form-check me-4">
-						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked> 
+						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault2" value="졸업 예정"> 
 						<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked> 
+						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault3" value="졸업"> 
 						<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
 					</div>
 				</div>
@@ -63,14 +63,14 @@
 			<div class="d-flex mb-4">
 				<div class="col-2 text-truncate">회사명/프로젝트명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jac_content">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-2">기간</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jac_period">
 			</div>
 
 		</div>
@@ -85,14 +85,14 @@
 			<div class="d-flex mb-4">
 				<div class="col-1 text-truncate">자격증명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jal_content">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-1 text-truncate">발급날짜</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jal_issdate">
 
 			</div>
 		</div>
@@ -108,24 +108,25 @@
 			<div class="d-flex mb-4">
 				<div class="col-1">근무지</div>
 
-				<input type="text" class="form-control w-25 ms-3"
-					id="floatingInputValue" placeholder="지역">
+				<input type="text" class="form-control w-25 ms-3" id="floatingInputValue" name="ja_location">
 
 			</div>
 
 			<div class="d-flex mb-4">
 				<div class="col-1">분야</div>
 
-				<select class="form-select ms-3 w-25" aria-label="field">
-					<option value="1" selected>분야1</option>
-					<option value="2">분야2</option>
-					<option value="3">분야3</option>
-				</select> <select class="form-select ms-3 w-25" aria-label="field">
-					<option value="1" selected>세부분야1</option>
-					<option value="2">세부분야2</option>
-					<option value="3">세부분야3</option>
+				<select class="form-select ms-3 w-25" aria-label="field" id="sel1" onchange="handleChange(this)">
+					<c:forEach items="${fdto}" var="dto">
+					<option value="${dto.f_seq}">${dto.f_name}</option>
+					</c:forEach>
+				</select> 
+				<select class="form-select ms-3 w-25" aria-label="field" id="sel2" name="fd_seq">
+					<c:forEach items="${fddto}" var="dto2">					
+						<c:if test="${dto2.f_seq == '1'}">	
+							<option value="${dto2.fd_seq}">${dto2.fd_name}</option>
+						</c:if>
+					</c:forEach>
 				</select>
-
 
 			</div>
 
@@ -134,8 +135,8 @@
 
 				<div class="d-flex ms-3">
 					<input type="text" class="form-control w-25 me-4"
-						id="floatingInputValue"> - <input type="text"
-						class="form-control w-25 ms-4" id="floatingInputValue">
+						id="floatingInputValue" name="ja_begindate"> - <input type="text"
+						class="form-control w-25 ms-4" id="floatingInputValue"  name="ja_enddate">
 				</div>
 
 
@@ -144,17 +145,15 @@
 			<div class="d-flex mb-4">
 				<div class="col-1">근무시간대</div>
 
-
 				<input type="text" class="form-control w-25 ms-1 ms-3"
-					id="floatingInputValue">
+					id="floatingInputValue" name="ja_time">
 			</div>
 
 			<div class="d-flex">
 				<div class="col-1">급여</div>
 
-
 				<input type="text" class="form-control w-50 ms-3"
-					id="floatingInputValue">
+					id="floatingInputValue" name="ja_salary">					
 			</div>
 
 		</div>
@@ -164,21 +163,21 @@
 		<div class="form-floating">
 			<textarea class="form-control" placeholder="Leave a comment here"
 				id="floatingTextarea2"
-				style="min-height: 300px; background-color: #F8F9FA; border: none; resize: none;"></textarea>
-			<label for="floatingTextarea2">자기소개서를 작성해주세요.</label>
+				style="min-height: 300px; background-color: #F8F9FA; border: none; resize: none;" name="ja_intro"></textarea>
 		</div>
 		<div class="float-end">(0/1000)</div>
 
 
 		<div class="fw-bold mt-5 fs-4 mb-4">이미지 첨부하기</div>
 		<div class="mb-5 j-margin">
-			<input class="form-control w-50" type="file" id="formFile">
+			<input class="form-control w-50" type="file" id="formFile" name="attach">
 		</div>
 		
 		<div class="p-right p-matop">
 			<button type="submit" class="btn btn-primary btn-lg float-lg-end px-5 mt-3 p-maright j-margintop j-marginbottom"style="background-color: #5179D9;">등록</button>
-		</div>
-
+		</div>		
+		
+		</form>
 
 	</section>
 
@@ -190,6 +189,7 @@
 <script>
 
 	function addEdu() {
+	    
 	    $('#edu').append (
 	    	`
 	    	<hr>
@@ -218,9 +218,11 @@
 			</div>    	
 	    	`
 	    );
+	    
 	}
 	
 	function addCareer() {
+	    
 	    $('#career').append (
 		    `
 		    <hr>
@@ -238,10 +240,12 @@
 			</div>
 		    `
 		);
+	    
 	}
 	
 	function addLic() {
 	    $('#lic').append (
+	            
 		    `
 		    <hr>
 		    <div class="d-flex mb-4 j-addmargin">
@@ -259,7 +263,26 @@
 			</div>
 			`
 		);	    
-	}		
+	    
+	}
+	
+	function handleChange(selObj) {
+	    
+	    const field = selObj.value;
+	    let options = '';
+	    
+	    <c:forEach items="${fddto}" var="fd">
+	    
+		    if ("${fd.f_seq}" === field) {
+			    options += `<option value="${fd.fd_seq}">${fd.fd_name}</option>`;
+		    }
+	    	       
+	    </c:forEach>  	    
+	    
+	    $('#sel2').html(options);	  
+	    
+	}
+	
 
 </script>
 </body>

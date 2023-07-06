@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ham.domain.MyFDetailDTO;
+import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
@@ -154,6 +156,22 @@ public class MyUserServiceImpl implements MyUserService {
 		String comment = mapper.scomment(sm_seq);
 		
 		return comment;
+	}
+	
+	@Override
+	public List<MyFieldDTO> flist() {
+		
+		List<MyFieldDTO> list = mapper.flist();
+		
+		return list;
+	}
+	
+	@Override
+	public List<MyFDetailDTO> fdlist() {
+		
+		List<MyFDetailDTO> list = mapper.fdlist();
+		
+		return list;
 	}
 	
 }

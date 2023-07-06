@@ -2,6 +2,8 @@ package com.ham.member;
 
 import java.util.List;
 
+import com.ham.domain.MyFDetailDTO;
+import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
@@ -40,5 +42,11 @@ public interface MyUserService {
 	List<MySpeakMDTO> slist(String id);
 
 	String scomment(String sm_seq);
+
+	
+	//구직 신청
+	List<MyFieldDTO> flist();
+
+	List<MyFDetailDTO> fdlist();
 	
 }
