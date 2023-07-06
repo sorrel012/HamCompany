@@ -27,7 +27,7 @@
 		<!-- 학력 -->
 		<div class="mb-5">
 			<div class="fw-bold mt-5 fs-4 mb-2">학력</div>
-			<div class="text-bg-light p-4 rounded py-5 fs-5">
+			<div class="text-bg-light p-4 rounded py-5 fs-5" id="edu">
 				<div class="d-flex mb-4">
 					<div class="col-1 text-truncate">학교(전공)</div>
 
@@ -35,37 +35,31 @@
 						id="floatingInputValue" placeholder="학교명을 입력하세요.">
 
 				</div>
-
 				<div class="d-flex">
-					<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업
-						여부</div>
+					<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업여부</div>
 
 					<div class="form-check me-4">
-						<input class="form-check-input" type="radio"
-							name="flexRadioDefault" id="flexRadioDefault1"> <label
-							class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
+						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> 
+						<label class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
 					</div>
 					<div class="form-check me-4">
-						<input class="form-check-input" type="radio"
-							name="flexRadioDefault" id="flexRadioDefault2" checked> <label
-							class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
+						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked> 
+						<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio"
-							name="flexRadioDefault" id="flexRadioDefault3" checked> <label
-							class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
+						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked> 
+						<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
 					</div>
-
 				</div>
 
 			</div>
 			<button type="button" class="btn btn-lg float-lg-end px-5 mt-3"
-				style="background-color: #688ce0;">추가</button>
+				style="background-color: #688ce0;" onclick="addEdu()">추가</button>
 		</div>
 
 		<!-- 경력 -->
 		<div class="fw-bold mt-5 fs-4 mb-2">경력</div>
-		<div class="text-bg-light p-4 rounded py-5 fs-5">
+		<div class="text-bg-light p-4 rounded py-5 fs-5" id="career">
 			<div class="d-flex mb-4">
 				<div class="col-2 text-truncate">회사명/프로젝트명</div>
 
@@ -79,17 +73,15 @@
 				<input type="text" class="form-control w-25" id="floatingInputValue">
 			</div>
 
-
-
 		</div>
 		
 		<button type="button" class="btn btn-lg float-lg-end px-5 mt-3"
-			style="background-color: #688ce0;">추가</button>
+			style="background-color: #688ce0;" onclick="addCareer()">추가</button>
 
 
 		<!-- 자격증 -->
 		<div class="fw-bold mt-5 fs-4 mb-2">자격증</div>
-		<div class="text-bg-light p-4 rounded py-5 fs-5">
+		<div class="text-bg-light p-4 rounded py-5 fs-5" id="lic">
 			<div class="d-flex mb-4">
 				<div class="col-1 text-truncate">자격증명</div>
 
@@ -103,13 +95,10 @@
 				<input type="text" class="form-control w-25" id="floatingInputValue">
 
 			</div>
-
-
-
 		</div>
 
 		<button type="button" class="btn btn-lg float-lg-end px-5 mt-3"
-			style="background-color: #688ce0;">추가</button>
+			style="background-color: #688ce0;" onclick="addLic()">추가</button>
 
 		<!-- 희망 근무 조건 -->
 		<div class="fw-bold mt-5 fs-4 mb-2 d-flex">
@@ -199,6 +188,78 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
+
+	function addEdu() {
+	    $('#edu').append (
+	    	`
+	    	<hr>
+	    	<div class="d-flex mb-4 j-addmargin">
+				<div class="col-1 text-truncate">학교(전공)</div>
+
+				<input type="text" class="form-control w-50"
+					id="floatingInputValue" placeholder="학교명을 입력하세요.">
+
+			</div>
+			<div class="d-flex">
+				<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업여부</div>
+
+				<div class="form-check me-4">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> 
+					<label class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
+				</div>
+				<div class="form-check me-4">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked> 
+					<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked> 
+					<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
+				</div>
+			</div>    	
+	    	`
+	    );
+	}
+	
+	function addCareer() {
+	    $('#career').append (
+		    `
+		    <hr>
+		    <div class="d-flex mb-4 j-addmargin">
+				<div class="col-2 text-truncate">회사명/프로젝트명</div>
+
+				<input type="text" class="form-control w-50" id="floatingInputValue">
+
+			</div>
+
+			<div class="d-flex">
+				<div class="col-2">기간</div>
+
+				<input type="text" class="form-control w-25" id="floatingInputValue">
+			</div>
+		    `
+		);
+	}
+	
+	function addLic() {
+	    $('#lic').append (
+		    `
+		    <hr>
+		    <div class="d-flex mb-4 j-addmargin">
+				<div class="col-1 text-truncate">자격증명</div>
+
+				<input type="text" class="form-control w-50" id="floatingInputValue">
+
+			</div>
+
+			<div class="d-flex">
+				<div class="col-1 text-truncate">발급날짜</div>
+
+				<input type="text" class="form-control w-25" id="floatingInputValue">
+
+			</div>
+			`
+		);	    
+	}		
 
 </script>
 </body>
