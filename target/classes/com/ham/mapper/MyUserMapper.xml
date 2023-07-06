@@ -147,5 +147,47 @@
 		delete from tblPGallery
 			where p_seq=#{p_seq}
 	</delete>
+	
+	
+	<!-- 커뮤니티 -->
+	<select id="llist" resultType="com.ham.domain.MyHReviewDTO">
+		select 
+			hr_seq,
+			m_id,
+			hr_subject,
+			hr_company,
+			hr_regdate,
+			hr_content,
+			fd_seq,
+			hr_hit
+		from tblHReview
+			where m_id=#{id}
+	</select>
+	
+	<select id="lcomment" resultType="String">
+		select 
+			count(hrc_content) as hr_comment
+		from tblHRComment
+			where hr_seq=#{hr_seq}
+	</select>
+
+	<select id="slist" resultType="com.ham.domain.MySpeakMDTO">
+		select 
+			sm_seq,
+			m_id,
+			sm_subject,
+			sm_content,
+			sm_regdate,
+			sm_hit
+		from tblSpeakM
+			where m_id=#{id}
+	</select>
+	
+	<select id="scomment" resultType="String">
+		select 
+			count(smc_content) as sm_comment
+		from tblSMComment
+			where sm_seq=#{sm_seq}
+	</select>
 
 </mapper>

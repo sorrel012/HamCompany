@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ham.domain.MyHReviewDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
+import com.ham.domain.MySpeakMDTO;
 import com.ham.member.MyUserService;
 
 @Controller
@@ -222,6 +224,52 @@ public class MyUserController {
 		return "redirect:/myportfolio.do";
 	}
 	
+	@GetMapping("/mylisten_list.do")
+	public String myListenList(Model model, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		*/
+		String id = "violet123";
+		
+		List<MyHReviewDTO> list = service.llist(id);
+		
+		for(MyHReviewDTO dto : list) {
+			
+			dto.setHr_comment(service.lcomment(dto.getHr_seq()));
+			
+		}
+		
+		model.addAttribute("list", list);
+
+		return "member/mylisten_list";
+	}
+
+	@GetMapping("/myspeak_list.do")
+	public String mySpeakList(Model model, HttpServletRequest req) {
+
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		*/
+		String id = "violet123";
+		
+		List<MySpeakMDTO> list = service.slist(id);
+		
+		for(MySpeakMDTO dto : list) {
+			
+			dto.setSm_comment(service.scomment(dto.getSm_seq()));
+			
+		}
+		
+		model.addAttribute("list", list);
+
+		return "member/myspeak_list";
+	}
+	
 	@GetMapping("/jobapply.do")
 	public String jobApply() {
 
@@ -233,5 +281,7 @@ public class MyUserController {
 
 		return "member/support_detail";
 	}
+	
+	
 	
 }

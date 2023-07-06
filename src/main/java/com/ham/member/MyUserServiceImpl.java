@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ham.domain.MyHReviewDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
+import com.ham.domain.MySpeakMDTO;
 import com.ham.mapper.MyUserMapper;
 
 @Service
@@ -118,6 +120,40 @@ public class MyUserServiceImpl implements MyUserService {
 		mapper.deleteGallery(p_seq);
 		mapper.deleteportfolio(p_seq);
 		
+	}
+	
+	
+	//커뮤니티
+	@Override
+	public List<MyHReviewDTO> llist(String id) {
+		
+		List<MyHReviewDTO> list = mapper.llist(id);
+		
+		return list;
+	}
+	
+	@Override
+	public String lcomment(String hr_seq) {
+		
+		String comment = mapper.lcomment(hr_seq);
+		
+		return comment;
+	}
+	
+	@Override
+	public List<MySpeakMDTO> slist(String id) {
+		
+		List<MySpeakMDTO> list = mapper.slist(id);
+		
+		return list;
+	}
+	
+	@Override
+	public String scomment(String sm_seq) {
+
+		String comment = mapper.scomment(sm_seq);
+		
+		return comment;
 	}
 	
 }

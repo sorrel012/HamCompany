@@ -2,9 +2,11 @@ package com.ham.member;
 
 import java.util.List;
 
+import com.ham.domain.MyHReviewDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
+import com.ham.domain.MySpeakMDTO;
 
 public interface MyUserService {
 
@@ -29,5 +31,14 @@ public interface MyUserService {
 	void delFile(String name);
 
 	void deleteportfolio(String p_seq);
+	
+	//커뮤니티
+	List<MyHReviewDTO> llist(String id);
+
+	String lcomment(String hr_seq);
+
+	List<MySpeakMDTO> slist(String id);
+
+	String scomment(String sm_seq);
 	
 }
