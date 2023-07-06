@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
+	<link rel="stylesheet" href="/resources/css/jobapply.css" />
 </head>
 <body>
 
@@ -18,10 +19,6 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<div class="w-75">
 				<h2 class="fw-bold">구직 신청서 작성하기</h2>
-			</div>
-			<div class="w-25 text-end">
-				<button type="button" class="btn btn-primary w-50 fs-5"
-					style="background-color: #5179D9;">등록</button>
 			</div>
 		</div>
 
@@ -85,8 +82,7 @@
 
 
 		</div>
-
-		</div>
+		
 		<button type="button" class="btn btn-lg float-lg-end px-5 mt-3"
 			style="background-color: #688ce0;">추가</button>
 
@@ -95,7 +91,7 @@
 		<div class="fw-bold mt-5 fs-4 mb-2">자격증</div>
 		<div class="text-bg-light p-4 rounded py-5 fs-5">
 			<div class="d-flex mb-4">
-				<div class="col-1 text-truncate">자격증 명</div>
+				<div class="col-1 text-truncate">자격증명</div>
 
 				<input type="text" class="form-control w-50" id="floatingInputValue">
 
@@ -118,11 +114,6 @@
 		<!-- 희망 근무 조건 -->
 		<div class="fw-bold mt-5 fs-4 mb-2 d-flex">
 			희망 근무 조건
-			<div class="form-check ms-5 fw-light">
-				<input class="form-check-input" type="radio" name="exampleRadios"
-					id="exampleRadios1" value="option1"> <label
-					class="form-check-label" for="exampleRadios1"> 상관 없음 </label>
-			</div>
 		</div>
 		<div class="text-bg-light p-4 rounded py-5 fs-5">
 			<div class="d-flex mb-4">
@@ -177,11 +168,7 @@
 					id="floatingInputValue">
 			</div>
 
-
-
 		</div>
-
-
 
 		<!-- 자기소개서 -->
 		<div class="fw-bold mt-5 fs-4 mb-2">자기소개서</div>
@@ -191,13 +178,16 @@
 				style="min-height: 300px; background-color: #F8F9FA; border: none; resize: none;"></textarea>
 			<label for="floatingTextarea2">자기소개서를 작성해주세요.</label>
 		</div>
-		</div>
 		<div class="float-end">(0/1000)</div>
 
 
 		<div class="fw-bold mt-5 fs-4 mb-4">이미지 첨부하기</div>
-		<div class="mb-5">
+		<div class="mb-5 j-margin">
 			<input class="form-control w-50" type="file" id="formFile">
+		</div>
+		
+		<div class="p-right p-matop">
+			<button type="submit" class="btn btn-primary btn-lg float-lg-end px-5 mt-3 p-maright j-margintop j-marginbottom"style="background-color: #5179D9;">등록</button>
 		</div>
 
 
