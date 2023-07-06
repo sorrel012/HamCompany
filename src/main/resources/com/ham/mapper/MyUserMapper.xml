@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ham.mapper.MyPortfolioMapper">
+<mapper namespace="com.ham.mapper.MyUserMapper">
 
-	<insert id="add">
+	<!-- 사용자 정보 수정 -->
+	<select id="editprofile" resultType="com.ham.domain.MyMemberDTO">
+		select
+			m_id,
+			m_pw,
+			m_name,
+			m_address,
+			m_address_detail,
+			m_tel,
+			m_email,
+			m_birth
+		from tblMember
+			where m_id=#{id}
+	</select>
+	
+	<update id="updateprofile">
+		update tblMember set
+			m_email = #{m_email},
+			m_address = #{m_address},
+			m_address_detail = #{m_address_detail},
+			m_tel = #{m_tel}
+				where m_id = #{m_id}
+	</update>
+	
+	<update id="updatepw">
+		update tblMember set
+			m_pw = #{m_pw}
+				where m_id = #{m_id}
+	</update>
+
+
+	<!-- 포트폴리오 -->
+	<insert id="addportfolio">
 		
 		<selectKey keyProperty="p_seq" order="BEFORE" resultType="String">
 			select p_seq.nextval from dual
@@ -40,7 +72,7 @@
 		<collection property="gallery" resultMap="galleryMap"/>
 	</resultMap>
 	
-	<select id="list" resultMap="portfolioMap">
+	<select id="portfoliolist" resultMap="portfolioMap">
 		select 
 		    p.p_seq,
 		    p.m_id,
@@ -58,7 +90,7 @@
 		    order by p.p_seq, pg.pg_seq
 	</select>
 	
-	<select id="edit" resultMap="portfolioMap">
+	<select id="editportfolio" resultMap="portfolioMap">
 		select 
 		    p.p_seq,
 		    p.m_id,
@@ -91,7 +123,7 @@
 			where pg_name=#{name}	
 	</delete>
 	
-	<update id="update">		
+	<update id="updateportfolio">		
 		update tblPortfolio set
 			p_subject = #{p_subject}, 
 			p_service = #{p_service}, 
@@ -106,7 +138,7 @@
 			values(pg_seq.nextval, #{pg_name}, #{p_seq})		
 	</insert>
 	
-	<delete id="delete">
+	<delete id="deleteportfolio">
 		delete from tblPortfolio 
 			where p_seq=#{p_seq}
 	</delete>

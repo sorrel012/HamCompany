@@ -13,18 +13,82 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
-import com.ham.member.MyPortfolioService;
+import com.ham.member.MyUserService;
 
 @Controller
-public class MyPortfolioController {
+public class MyUserController {
 	
 	@Autowired
-	private MyPortfolioService service;
+	private MyUserService service;
+	
+	@GetMapping("/user_profile.do")
+	public String userProfile(Model model, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		 */
+		String id = "wain1719";
+		
+		MyMemberDTO dto = service.editProfile(id);
+		
+		if (dto.getM_birth() != null && !dto.getM_birth().isEmpty()) {
+		    String datePart = dto.getM_birth().split(" ")[0]; // 시간 부분은 잘라낸다.
+		    dto.setM_birth(datePart);
+		}
+		
+		model.addAttribute("dto", dto);
+		
+		return "member/user_profile";
+	}
+
+	//기본 정보 수정
+	@PostMapping("/user_profile_update.do")
+	public String update(@ModelAttribute("dto") MyMemberDTO dto) {
+		
+		int result = service.updateProfile(dto);
+
+		if (result > 0) {
+			return "redirect:/user_profile.do";
+		} else {
+			// 실패 처리 로직 추가 (예: 에러 페이지로 이동)
+			return "redirect:/error";
+		}
+	}
+
+	//비밀번호 수정
+	@PostMapping("/user_profile_updatepw.do")
+	public String updatePw(String new_pw, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		 */
+		String id = "wain1719";
+		
+		MyMemberDTO dto = new MyMemberDTO();
+		
+		dto.setM_pw(new_pw);
+		dto.setM_id(id);
+		
+		int result = service.updatepwProfile(dto);
+
+		if (result > 0) {
+			return "redirect:/user_profile.do";
+		} else {
+			// 실패 처리 로직 추가 (예: 에러 페이지로 이동)
+			return "redirect:/error";
+		}
+	}
 
 	@GetMapping("/myportfolio.do")
 	public String myPortfolio(Model model, HttpServletRequest req) {
@@ -36,7 +100,7 @@ public class MyPortfolioController {
 		*/
 		String id = "wain1719";
 				
-		List<MyPortfolioDTO> list = service.list(id);
+		List<MyPortfolioDTO> list = service.portfoliolist(id);
 		
 		model.addAttribute("list", list);
 
@@ -80,7 +144,7 @@ public class MyPortfolioController {
 			
 		}
 		
-		service.add(dto, files);
+		service.addportfolio(dto, files);
 
 		return "redirect:/myportfolio.do";
 	}
@@ -88,7 +152,7 @@ public class MyPortfolioController {
 	@GetMapping("/editportfolio.do")
 	public String editPortfolio(Model model, String p_seq) {
 
-		List<MyPortfolioDTO> list = service.edit(p_seq);
+		List<MyPortfolioDTO> list = service.editportfolio(p_seq);
 		
 		model.addAttribute("list", list);
 		
@@ -145,7 +209,7 @@ public class MyPortfolioController {
 			
 		}
 				
-		service.update(dto, files);
+		service.updateportfolio(dto, files);
 		
 		return "redirect:/myportfolio.do";
 	}
@@ -153,7 +217,7 @@ public class MyPortfolioController {
 	@GetMapping("/delportfolio.do")
 	public String delPortfolio(String p_seq) {
 		
-		service.delete(p_seq);
+		service.deleteportfolio(p_seq);
 		
 		return "redirect:/myportfolio.do";
 	}

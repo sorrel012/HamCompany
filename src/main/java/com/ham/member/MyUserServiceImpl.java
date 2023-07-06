@@ -5,20 +5,44 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
-import com.ham.mapper.MyPortfolioMapper;
+import com.ham.mapper.MyUserMapper;
 
 @Service
-public class MyPortfolioServiceImpl implements MyPortfolioService {
+public class MyUserServiceImpl implements MyUserService {
 	
 	@Autowired
-	private MyPortfolioMapper mapper;
+	private MyUserMapper mapper;
 
+	//사용자 정보 수정
 	@Override
-	public void add(MyPortfolioDTO dto, List<String> files) {
+	public MyMemberDTO editProfile(String id) {
 		
-		mapper.add(dto);
+		MyMemberDTO dto = mapper.editprofile(id);
+		
+		return dto;
+	}
+	
+	@Override
+	public int updateProfile(MyMemberDTO dto) {
+		
+		return mapper.updateprofile(dto);
+	}
+	
+	@Override
+	public int updatepwProfile(MyMemberDTO dto) {
+		
+		return mapper.updatepw(dto);
+	}
+	
+	
+	//포트폴리오
+	@Override
+	public void addportfolio(MyPortfolioDTO dto, List<String> files) {
+		
+		mapper.addportfolio(dto);
 		
 		for(int i=0; i<files.size(); i++) {
 			
@@ -37,17 +61,17 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 	}
 	
 	@Override
-	public List<MyPortfolioDTO> list(String id) {
+	public List<MyPortfolioDTO> portfoliolist(String id) {
 		
-		List<MyPortfolioDTO> list = mapper.list(id);
+		List<MyPortfolioDTO> list = mapper.portfoliolist(id);
 		
 		return list;
 	}
 	
 	@Override
-	public List<MyPortfolioDTO> edit(String p_seq) {
+	public List<MyPortfolioDTO> editportfolio(String p_seq) {
 
-		List<MyPortfolioDTO> list = mapper.edit(p_seq);
+		List<MyPortfolioDTO> list = mapper.editportfolio(p_seq);
 		
 		return list;
 	}
@@ -68,9 +92,9 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 	}
 	
 	@Override
-	public void update(MyPortfolioDTO dto, List<String> files) {
+	public void updateportfolio(MyPortfolioDTO dto, List<String> files) {
 
-		mapper.update(dto);
+		mapper.updateportfolio(dto);
 		
 		for(int i=0; i<files.size(); i++) {
 			
@@ -89,10 +113,10 @@ public class MyPortfolioServiceImpl implements MyPortfolioService {
 	}
 	
 	@Override
-	public void delete(String p_seq) {
+	public void deleteportfolio(String p_seq) {
 		
 		mapper.deleteGallery(p_seq);
-		mapper.delete(p_seq);
+		mapper.deleteportfolio(p_seq);
 		
 	}
 	
