@@ -47,7 +47,7 @@
 						<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault3" value="졸업"> 
+						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault3" value="졸업" checked> 
 						<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
 					</div>
 				</div>
@@ -108,7 +108,7 @@
 			<div class="d-flex mb-4">
 				<div class="col-1">근무지</div>
 
-				<input type="text" class="form-control w-25 ms-3" id="floatingInputValue" name="ja_location">
+				<input type="text" class="form-control w-25 ms-3" id="floatingInputValue" name="ja_location" required>
 
 			</div>
 
@@ -135,8 +135,8 @@
 
 				<div class="d-flex ms-3">
 					<input type="text" class="form-control w-25 me-4"
-						id="floatingInputValue" name="ja_begindate"> - <input type="text"
-						class="form-control w-25 ms-4" id="floatingInputValue"  name="ja_enddate">
+						id="floatingInputValue" name="ja_begindate" required> - <input type="text"
+						class="form-control w-25 ms-4" id="floatingInputValue"  name="ja_enddate" required>
 				</div>
 
 
@@ -146,14 +146,14 @@
 				<div class="col-1">근무시간대</div>
 
 				<input type="text" class="form-control w-25 ms-1 ms-3"
-					id="floatingInputValue" name="ja_time">
+					id="floatingInputValue" name="ja_time" required>
 			</div>
 
 			<div class="d-flex">
 				<div class="col-1">급여</div>
 
 				<input type="text" class="form-control w-50 ms-3"
-					id="floatingInputValue" name="ja_salary">					
+					id="floatingInputValue" name="ja_salary" required>					
 			</div>
 
 		</div>
@@ -163,14 +163,14 @@
 		<div class="form-floating">
 			<textarea class="form-control" placeholder="Leave a comment here"
 				id="floatingTextarea2"
-				style="min-height: 300px; background-color: #F8F9FA; border: none; resize: none;" name="ja_intro"></textarea>
+				style="min-height: 300px; background-color: #F8F9FA; border: none; resize: none;" name="ja_intro" required></textarea>
 		</div>
 		<div class="float-end">(0/1000)</div>
 
 
 		<div class="fw-bold mt-5 fs-4 mb-4">이미지 첨부하기</div>
 		<div class="mb-5 j-margin">
-			<input class="form-control w-50" type="file" id="formFile" name="attach">
+			<input class="form-control w-50" type="file" id="formFile" name="attach" required>
 		</div>
 		
 		<div class="p-right p-matop">
@@ -190,35 +190,34 @@
 
 	function addEdu() {
 	    
+	    let idx = 2;
+	    
 	    $('#edu').append (
 	    	`
 	    	<hr>
 	    	<div class="d-flex mb-4 j-addmargin">
 				<div class="col-1 text-truncate">학교(전공)</div>
-
-				<input type="text" class="form-control w-50"
-					id="floatingInputValue" placeholder="학교명을 입력하세요.">
-
-			</div>
+					<input type="text" class="form-control w-50" id="floatingInputValue" name="jae_content">
+				</div>
 			<div class="d-flex">
 				<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업여부</div>
-
-				<div class="form-check me-4">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> 
+					<div class="form-check me-4">
+					<input class="form-check-input" type="radio" name="jae_graduation' + idx + '" id="flexRadioDefault1" value="재학 중"> 
 					<label class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
 				</div>
 				<div class="form-check me-4">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked> 
+					<input class="form-check-input" type="radio" name="jae_graduation' + idx + '" id="flexRadioDefault2" value="졸업 예정"> 
 					<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked> 
+					<input class="form-check-input" type="radio" name="jae_graduation' + idx + '" id="flexRadioDefault3" value="졸업" checked> 
 					<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
-				</div>
-			</div>    	
+				</div>	    	
+			</div>
 	    	`
 	    );
 	    
+	    idx += 1;
 	}
 	
 	function addCareer() {
@@ -229,14 +228,14 @@
 		    <div class="d-flex mb-4 j-addmargin">
 				<div class="col-2 text-truncate">회사명/프로젝트명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jac_content">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-2">기간</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jac_period">
 			</div>
 		    `
 		);
@@ -251,14 +250,14 @@
 		    <div class="d-flex mb-4 j-addmargin">
 				<div class="col-1 text-truncate">자격증명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jal_content">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-1 text-truncate">발급날짜</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jal_issdate">
 
 			</div>
 			`

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -289,7 +290,7 @@ public class MyUserController {
 	}
 	
 	@PostMapping("/jobapply_ins.do")
-	public String jobApplyInsert(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto, HttpServletRequest req) {
+	public String jobApplyInsert(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto, MultipartFile attach, HttpServletRequest req) {
 
 		//접속자 아이디
 		HttpSession session = req.getSession();
@@ -297,11 +298,42 @@ public class MyUserController {
 		String id = (String)session.getAttribute("id");
 		*/
 		String id = "violet123";
-		
 		jobdto.setM_id(id);
+				
+		
+		//라디오박스 동적으로 추가하는 값을 받아와서 set
+		Map<String, String[]> parameterMap = req.getParameterMap();
+	    List<String> jae_graduationList = new ArrayList<>();
+
+	    for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+	        String key = entry.getKey();
+	        String[] values = entry.getValue();
+	        
+	        if (key.startsWith("jae_graduation")) {
+	            for (String value : values) {
+	                jae_graduationList.add(value);
+	            }
+	        }
+	    }
+
+	    edudto.setJae_graduation(jae_graduationList);
+		
+		try {
+
+			UUID uuid = UUID.randomUUID();
+
+			String filename = uuid + "_" + attach.getOriginalFilename();
+
+			attach.transferTo(new File(req.getRealPath("/resources/img/portfolio") + "\\" + filename));
+			jobdto.setJa_pic(filename);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println(jobdto);
 		System.out.println(edudto);
+		System.out.println(careerdto);
 		System.out.println(licdto);
 		
 		return "member/support_detail";
