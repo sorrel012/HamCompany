@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/myprofile.css" />
+	<link rel="stylesheet" href="/resources/css/supportdetail.css" />
 </head>
 <body>
 
@@ -65,36 +66,96 @@
 				<thead class="table-light">
 					<tr class="text-center">
 						<td class="col-1">번호</td>
-						<td class="col-3">지원 내역 확인</td>
+						<td class="col-3">신청 회사명</td>
 						<td class="col-2">근무 시작</td>
 						<td class="col-2">근무 종료</td>
 						<td class="col-2">금액</td>
-						<td class="col-2">승인 여부</td>
+						<td class="col-2">진행 상황</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="text-center align-middle">
-						<td class="col-1 text-wrap" style="height: 60px;">1</td>
-						<td class="col-3 text-wrap" style="height: 60px;"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								타일공의 삶 </a></td>
-						<td class="col-2 text-wrap" style="height: 60px;">2023-04-01
-							<div>09:00</div>
+						<c:forEach items="${list}" var="dto">
+						<td class="col-1 text-wrap" style="height: 60px;">${dto.p_seq}</td>
+						<td class="col-3 text-wrap" style="height: 60px;">
+							<a class="text-black text-decoration-none text-hover" onclick="showModal('${dto.bd_name}', '${dto.p_regdate}', '${dto.p_name}', '${dto.p_tel}', '${dto.p_email}', '${dto.p_address}', '${dto.p_address_detail}', '${dto.p_memo}', '${dto.o_confirm}')"> ${dto.bd_name} </a>
 						</td>
-						<td class="col-2 text-wrap" style="height: 60px;">2023-04-03
-							<div class="text-truncate">12:00</div>
+						<td class="col-2 text-wrap" style="height: 60px;">${dto.ja_begindate}
 						</td>
-						<td class="col-2 text-wrap" style="height: 60px;">250,000</td>
+						<td class="col-2 text-wrap" style="height: 60px;">${dto.ja_enddate}
+						</td>
+						<td class="col-2 text-wrap" style="height: 60px;">${dto.ja_salary}</td>
 						<td class="col-2" style="height: 60px;">
-							<button class="btn">승인</button>
-							<button class="btn bg-secondary">거절</button>
+							<c:choose>
+								<c:when test="${dto.o_confirm eq '대기중'}">
+									<button class="text-truncate btn btn-primary btn-cursor">${dto.o_confirm}</button>
+								</c:when>
+								<c:when test="${dto.o_confirm eq '승인'}">
+									<button class="text-truncate btn btn-primary gray btn-cursor">거절</button>
+								</c:when>
+								<c:otherwise>
+									<button class="text-truncate btn btn-primary btn-cursor">${dto.o_confirm}</button>
+								</c:otherwise>
+							</c:choose>
 						</td>
+						</c:forEach>
 					</tr>
 				</tbody>
 			</table>
 
 		</div>
 
+	</div>
+
+	<!-- 상세정보 modal창 -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 m-weight" id="staticBackdropLabel">상세내역</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="m-box m-mabottom">
+						<h5>✅ 회사명</h5>
+						<div id="company" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5>✅ 신청날짜</h5>
+						<div id="regdate" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5>✅ 신청자명</h5>
+						<div id="applicant" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5>✅ 연락처</h5>
+						<div id="tel" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5>✅ 이메일</h5>
+						<div id="email" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5>✅ 주소</h5>
+						<div id="address" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5>✅ 상세주소</h5>
+						<div id="addressDetail" class="m-matop m-maleft"></div>
+					</div>
+					<div class="m-box">
+						<h5>✅ 메모</h5>
+						<div id="memo" class="m-matop m-maleft"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" id="acceptBtn">승인</button>
+					<button class="btn bg-secondary" id="denyBtn">거절</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -104,6 +165,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 
+    function showModal(bd_name, p_regdate, p_name, p_tel, p_email, p_address, p_address_detail, p_memo) {
+        
+        $('#staticBackdrop').modal('show');
+        
+        $('#company').text(' ◼  ' + bd_name);
+        $('#regdate').text(' ◼  ' + p_regdate);
+        $('#applicant').text(' ◼  ' + p_name);
+        $('#tel').text(' ◼  ' + p_tel);
+        $('#email').text(' ◼  ' + p_email);
+        $('#address').text(' ◼  ' + p_address);
+        $('#addressDetail').text(' ◼  ' + p_address_detail);
+        $('#memo').text(' ◼  ' + p_memo);
+        
+    }
+    
 </script>
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ham.domain.MyApplicationDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -244,4 +245,13 @@ public class MyUserServiceImpl implements MyUserService {
 		return 0;
 	}
 	
+	@Override
+	public List<MyApplicationDTO> getApplication(String id) {
+		
+		List<MyApplicationDTO> list = mapper.getapplication(id);
+				
+		return list;
+	}
+	
 }
+;

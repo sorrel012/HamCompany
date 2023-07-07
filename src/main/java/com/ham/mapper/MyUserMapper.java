@@ -2,6 +2,7 @@ package com.ham.mapper;
 
 import java.util.List;
 
+import com.ham.domain.MyApplicationDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -68,5 +69,7 @@ public interface MyUserMapper {
 	int addcareer(MyJACareerDTO tmpdto);
 
 	int addlic(MyJALicenseDTO tmpdto);
+
+	List<MyApplicationDTO> getapplication(String id);
 
 }

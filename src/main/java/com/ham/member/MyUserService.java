@@ -2,6 +2,7 @@ package com.ham.member;
 
 import java.util.List;
 
+import com.ham.domain.MyApplicationDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -54,5 +55,7 @@ public interface MyUserService {
 	List<MyFDetailDTO> fdlist();
 
 	int addJAP(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto);
+
+	List<MyApplicationDTO> getApplication(String id);
 	
 }

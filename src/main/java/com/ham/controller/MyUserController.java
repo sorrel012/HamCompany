@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ham.domain.MyApplicationDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -144,7 +145,7 @@ public class MyUserController {
 				
 				files.add(filename);
 
-				file.transferTo(new File(req.getRealPath("/resources/img/portfolio") + "\\" + filename));
+				file.transferTo(new File(req.getRealPath("/resources/img/mypage") + "\\" + filename));
 				//C:\OneDrive\project\함해볼텨\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ham\resources\img\portfolio
 
 			} catch (Exception e) {
@@ -211,7 +212,7 @@ public class MyUserController {
 					
 					files.add(filename);
 
-					file.transferTo(new File(req.getRealPath("/resources/img/portfolio") + "\\" + filename));
+					file.transferTo(new File(req.getRealPath("/resources/img/mypage") + "\\" + filename));
 					//C:\OneDrive\project\함해볼텨\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ham\resources\img\portfolio
 
 				} catch (Exception e) {
@@ -328,7 +329,7 @@ public class MyUserController {
 
 			String filename = uuid + "_" + attach.getOriginalFilename();
 
-			attach.transferTo(new File(req.getRealPath("/resources/img/portfolio") + "\\" + filename));
+			attach.transferTo(new File(req.getRealPath("/resources/img/mypage") + "\\" + filename));
 			jobdto.setJa_pic(filename);
 			
 		} catch (Exception e) {
@@ -347,10 +348,28 @@ public class MyUserController {
 	}
 
 	@GetMapping("/support_detail.do")
-	public String supportDetail() {
+	public String supportDetail(Model model, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		*/
+		String id = "violet123";
+		
+		//로그인한 사용자의 모든 지원 내역 받아오기
+		List<MyApplicationDTO> list = service.getApplication(id);
+		
+		for(MyApplicationDTO dto : list) {
+			dto.setJa_begindate(dto.getJa_begindate().split(" ")[0]);
+			dto.setJa_enddate(dto.getJa_enddate().split(" ")[0]);
+			dto.setP_regdate(dto.getP_regdate().split(" ")[0]);
+		}
+		
+		
+		model.addAttribute("list", list);
 
 		return "member/support_detail";
 	}
-	
 	
 }

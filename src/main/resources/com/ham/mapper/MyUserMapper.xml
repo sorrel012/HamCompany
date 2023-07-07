@@ -42,8 +42,7 @@
 		</selectKey>
 		
 		insert into tblPortfolio (p_seq, m_id, p_subject, p_service, p_location, p_time, p_year)
-			values (#{p_seq}, #{m_id}, #{p_subject}, #{p_service}, #{p_location}, #{p_time}, #{p_year})
-		
+			values (#{p_seq}, #{m_id}, #{p_subject}, #{p_service}, #{p_location}, #{p_time}, #{p_year})		
 	</insert>
 	
 	<insert id="addGallery">
@@ -190,6 +189,8 @@
 			where sm_seq=#{sm_seq}
 	</select>
 	
+	
+	<!-- 구직 신청 -->
 	<select id="flist" resultType="com.ham.domain.MyFieldDTO">
 		select 
 			f_seq,
@@ -213,6 +214,7 @@
 	
 		insert into tblJobApl (ja_seq, m_id, fd_seq, ja_salary, ja_intro, ja_begindate, ja_enddate, ja_location, ja_time, ja_pic)
 			values (#{ja_seq}, #{m_id}, #{fd_seq}, #{ja_salary}, #{ja_intro}, #{ja_begindate}, #{ja_enddate}, #{ja_location}, #{ja_time}, #{ja_pic})
+			
 	</insert>
 	
 	<insert id="addedu">
@@ -229,5 +231,21 @@
 		insert into tblJALicense (jal_seq, ja_seq, jal_content, jal_issdate)
 			values (jal_seq.nextval, #{ja_seq}, #{jal_content}, #{jal_issdate})
 	</insert>
+	
+	<select id="getapplication" resultType="com.ham.domain.MyApplicationDTO">
+		select
+		    p.p_seq, p.b_id, p.p_name, p.p_tel, p.p_address, p.p_address_detail, p.p_memo, p.p_email, p.p_regdate,
+		    m.ja_seq,	
+		    j.m_id, j.ja_begindate, j.ja_enddate, j.ja_salary,
+		    bd.bd_name,
+		    o.o_confirm
+		from tblPay p
+		    inner join tblMarket m on m.mk_seq = p.mk_seq
+		    inner join tblJobApl j on m.ja_seq = j.ja_seq
+		    inner join tblBusiness b on p.b_id = b.b_id
+		    inner join tblBDetail bd on b.b_id = bd.b_id
+		    inner join tblOrder o on p.p_seq = o.p_seq
+		where m_id = #{id}
+	</select>
 
 </mapper>
