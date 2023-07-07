@@ -131,6 +131,18 @@
 	    obj.parent().remove();
 	}
 	
+	$(document).ready(function() {
+	    $("#p-form").on("submit", function(e) {
+	      var orgFiles = $("input[name='pg_name']").length; //기존 파일 개수
+	      var newFiles = document.getElementById('formFile').files.length; //새로 첨부한 파일 개수
+
+	      if (orgFiles + newFiles === 0) {
+	        alert("파일을 한 개 이상 첨부해주세요.");
+	        e.preventDefault();
+	      }
+	    });
+	  });
+	
 </script>
 </body>
 </html>

@@ -181,11 +181,15 @@ public class MyUserController {
 			
 			String name = gdto.getPg_name();
 			
-			if (!Arrays.asList(orgFiles).contains(name)) {
-				//파일을 삭제했으면 DB에서 삭제
+			try {
+				if (!Arrays.asList(orgFiles).contains(name)) {
+					//파일을 삭제했으면 DB에서 삭제
+					service.delFile(name);
+					
+			    }
+			} catch (NullPointerException e) {
 				service.delFile(name);
-				
-		    }
+			}
 			
 		}
 		
