@@ -19,28 +19,47 @@
 
 	<!-- mainContent -->
 	<section class="container-md mt-4 mb-5">
-		<h2 class="fw-bold mt-5 mb-3">함! 들어볼텨</h2>
+		<h2 class="my-5">
+			<span class="fw-bold" style="color: #FF914D">함!</span> <span
+				class="text-danger fw-bold">들어</span>볼텨
+		</h2>
 
 		<!--본문-->
 		<div
 			class="border border-1 border-secondary border-opacity-50 rounded p-4">
 
 			<div class="p-2">
-				<div class="fs-3 mt-2 fw-semibold">자격증 추가로 더 딸까요??</div>
+				<div class="fs-3 mt-2 fw-semibold">${dto.hr_subject}</div>
 
-				<div class="d-flex mt-2">
-					<div class="pe-3 me-3 border-end" style="color: #FF9170;">아침햇살</div>
-					<div>2023-06-26 14:26</div>
+				<div class="d-flex justify-content-between mt-2">
+					<div class="d-flex">
+						<div class="pe-3 me-3 border-end" style="color: #FF9170;">${dto.m_name}</div>
+						<div>${dto.hr_regdate}</div>
+					</div>
+					<div>
+						<i class="bi bi-eye me-2">
+						<span class="fst-normal">${dto.hr_hit}</span>
+						</i>
+					</div>
 				</div>
 			</div>
 
 			<hr>
 
 			<div class="my-4 lh-lg">
-
-				현재 가지고 있는 것들은 기사 자격증 한 개입니다. <br> 다른 종류 자격증 따면 도움이 될까요? <br>
-
-				아니면 하나로 전문성 키우는 게 나을까요?
+				
+				<div class="mb-4 rounded-4 w-100 p-4 bg-light">
+					<div class="d-flex">
+						<div class="col-2 fw-bold" style="color: #FF8370;">회사명  </div> 
+						<div class="col-4">${dto.hr_company }</div>
+					</div>
+					<div class="d-flex">
+						<div class="col-2 fw-bold" style="color: #FF8370;">근무분야  </div> 
+						<div class="col-4">${dto.fd_name}</div>
+					</div>
+				</div>
+				
+				${dto.hr_content}
 
 			</div>
 
@@ -48,56 +67,64 @@
 				style="align-items: flex-end;">
 				<div class="d-flex ">
 					<span class="material-symbols-outlined me-2">chat</span> <span>댓글
-						<span style="color: #FF9170;">2</span>개
+						<span style="color: #FF9170;" id="commentCnt">${ccnt}</span>개
 					</span>
 				</div>
 
 				<div>
 					<button type="button" class="btn btn-danger"
-						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem;">수정</button>
+						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem;" onclick="location.href='/listenedit.do?seq=${dto.hr_seq}';">수정</button>
 
 					<button type="button" class="btn"
-						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem; background-color: rgb(156, 156, 156);">삭제</button>
+						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem; background-color: rgb(156, 156, 156);"
+						data-bs-toggle="modal" data-bs-target="#exampleModal" >삭제</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    	<div class="modal-header">
+					    		함 들어볼텨
+					    	</div>
+					      <div class="modal-body fs-4 fw-bold">
+					        정말 게시글을 삭제하시겠습니까?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" style="border : none;" data-bs-dismiss="modal" onclick="location.href='/deleteReview.do?seq=${dto.hr_seq}'">삭제</button>
+					        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="background-color: rgb(156, 156, 156); border : none;">취소</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
 				</div>
 			</div>
 
 			<hr>
 
 			<!-- 댓글 -->
-			<div>
-				<div class="border-bottom">
-
-					<div class="d-flex mt-2">
-						<div class="pe-3 me-3 border-end">피그마 작업</div>
-						<div>2023-06-26 14:27</div>
+			<div id="commentList">
+				<c:forEach items="${clist}" var="dto">
+					<div class="border-bottom">
+	
+						<div class="d-flex mt-2">
+							<div class="pe-3 me-3 border-end">${dto.m_name}(${dto.m_id})</div>
+							<div>${dto.hrc_regdate}</div>
+						</div>
+	
+						<div class="my-3 lh-lg"">
+							${dto.hrc_content}
+						</div>
 					</div>
-
-					<div class="my-3 lh-lg"">
-						개인적으로는 하나로 전문성 키우는 걸 추천드립니다.<br> 저도 자격증 하나로 한 달에 부족함 없이 벌고
-						있어요 ㅎㅎ
-					</div>
-				</div>
-
-				<div class="border-bottom">
-
-					<div class="d-flex mt-2">
-						<div class="pe-3 me-3 border-end">열일하기</div>
-						<div>2023-06-26 15:13</div>
-					</div>
-
-					<div class="my-3 lh-lg"">
-						저는 윗댓글 분과 의견이 조금 달라요..! <br> 하나로 전문성 키우는 것도 좋긴 한데, 그것만으로는 요즘
-						살아남기 힘들어요 <br> 한 2개 정도는 따두는 게 좋은 것 같아요
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 
 			<form class="d-flex my-4">
 				<div class="input-group">
 					<input class="form-control" type="text" placeholder="댓글 작성하기"
-						aria-label=".form-control-lg example">
-					<button type="button" class="btn btn-dark px-4"
-						style="background-color: black;">등록</button>
+						aria-label=".form-control-lg example" id="hrc_content" name="hrc_content">
+					<button id="addComment" type="button" class="btn btn-dark px-4"
+						style="background-color: black; ">등록</button>
 				</div>
 			</form>
 
@@ -105,7 +132,7 @@
 		<div class="d-flex my-4 flex-row-reverse">
 			<button type="button" class="btn btn-outline-secondary"
 				style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem; background-color: white; color: black;"
-				onclick="location.href='/html/speakList.html'">
+				onclick="location.href='/listenlist.do';">
 				<i class="bi bi-list"></i> 목록 보기
 			</button>
 		</div>
@@ -119,6 +146,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 
+	$("#addComment").click(function(){
+		$.ajax({
+ 			type: "POST",
+ 			url : "/addcomment.do",
+ 			data : {
+ 				hr_seq : "${dto.hr_seq}",
+ 				hrc_content : $(hrc_content).val()
+ 			},
+ 			dataType : 'JSON',
+ 			success: function(results){
+
+	 				
+	 			let div = `
+					<div class="border-bottom">
+	
+						<div class="d-flex mt-2">
+							<div class="pe-3 me-3 border-end">\${results.m_name}(\${results.m_id})</div>
+							<div>\${results.hrc_regdate}</div>
+						</div>
+	
+						<div class="my-3 lh-lg"">
+							\${results.hrc_content}
+						</div>
+					</div>
+					`;
+				
+	
+				$('#commentList').append(div);
+				
+				$('#hrc_content').val("");
+				
+				$('#commentCnt').text(`\${results.BoardCnt}`);
+ 
+			
+ 			},
+ 			error: function(data){
+ 				alert("에러 발생. " + data);
+ 			}
+ 		})
+	});
+			
 </script>
 </body>
 </html>
