@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.bold {
+	font-weight: bold;
+} 
+
+.custom-link:hover {
+  font-size: 18px;
+  font-weight: bold;
+  color: red !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}

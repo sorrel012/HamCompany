@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 
@@ -22,7 +23,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">회원정보</li>
-					<li class="breadcrumb-item" aria-current="page">프로필</li>
+					<li class="breadcrumb-item text-danger bold" aria-current="page">사업자 프로필</li>
 				</ol>
 			</nav>
 		</section>
@@ -34,6 +35,8 @@
 					<li class="nav-item pb-1 active"><a
 						class="text-decoration-none text-dark" href="/business_profile.do">사업자 프로필</a></li>
 					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/business_profile_detail.do">사업자 상세 프로필</a></li>
+					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="/wish_list.do">위시리스트</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">주문 정보</div>
@@ -44,7 +47,7 @@
 				<div class="mb-1 fw-bold">커뮤니티</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="/mylisten_list.do">작성한 글</a></li>
+						class="text-decoration-none text-dark" href="/business_myspeak_list.do">말해볼텨</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -184,7 +187,7 @@ function sample6_execDaumPostcode() {
             /* document.getElementById('sample6_postcode').value = data.zonecode; */
             document.getElementById("sample6_address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            //document.getElementById("sample6_detailAddress").focus();
+            document.getElementById("address_detail").focus();
         }
     }).open();
 }

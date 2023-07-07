@@ -28,5 +28,127 @@
 	    SET b_pw = #{b_pw}
 	    WHERE b_id = #{b_id}
 	</update>
+	
+	<select id="profile_detail" resultType="com.ham.domain.BusinessDTO">
+		select * from tblBusiness b
+		inner join tblBdetail bd
+		on b.b_id = bd.b_id
+        inner join tblFDetail f
+        on bd.fd_seq = f.fd_seq
+        inner join tblField fi
+        on fi.f_seq = f.f_seq
+		where b.b_id = #{b_id}
+	</select>
+	
+	<select id="allField" resultType="com.ham.domain.FieldDTO">
+		select * from tblField f
+	    inner join tblFDetail fd
+	    on f.f_seq = fd.f_seq
+	</select>
+	
+	<update id="profile_detail_edit" parameterType="com.ham.domain.BusinessDTO">
+	    UPDATE tblBdetail
+	    SET bd_name = #{bd_name},
+	    	bd_owner = #{bd_owner},
+	    	bd_address = #{bd_address},
+	    	bd_address_detail = #{bd_address_detail},
+	    	fd_seq = #{fd_seq},
+	    	bd_intro = #{bd_intro}
+	    WHERE b_id = #{b_id}
+	</update>
+	
+	<select id="wish_list" resultType="com.ham.domain.WishDTO">
+		select b.b_id, j.ja_seq, w.w_seq, m.mk_seq, j.m_id, f.fd_seq, j.ja_salary, j.ja_intro, j.ja_begindate, j.ja_enddate, j.ja_location, j.ja_time, j.ja_pic, j.ja_regdate, f.fd_name,  
+	    (select round(avg(er.er_rate), 1) from tblMember mb
+	    inner join tbljobapl a on mb.m_id = a.m_id
+	    inner join tblMarket mk on a.ja_seq = mk.ja_seq
+	    inner join tblPay p on mk.mk_seq = p.mk_seq
+	    inner join tblOrder o on p.p_seq = o.p_seq
+	    inner join tblEReview er on o.o_seq = er.o_seq
+	    where mb.m_id = j.m_id) as rate 
+	    from tblBusiness b
+	    inner join tblWish w on b.b_id = w.b_id
+	    inner join tblMarket m on w.mk_seq = m.mk_seq
+	    inner join tblJobApl j on j.ja_seq = m.ja_seq
+	    inner join tblFDetail f on f.fd_seq = j.fd_seq
+	    where b.b_id = #{b_id}
+	</select>
+	
+	<delete id="wish_list_delete">
+		delete from tblWish
+		where w_seq = #{w_seq}
+	</delete>
+	
+	<select id="order_list" resultType="com.ham.domain.OrderDTO">
+	    SELECT *
+		FROM (
+		  SELECT b.*, 
+		  p.p_seq, p.mk_seq, p.p_name, p.p_tel, p.p_address, p.p_address_detail, p.p_memo, p.p_email, p.p_regdate, 
+		  o.o_seq, o.o_confirm, o.o_confdate,
+		  m.ja_seq, 
+		  j.m_id, j.fd_seq, j.ja_salary, j.ja_intro, j.ja_begindate, j.ja_enddate, j.ja_location, j.ja_time, j.ja_pic,
+		  f.fd_name,
+		  ROWNUM AS rn
+		  FROM tblBusiness b
+		  INNER JOIN tblPay p ON b.b_id = p.b_id
+		  INNER JOIN tblOrder o ON p.p_seq = o.p_seq
+		  INNER JOIN tblMarket m ON m.mk_seq = p.mk_seq
+		  INNER JOIN tblJobApl j ON j.ja_seq = m.ja_seq
+		  INNER JOIN tblFDetail f ON f.fd_seq = j.fd_seq
+		  WHERE b.b_id = #{b_id}
+		  ORDER BY o.o_seq ASC
+		) WHERE rn BETWEEN ${start} AND ${end}
+	</select>
+	
+	<select id="order_list_size" resultType="String">
+		SELECT count(*)
+		FROM tblBusiness b
+		INNER JOIN tblPay p ON b.b_id = p.b_id
+		INNER JOIN tblOrder o ON p.p_seq = o.p_seq
+		INNER JOIN tblMarket m ON m.mk_seq = p.mk_seq
+		INNER JOIN tblJobApl j ON j.ja_seq = m.ja_seq
+		INNER JOIN tblFDetail f ON f.fd_seq = j.fd_seq
+		WHERE b.b_id = #{b_id}
+	</select>
 
+	<select id="order_list_select" resultType="com.ham.domain.OrderDTO">
+		select *
+	    from tblBusiness b
+	    inner join tblPay p on b.b_id = p.b_id
+	    inner join tblOrder o on p.p_seq = o.p_seq
+	    inner join tblMarket m on m.mk_seq = p.mk_seq
+	    inner join tblJobApl j on j.ja_seq = m.ja_seq
+	    inner join tblFDetail f on f.fd_seq = j.fd_seq
+	    where o.o_seq = #{o_seq}
+	</select>
+	
+	<select id="review_list" resultType="com.ham.domain.ReviewDTO">
+		select *
+	    from tblEReview
+	    where o_seq = #{o_seq}
+	</select>
+	
+	<insert id="order_list_review_add" parameterType="com.ham.domain.ReviewDTO">
+		insert into tblEReview
+		values(er_seq.nextVal, sysdate, #{er_content}, #{er_rate}, #{o_seq})
+	</insert>
+	
+	<update id="order_list_review_edit" parameterType="com.ham.domain.ReviewDTO">
+	    UPDATE tblEReview
+	    SET er_content = #{er_content},
+	    	er_rate = #{er_rate}
+	    WHERE o_seq = #{o_seq}
+	</update>
+	
+	<select id="business_speak_list" resultType="com.ham.domain.BusinessSpeakDTO">
+		SELECT *
+		FROM (
+		select s.*,  (select count(*) from tblSBComment where sb_seq = s.sb_seq) as count, ROWNUM AS rn
+			    from tblSpeakB s
+			    where b_id = #{b_id}
+		        ORDER BY s.sb_seq
+		) 
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
 </mapper>
