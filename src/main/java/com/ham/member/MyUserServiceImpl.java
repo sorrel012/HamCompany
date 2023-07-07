@@ -4,10 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
+import com.ham.domain.MyJACareerDTO;
+import com.ham.domain.MyJAEduDTO;
+import com.ham.domain.MyJALicenseDTO;
+import com.ham.domain.MyJobAPLDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
@@ -172,6 +177,71 @@ public class MyUserServiceImpl implements MyUserService {
 		List<MyFDetailDTO> list = mapper.fdlist();
 		
 		return list;
+	}
+	
+	@Transactional
+	@Override
+	public int addJAP(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto) {
+		
+		int job = mapper.addjob(jobdto);
+		String ja_seq = jobdto.getJa_seq();
+		
+		int edu = 0;
+		if(edudto.getJae_content_list() != null) {
+			int len = edudto.getJae_content_list().size();
+			
+			for(int i=0; i<len; i++) {
+				
+				MyJAEduDTO tmpdto = new MyJAEduDTO();
+				
+				tmpdto.setJa_seq(ja_seq);
+				tmpdto.setJae_content(edudto.getJae_content_list().get(i));
+				tmpdto.setJae_graduation(edudto.getJae_graduation_list().get(i));
+				
+				edu = mapper.addedu(tmpdto);
+				
+			}
+		}
+		
+		int career = 0;
+		if(careerdto.getJac_content_list() != null) {
+			int len = careerdto.getJac_content_list().size();
+			
+			for(int i=0; i<len; i++) {
+				
+				MyJACareerDTO tmpdto = new MyJACareerDTO();
+				
+				tmpdto.setJa_seq(ja_seq);
+				tmpdto.setJac_content(careerdto.getJac_content_list().get(i));
+				tmpdto.setJac_period(careerdto.getJac_period_list().get(i));
+				
+				career = mapper.addcareer(tmpdto);
+				
+			}
+		}
+		
+		int lic = 0;
+		if(licdto != null) {
+			int len = licdto.getJal_content_list().size();
+			
+			for(int i=0; i<len; i++) {
+				
+				MyJALicenseDTO tmpdto = new MyJALicenseDTO();
+				
+				tmpdto.setJa_seq(ja_seq);
+				tmpdto.setJal_content(licdto.getJal_content_list().get(i));
+				tmpdto.setJal_issdate(licdto.getJal_issdate_list().get(i));
+				
+				lic = mapper.addlic(tmpdto);
+				
+			}
+		}
+		
+		if(job == 1 & edu == 1 & career == 1 & lic== 1) {
+			return 1;
+		}
+		
+		return 0;
 	}
 	
 }

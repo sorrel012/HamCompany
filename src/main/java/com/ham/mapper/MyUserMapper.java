@@ -5,6 +5,10 @@ import java.util.List;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
+import com.ham.domain.MyJACareerDTO;
+import com.ham.domain.MyJAEduDTO;
+import com.ham.domain.MyJALicenseDTO;
+import com.ham.domain.MyJobAPLDTO;
 import com.ham.domain.MyMemberDTO;
 import com.ham.domain.MyPGalleryDTO;
 import com.ham.domain.MyPortfolioDTO;
@@ -56,5 +60,13 @@ public interface MyUserMapper {
 	List<MyFieldDTO> flist();
 
 	List<MyFDetailDTO> fdlist();
+	
+	int addjob(MyJobAPLDTO jobdto);
+
+	int addedu(MyJAEduDTO tmpdto);
+
+	int addcareer(MyJACareerDTO tmpdto);
+
+	int addlic(MyJALicenseDTO tmpdto);
 
 }

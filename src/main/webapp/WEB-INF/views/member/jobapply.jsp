@@ -32,22 +32,22 @@
 				<div class="d-flex mb-4">
 					<div class="col-1 text-truncate">학교(전공)</div>
 
-					<input type="text" class="form-control w-50" id="floatingInputValue" name="jae_content">
+					<input type="text" class="form-control w-50" id="floatingInputValue" name="jae_content_list" required>
 
 				</div>
 				<div class="d-flex">
 					<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업여부</div>
 
 					<div class="form-check me-4">
-						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault1" value="재학 중"> 
+						<input class="form-check-input" type="radio" name="jae_graduation_list" id="flexRadioDefault1" value="재학 중"> 
 						<label class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
 					</div>
 					<div class="form-check me-4">
-						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault2" value="졸업 예정"> 
+						<input class="form-check-input" type="radio" name="jae_graduation_list" id="flexRadioDefault2" value="졸업 예정"> 
 						<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="jae_graduation" id="flexRadioDefault3" value="졸업" checked> 
+						<input class="form-check-input" type="radio" name="jae_graduation_list" id="flexRadioDefault3" value="졸업" checked> 
 						<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
 					</div>
 				</div>
@@ -63,14 +63,14 @@
 			<div class="d-flex mb-4">
 				<div class="col-2 text-truncate">회사명/프로젝트명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue" name="jac_content">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jac_content_list">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-2">기간</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue" name="jac_period">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jac_period_list">
 			</div>
 
 		</div>
@@ -85,14 +85,14 @@
 			<div class="d-flex mb-4">
 				<div class="col-1 text-truncate">자격증명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue" name="jal_content">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jal_content_list">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-1 text-truncate">발급날짜</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue" name="jal_issdate">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jal_issdate_list">
 
 			</div>
 		</div>
@@ -188,29 +188,29 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 
+	let idx = 2;
+	
 	function addEdu() {
-	    
-	    let idx = 2;
-	    
+	    console.log(idx);
 	    $('#edu').append (
 	    	`
 	    	<hr>
 	    	<div class="d-flex mb-4 j-addmargin">
 				<div class="col-1 text-truncate">학교(전공)</div>
-					<input type="text" class="form-control w-50" id="floatingInputValue" name="jae_content">
+					<input type="text" class="form-control w-50" id="floatingInputValue" name="jae_content_list">
 				</div>
 			<div class="d-flex">
 				<div class="col-1 text-truncate me-sm-2 me-md-2 me-lg-0">졸업여부</div>
 					<div class="form-check me-4">
-					<input class="form-check-input" type="radio" name="jae_graduation' + idx + '" id="flexRadioDefault1" value="재학 중"> 
+					<input class="form-check-input" type="radio" name="jae_graduation\${idx}_list" id="flexRadioDefault1" value="재학 중"> 
 					<label class="form-check-label" for="flexRadioDefault1"> 재학 중 </label>
 				</div>
 				<div class="form-check me-4">
-					<input class="form-check-input" type="radio" name="jae_graduation' + idx + '" id="flexRadioDefault2" value="졸업 예정"> 
+					<input class="form-check-input" type="radio" name="jae_graduation\${idx}_list" id="flexRadioDefault2" value="졸업 예정"> 
 					<label class="form-check-label" for="flexRadioDefault2"> 졸업 예정 </label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="radio" name="jae_graduation' + idx + '" id="flexRadioDefault3" value="졸업" checked> 
+					<input class="form-check-input" type="radio" name="jae_graduation\${idx}_list" id="flexRadioDefault3" value="졸업" checked> 
 					<label class="form-check-label" for="flexRadioDefault3"> 졸업 </label>
 				</div>	    	
 			</div>
@@ -228,14 +228,14 @@
 		    <div class="d-flex mb-4 j-addmargin">
 				<div class="col-2 text-truncate">회사명/프로젝트명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue" name="jac_content">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jac_content_list">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-2">기간</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue" name="jac_period">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jac_period_list">
 			</div>
 		    `
 		);
@@ -250,14 +250,14 @@
 		    <div class="d-flex mb-4 j-addmargin">
 				<div class="col-1 text-truncate">자격증명</div>
 
-				<input type="text" class="form-control w-50" id="floatingInputValue" name="jal_content">
+				<input type="text" class="form-control w-50" id="floatingInputValue" name="jal_content_list">
 
 			</div>
 
 			<div class="d-flex">
 				<div class="col-1 text-truncate">발급날짜</div>
 
-				<input type="text" class="form-control w-25" id="floatingInputValue" name="jal_issdate">
+				<input type="text" class="form-control w-25" id="floatingInputValue" name="jal_issdate_list">
 
 			</div>
 			`

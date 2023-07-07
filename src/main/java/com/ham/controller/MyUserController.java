@@ -320,7 +320,7 @@ public class MyUserController {
 	        }
 	    }
 
-	    edudto.setJae_graduation(jae_graduationList);
+	    edudto.setJae_graduation_list(jae_graduationList);
 		
 		try {
 
@@ -335,12 +335,15 @@ public class MyUserController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(jobdto);
-		System.out.println(edudto);
-		System.out.println(careerdto);
-		System.out.println(licdto);
+		int result = service.addJAP(jobdto, edudto, careerdto, licdto);
+
+		if (result > 0) {
+			return "member/support_detail";
+		} else {
+			// 실패 처리 로직 추가 (예: 에러 페이지로 이동)
+			return "redirect:/error";
+		}
 		
-		return "member/support_detail";
 	}
 
 	@GetMapping("/support_detail.do")

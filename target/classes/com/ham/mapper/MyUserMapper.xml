@@ -204,5 +204,30 @@
 			fd_name
 		from tblFDetail
 	</select>
+	
+	<insert id="addjob">
+	
+		<selectKey keyProperty="ja_seq" order="BEFORE" resultType="String">
+			select ja_seq.nextval from dual
+		</selectKey>	
+	
+		insert into tblJobApl (ja_seq, m_id, fd_seq, ja_salary, ja_intro, ja_begindate, ja_enddate, ja_location, ja_time, ja_pic)
+			values (#{ja_seq}, #{m_id}, #{fd_seq}, #{ja_salary}, #{ja_intro}, #{ja_begindate}, #{ja_enddate}, #{ja_location}, #{ja_time}, #{ja_pic})
+	</insert>
+	
+	<insert id="addedu">
+		insert into tblJAEdu (jae_seq, ja_seq, jae_content, jae_graduation)
+			values (jae_seq.nextval, #{ja_seq}, #{jae_content}, #{jae_graduation})
+	</insert>
+	
+	<insert id="addcareer">
+		insert into tblJACareer (jac_seq, ja_seq, jac_content, jac_period)
+			values (jac_seq.nextval, #{ja_seq}, #{jac_content}, #{jac_period})
+	</insert>
+	
+	<insert id="addlic">
+		insert into tblJALicense (jal_seq, ja_seq, jal_content, jal_issdate)
+			values (jal_seq.nextval, #{ja_seq}, #{jal_content}, #{jal_issdate})
+	</insert>
 
 </mapper>
