@@ -238,7 +238,7 @@
 		    m.ja_seq,	
 		    j.m_id, j.ja_begindate, j.ja_enddate, j.ja_salary,
 		    bd.bd_name,
-		    o.o_confirm
+		    o.o_confirm, o.o_seq
 		from tblPay p
 		    inner join tblMarket m on m.mk_seq = p.mk_seq
 		    inner join tblJobApl j on m.ja_seq = j.ja_seq
@@ -247,5 +247,18 @@
 		    inner join tblOrder o on p.p_seq = o.p_seq
 		where m_id = #{id}
 	</select>
+	
+	<update id="updateaccept">
+		update tblOrder set
+			o_confirm = '승인'
+		where o_seq = #{o_seq}
+			
+	</update>
+	
+	<update id="updatedeny">
+		update tblOrder set
+			o_confirm = '거절'
+		where o_seq = #{o_seq}
+	</update>
 
 </mapper>

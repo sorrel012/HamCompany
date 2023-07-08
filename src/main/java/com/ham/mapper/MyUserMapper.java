@@ -72,4 +72,10 @@ public interface MyUserMapper {
 
 	List<MyApplicationDTO> getapplication(String id);
 
+	
+	//지원 내역
+	void updateaccept(String o_seq);
+
+	void updatedeny(String o_seq);
+
 }

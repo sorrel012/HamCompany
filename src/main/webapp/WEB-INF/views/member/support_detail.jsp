@@ -23,7 +23,7 @@
 			<nav style="-bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
-					<li class="breadcrumb-item" aria-current="page">지원 정보</li>
+					<li class="breadcrumb-item" aria-current="page">지원정보</li>
 					<li class="breadcrumb-item" aria-current="page">지원 내역</li>
 				</ol>
 			</nav>
@@ -74,11 +74,11 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto">
 					<tr class="text-center align-middle">
-						<c:forEach items="${list}" var="dto">
 						<td class="col-1 text-wrap" style="height: 60px;">${dto.p_seq}</td>
 						<td class="col-3 text-wrap" style="height: 60px;">
-							<a class="text-black text-decoration-none text-hover" onclick="showModal('${dto.bd_name}', '${dto.p_regdate}', '${dto.p_name}', '${dto.p_tel}', '${dto.p_email}', '${dto.p_address}', '${dto.p_address_detail}', '${dto.p_memo}', '${dto.o_confirm}')"> ${dto.bd_name} </a>
+							<a class="text-black text-decoration-none text-hover" onclick="showModal('${dto.bd_name}', '${dto.p_regdate}', '${dto.p_name}', '${dto.p_tel}', '${dto.p_email}', '${dto.p_address}', '${dto.p_address_detail}', '${dto.p_memo}', '${dto.o_confirm}', '${dto.o_seq}')"> ${dto.bd_name} </a>
 						</td>
 						<td class="col-2 text-wrap" style="height: 60px;">${dto.ja_begindate}
 						</td>
@@ -88,18 +88,18 @@
 						<td class="col-2" style="height: 60px;">
 							<c:choose>
 								<c:when test="${dto.o_confirm eq '대기중'}">
-									<button class="text-truncate btn btn-primary btn-cursor">${dto.o_confirm}</button>
+									<button class="text-truncate btn btn-primary btn-cursor">대기 중</button>
 								</c:when>
 								<c:when test="${dto.o_confirm eq '승인'}">
-									<button class="text-truncate btn btn-primary gray btn-cursor">거절</button>
+									<button class="text-truncate btn btn-primary green btn-cursor">${dto.o_confirm}</button>
 								</c:when>
 								<c:otherwise>
-									<button class="text-truncate btn btn-primary btn-cursor">${dto.o_confirm}</button>
+									<button class="text-truncate btn btn-primary btn-cursor gray">${dto.o_confirm}</button>
 								</c:otherwise>
 							</c:choose>
 						</td>
-						</c:forEach>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 
@@ -118,41 +118,39 @@
 				</div>
 				<div class="modal-body">
 					<div class="m-box m-mabottom">
-						<h5>✅ 회사명</h5>
-						<div id="company" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 회사명</h5>
+						<div id="company" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box m-mabottom">
-						<h5>✅ 신청날짜</h5>
-						<div id="regdate" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 신청날짜</h5>
+						<div id="regdate" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box m-mabottom">
-						<h5>✅ 신청자명</h5>
-						<div id="applicant" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 신청자명</h5>
+						<div id="applicant" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box m-mabottom">
-						<h5>✅ 연락처</h5>
-						<div id="tel" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 연락처</h5>
+						<div id="tel" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box m-mabottom">
-						<h5>✅ 이메일</h5>
-						<div id="email" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 이메일</h5>
+						<div id="email" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box m-mabottom">
-						<h5>✅ 주소</h5>
-						<div id="address" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 주소</h5>
+						<div id="address" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box m-mabottom">
-						<h5>✅ 상세주소</h5>
-						<div id="addressDetail" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 상세주소</h5>
+						<div id="addressDetail" class="m-matop m-maleft m-font"></div>
 					</div>
 					<div class="m-box">
-						<h5>✅ 메모</h5>
-						<div id="memo" class="m-matop m-maleft"></div>
+						<h5 class="m-bold">✅ 메모</h5>
+						<div id="memo" class="m-matop m-maleft m-font"></div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button class="btn" id="acceptBtn">승인</button>
-					<button class="btn bg-secondary" id="denyBtn">거절</button>
+				<div id="btns">
 				</div>
 			</div>
 		</div>
@@ -165,7 +163,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 
-    function showModal(bd_name, p_regdate, p_name, p_tel, p_email, p_address, p_address_detail, p_memo) {
+    function showModal(bd_name, p_regdate, p_name, p_tel, p_email, p_address, p_address_detail, p_memo, o_confirm, o_seq) {
         
         $('#staticBackdrop').modal('show');
         
@@ -178,7 +176,50 @@
         $('#addressDetail').text(' ◼  ' + p_address_detail);
         $('#memo').text(' ◼  ' + p_memo);
         
+        if (o_confirm == '대기중') {
+            $('#btns').html(
+                `
+                <div class="modal-footer">
+					<form method="POST" id="form" >
+						<button class="btn" id="acceptBtn" onclick="accept()">승인</button>
+						<button class="btn bg-secondary" id="denyBtn" onclick="deny()">거절</button>
+						<input type="hidden" name="o_seq" id="hiddenBtn">
+					</form>
+				</div>
+                `
+            );            
+
+		    $('#hiddenBtn').attr('value', o_seq);
+        }
+        
     }
+    
+    function accept() {
+        
+        if(!confirm('신청을 승인하시겠습니까?')) {
+            
+            $('#form').on('submit',function(){
+                event.preventDefault();
+        	})        	
+		} else {
+		    $('#form').attr('action', '/support_accept.do').submit();
+		}
+        
+    }
+    
+    function deny() {
+        
+        if(!confirm('신청을 거절하시겠습니까?')) {
+            
+            $('#form').on('submit',function(){
+                event.preventDefault();
+        	})        	
+		} else {
+		    $('#form').attr('action', '/support_deny.do').submit();
+		}
+        
+    }
+    
     
 </script>
 </body>

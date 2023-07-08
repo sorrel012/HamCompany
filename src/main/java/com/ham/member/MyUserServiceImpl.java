@@ -253,5 +253,16 @@ public class MyUserServiceImpl implements MyUserService {
 		return list;
 	}
 	
+	
+	//지원 내역
+	@Override
+	public void updateAccept(String o_seq) {
+		mapper.updateaccept(o_seq);
+	}
+	
+	@Override
+	public void updateDeny(String o_seq) {
+		mapper.updatedeny(o_seq);
+	}
+	
 }
-;

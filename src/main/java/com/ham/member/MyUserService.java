@@ -57,5 +57,11 @@ public interface MyUserService {
 	int addJAP(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto);
 
 	List<MyApplicationDTO> getApplication(String id);
+
+	
+	//지원 내역
+	void updateAccept(String o_seq);
+
+	void updateDeny(String o_seq);
 	
 }

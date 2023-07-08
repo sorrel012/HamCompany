@@ -21,5 +21,6 @@ public class MyApplicationDTO {
 	private String ja_salary;
 	private String bd_name;
 	private String o_confirm;
+	private String o_seq;
 	
 }

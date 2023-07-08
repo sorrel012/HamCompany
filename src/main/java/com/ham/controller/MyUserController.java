@@ -355,7 +355,7 @@ public class MyUserController {
 		/* TODO 세션 아이디 로그인 후 변경
 		String id = (String)session.getAttribute("id");
 		*/
-		String id = "violet123";
+		String id = "magenta456";
 		
 		//로그인한 사용자의 모든 지원 내역 받아오기
 		List<MyApplicationDTO> list = service.getApplication(id);
@@ -370,6 +370,23 @@ public class MyUserController {
 		model.addAttribute("list", list);
 
 		return "member/support_detail";
+	}
+	
+	@PostMapping("support_accept.do")
+	public String supportAccept(String o_seq) {
+		
+		service.updateAccept(o_seq);
+
+		return "redirect:/support_detail.do";
+	}
+	
+	
+	@PostMapping("support_deny.do")
+	public String supportResult(String o_seq) {
+		
+		service.updateDeny(o_seq);
+		
+		return "redirect:/support_detail.do";
 	}
 	
 }

@@ -39,3 +39,11 @@
  .gray {
  	background-color: gray !important;
  }
+ 
+ .m-font {
+ 	font-size: 1.2rem;
+ }
+ 
+ .m-bold {
+ 	font-weight: bold;
+ }
