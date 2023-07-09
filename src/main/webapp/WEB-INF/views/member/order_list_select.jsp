@@ -172,6 +172,7 @@
 			        <button type="button" class="btn btn-primary border-0" onclick="submitReview()">작성 완료</button>
 			      </div>
 			    </div>
+			    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 			    </form>
 			  </div>
 			</div>
@@ -210,6 +211,7 @@
 			        <button type="button" class="btn btn-primary border-0" onclick="submitReview2()">수정하기</button>
 			      </div>   
 			    </div>
+			    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 			    </form>
 			  </div>
 			</div>

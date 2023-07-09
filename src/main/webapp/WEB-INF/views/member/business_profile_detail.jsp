@@ -136,6 +136,7 @@
                 <div class="mt-4 text-end">
 					<button type="button" class="btn" id="editbtn" style="width: 80px;" onclick="showConfirmationModal()">수정</button>
 				</div>
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
         	</form>
     	</div>
     	

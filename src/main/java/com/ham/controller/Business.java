@@ -1,5 +1,6 @@
 package com.ham.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.ham.domain.WishDTO;
 import com.ham.member.BusinessService;
 
 @Controller
+@PreAuthorize("hasRole("ROLE_BUSINESS"))
 public class Business {
 
 	@Autowired
@@ -28,9 +30,9 @@ public class Business {
 	
 	//비즈니스 프로필
 	@GetMapping("/business_profile.do")
-	public String businessProfile(Model model) {
+	public String businessProfile(Model model, Principal p) {
 	
-		List<BusinessDTO> list = service.profile("adventureseeker22");
+		List<BusinessDTO> list = service.profile(p.getName());
 		
 		System.out.println(list);
 		
@@ -71,9 +73,9 @@ public class Business {
 	
 	//businessProfileDetail.jsp
 	@GetMapping("/business_profile_detail.do")
-	public String businessProfileDetail(Model model) {
+	public String businessProfileDetail(Model model, Principal p) {
 		
-		BusinessDTO dto = service.profile_detail("adventureseeker22");
+		BusinessDTO dto = service.profile_detail(p.getName());
 		List<FieldDTO> list = service.allField();
 		
 		//System.out.println(dto);
@@ -105,9 +107,9 @@ public class Business {
 	}
 	
 	@GetMapping("/wish_list.do")
-	public String wishList(Model model) {
+	public String wishList(Model model, Principal p) {
 		
-		List<WishDTO> list = service.wish_list("adventureseeker22");
+		List<WishDTO> list = service.wish_list(p.getName());
 		
 		
 		//System.out.println(list);
@@ -128,7 +130,7 @@ public class Business {
 	}
 	
 	@GetMapping("/order_list.do")
-	public String orderList(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String orderList(Model model, @RequestParam(defaultValue = "1") int page, Principal p) {
 		
 		int itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
 
@@ -137,7 +139,7 @@ public class Business {
 	    
 	    Map<String, String> map = new HashMap<String, String>();
 	    
-	    String b_id = "adventureseeker22";
+	    String b_id = p.getName();
 	    
 	    map.put("b_id", b_id);
 	    map.put("start", start + "");
@@ -230,7 +232,7 @@ public class Business {
 	*/
 	
 	@GetMapping("/business_myspeak_list.do")
-	public String business_myspeak_list(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String business_myspeak_list(Model model, @RequestParam(defaultValue = "1") int page, Principal p) {
 	    int itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
 
 	    int start = (page - 1) * itemsPerPage + 1;
@@ -238,7 +240,7 @@ public class Business {
 	    
 	    Map<String, String> map = new HashMap<String, String>();
 	    
-	    String b_id = "adventureseeker22";
+	    String b_id = p.getName();
 
 	    map.put("b_id", b_id);
 	    map.put("start", start + "");
