@@ -85,16 +85,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div class="d-flex justify-content-center mt-4">
-				<div>
-					<button class="btn w-10" style="margin-right: 10px;">1</button>
-					<button class="btn w-10" style="margin-right: 10px;">2</button>
-					<button class="btn w-10" style="margin-right: 10px;">3</button>
-					<button class="btn w-10" style="margin-right: 10px;">4</button>
-					<button class="btn w-10" style="margin-right: 10px;">5</button>
-					<button class="btn w-10" style="margin-right: 10px;">&gt;&gt;</button>
-				</div>
-			</div>
 		</div>
 
 	</div>
