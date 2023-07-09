@@ -1,10 +1,12 @@
 package com.ham.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,18 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.ham.board.BoardService;
-import com.ham.domain.BusinessSpeakDTO;
+import com.ham.board.ListenService;
 import com.ham.domain.HRCommentDTO;
 import com.ham.domain.HReviewAddDTO;
 import com.ham.domain.HReviewDTO;
-import com.ham.domain.MemberSpeakDTO;
 
 @Controller
-public class BoardController {
+@PreAuthorize("isAuthenticated()")
+public class ListenController {
 	
 	@Autowired
-	private BoardService service;
+	private ListenService service;
 	
 	//listen - 함 들어볼텨
 	@GetMapping("/listenlist.do")
@@ -105,9 +106,12 @@ public class BoardController {
 	}
 	
 	@PostMapping("/addhreview.do")
-	public String addHReview(HReviewAddDTO dto) {
+	public String addHReview(HReviewAddDTO dto, Principal p) {
 		
+		String id = p.toString();
+		dto.setM_id(id);
 		service.addHReview(dto);
+		
 
 		return "redirect:listenlist.do";
 	}
@@ -138,11 +142,13 @@ public class BoardController {
 	
 	@RequestMapping(value="/addcomment.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String addComment(@RequestParam("hr_seq") String hr_seq, @RequestParam("hrc_content") String hrc_content) {
+	public String addComment(@RequestParam("hr_seq") String hr_seq, @RequestParam("hrc_content") String hrc_content, Principal p) {
 		
 		//1. 댓글 등록
 		HRCommentDTO dto = new HRCommentDTO();
 		
+		String id = p.toString();
+		dto.setM_id(id);
 		dto.setHr_seq(hr_seq);
 		dto.setHrc_content(hrc_content);
 	
@@ -176,91 +182,6 @@ public class BoardController {
 		
 		return "board/listenlist";
 		
-	}
-	
-
-	
-	
-	
-
-	
-	//speak - 함 말해볼텨
-	/*
-	 type : 1 => 사용자 말해볼텨
-	 type : 2 => 사업자 말해볼텨
-	 */
-	@GetMapping("/speaklist.do")
-	public String speakList(Model model, @RequestParam(value="type" , defaultValue="0") String type) {
-		
-		System.out.println(type);
-		
-		if (type.equals("1")) {
-			
-			//사용자 말해볼텨 리스트 불러오기
-			
-			List<MemberSpeakDTO> list = service.getSpeakList();
-			//int count = service.getBoardCnt();
-			
-			
-			model.addAttribute("list", list);
-			//model.addAttribute("count", count);
-			
-			return "board/speaklist";
-			
-			
-		} else if (type.equals("2")) {
-	
-			//사업자 말해볼텨 리스트 불러오기
-			List<BusinessSpeakDTO> list = service.getSpeakMList();
-		}
-		
-		return "board/speaklist";
-	}
-	
-	
-	/*
-	@GetMapping("/listenlist.do")
-	public String listenSortedList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort) {
-		
-		
-		if (sort.equals("0")) {
-			List<HReviewDTO> list = service.getHReviewList();
-			int count = service.getBoardCnt();
-			
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-			return "board/listenlist";
-		} else {
-			List<HReviewDTO> list = service.getSortedHReviewList(sort);
-			int count = service.getBoardCnt();
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-			return "board/listenlist";
-		}
-		
-	}
-	*/
-	
-	
-	
-	@GetMapping("/speakdetail.do")
-	public String speakDetail() {
-		
-		return "board/speakdetail";
-	}
-	
-	@GetMapping("/speakadd.do")
-	public String speakAdd() {
-		
-		return "board/speakadd";
-	}
-	
-	
+	}	
 
 }

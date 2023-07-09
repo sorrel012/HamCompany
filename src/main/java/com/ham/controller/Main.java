@@ -109,41 +109,6 @@ public class Main {
 		return "member/jobapply";
 	}
 	
-	@GetMapping("/speaklist.do")
-	public String speakList() {
-		
-		return "board/speaklist";
-	}
-	
-	@GetMapping("/speakdetail.do")
-	public String speakDetail() {
-		
-		return "board/speakdetail";
-	}
-	
-	@GetMapping("/speakadd.do")
-	public String speakAdd() {
-		
-		return "board/speakadd";
-	}
-	
-	@GetMapping("/listenlist.do")
-	public String listenList() {
-		
-		return "board/listenlist";
-	}
-	
-	@GetMapping("/listendetail.do")
-	public String listenDetail() {
-		
-		return "board/listendetail";
-	}
-	
-	@GetMapping("/listenadd.do")
-	public String listenAdd() {
-		
-		return "board/listenadd";
-	}
 	
 	@GetMapping("/checkprofile.do")
 	public String checkProfile() {

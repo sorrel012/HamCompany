@@ -9,16 +9,18 @@ import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.HRCommentDTO;
 import com.ham.domain.HReviewAddDTO;
 import com.ham.domain.HReviewDTO;
+import com.ham.domain.MSCommentDTO;
 import com.ham.domain.MemberSpeakDTO;
-import com.ham.mapper.BoardMapper;
+import com.ham.mapper.ListenMapper;
 
 
 @Service
-public class BoardSeviceImpl implements BoardService{
+public class ListenSeviceImpl implements ListenService{
 	
 	@Autowired
-	private BoardMapper mapper;
+	private ListenMapper mapper;
 
+	//함 들어볼텨
 	@Override
 	public List<HReviewDTO> getHReviewList() {
 		
@@ -164,27 +166,6 @@ public class BoardSeviceImpl implements BoardService{
 		mapper.deleteContentCmt(seq);
 		
 		
-	}
-
-	@Override
-	public List<MemberSpeakDTO> getSpeakList() {
-		
-		List<MemberSpeakDTO> list = mapper.getSpeakList();
-
-		return list;
-		
-		
-	}
-
-	@Override
-	public List<BusinessSpeakDTO> getSpeakMList() {
-		
-		List<BusinessSpeakDTO> list = mapper.getSpeakMList();
-		
-		return list;
-	}
-	
-	
-	
+	}	
 
 }

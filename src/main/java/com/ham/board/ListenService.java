@@ -1,4 +1,4 @@
-package com.ham.mapper;
+package com.ham.board;
 
 import java.util.List;
 
@@ -6,37 +6,38 @@ import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.HRCommentDTO;
 import com.ham.domain.HReviewAddDTO;
 import com.ham.domain.HReviewDTO;
+import com.ham.domain.MSCommentDTO;
 import com.ham.domain.MemberSpeakDTO;
 
-public interface BoardMapper {
+public interface ListenService {
 
 	List<HReviewDTO> getHReviewList();
 
-	int getBoardCount();
+	int getBoardCnt();
 
 	HReviewDTO getListenDetail(String seq);
 
-	List<HRCommentDTO> getCommentList(String seq);
+	List<HRCommentDTO> getDetailComment(String seq);
 
-	int getCommentCount(String seq);
+	int getCommentCnt(String seq);
 
 	int deleteComment(String seq);
 
 	List<HReviewAddDTO> getField();
 
-	List<HReviewAddDTO> getFdetail();
+	List<HReviewAddDTO> getFDetail();
 
-	void insertHReview(HReviewAddDTO dto);
+	void addHReview(HReviewAddDTO dto);
 
-	void editHReview(HReviewAddDTO dto);
+	void editReview(HReviewAddDTO dto);
 
 	void addComment(HRCommentDTO dto);
 
 	HRCommentDTO getLastComment(String hr_seq);
 
-	List<HReviewDTO> getSearchResult(String word);
+	List<HReviewDTO> searchResult(String word);
 
-	int getSearchCount(String word);
+	int getSearchBoardCnt(String word);
 
 	List<HReviewDTO> getSortedHReviewList(String sort);
 
@@ -44,10 +45,6 @@ public interface BoardMapper {
 
 	String getViewCnt(String seq);
 
-	void deleteContentCmt(String seq);
-
-	List<MemberSpeakDTO> getSpeakList();
-
-	List<BusinessSpeakDTO> getSpeakMList();
+	void deleteContentCmt(String seq);	
 
 }

@@ -24,14 +24,15 @@
 		<div class="headline">
 			<h2>
 				<span class="fw-bold" style="color: #FF914D">함!</span> <span
-					class="text-primary fw-bold">말해</span>볼텨
+					class="text-primary fw-bold">말해</span>볼텨 <span class="fw-bold">[사용자]</span>
 			</h2>
+			
 			<button type="button" class="btn btn-danger"
-				style="width: 100px; height: 40px;" onclick="location.href='/speakadd.do'">글쓰기</button>
+				style="width: 100px; height: 40px;" onclick="location.href='/speakadd.do?type=1'">글쓰기</button>
 		</div>
 
 		<div class="side-headline mb-1">
-			<p style="text-align: left m-0">총 358,927 건</p>
+			<p style="text-align:left m-0;" class="fs-5">총 <span class="fw-bold">${count}</span>건</p>
 			<div class="d-flex">
 				<div style="width: 40%;" class="me-3">
 					<select class="form-select w-100" id="sortList" aria-label="Default select example">
@@ -47,32 +48,44 @@
 			</div>
 		</div>
 		
-		<div class="container-sm border border-1 border-dark border-opacity-25 rounded h-100">
-			<c:forEach items="${list}" var="dto">
-				<div class="container-fluid list p-2 border-bottom " onclick="location.href='/speakdetail.do?seq=${dto.sm_seq}'">
-					<div class="d-flex align-items-center mb-2">
-						<img class="profile" src="/resources/img/로고.png">
-						<div class="profile-detail">
-							<p class="name">${dto.m_name}(${dto.m_id})</p>
-							<p class="time">${dto.sm_regdate}</p>
+		<c:if test="${count != 0}">
+			<div class="container-sm border border-1 border-dark border-opacity-25 rounded h-100">
+				<c:forEach items="${list}" var="dto">
+					<div class="container-fluid list p-2 border-bottom " onclick="location.href='/speakmdetail.do?&seq=${dto.sm_seq}'">
+						<div class="d-flex align-items-center mb-2">
+							<img class="profile" src="/resources/img/로고.png">
+							<div class="profile-detail">
+								<p class="name">${dto.m_name}(${dto.m_id})</p>
+								<p class="time">${dto.sm_regdate}</p>
+							</div>
+						</div>
+						<div class="d-flex flex-column">
+							<h4 class="fs-3 fw-bold title">
+								${dto.sm_subject}</h4>
+						</div>
+						<div class="d-flex align-items-center pb-2" >
+							<i class="bi bi-chat-left-dots me-2"></i> <span
+							style="margin-right: 20px;">${dto.count}</span>
+							<i class="bi bi-eye me-2">
+							<span class="fst-normal"style="margin-right: 20px;">${dto.sm_hit}</span>
+							</i>
 						</div>
 					</div>
-					<div class="d-flex flex-column">
-						<h4 class="fs-3 fw-bold title">
-							${dto.sm_subject}</h4>
-					</div>
-					<div class="d-flex align-items-center pb-2" >
-						<i class="bi bi-chat-left-dots me-2"></i> <span
-						style="margin-right: 20px;">${dto.count}</span>
-						<i class="bi bi-eye me-2">
-						<span class="fst-normal"style="margin-right: 20px;">${dto.sm_hit}</span>
-						</i>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
+				</c:forEach>
+			</div>
+		</c:if>
 			
-
+		<c:if test="${count == 0}">
+			
+			<hr>
+			<div>
+				<div class="text-center my-5 fs-2 fw-bold">검색 결과가 존재하지 않습니다.</div>
+				<div class="w-100 d-flex justify-content-center" >
+					<button type="button" class="btn btn-light btn-lg mb-5 text-dark" style="background-color : #ededed;" onclick="location.href='/speakmlist.do'">전체 리스트 보기</button>
+				</div>
+       		</div>
+		</c:if>
+	
 		<div class="page">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
@@ -121,7 +134,7 @@
 		if ($('#word').val() == "") {
 			alert("검색어를 입력해주세요.");
 		} else {
-			location.href="/searchlist.do?word="+$('#word').val();
+			location.href="/searchmlist.do?word="+$('#word').val();
 		}
 			
 	};
@@ -140,7 +153,7 @@
 	
 	$('#sortList').change(function () {
 		
-		location.href="/speaklist.do?sort="+$(this).val();
+		location.href="/speakmlist.do?sort="+$(this).val();
 	}) 
 
 </script>

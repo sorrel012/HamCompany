@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ham.mapper.BoardMapper">
+<mapper namespace="com.ham.mapper.ListenMapper">
 	
 	<!--  함 들어볼텨 -->
 	<select id="getHReviewList" resultType="com.ham.domain.HReviewDTO">
@@ -61,7 +61,7 @@
 		</selectKey>
 		
 		
-		insert into tblhreview (hr_seq, m_id, hr_subject, hr_company, hr_regdate, hr_content, fd_seq) values (#{hr_seq}, 'cinnamon789', #{hr_subject}, #{hr_company}, default, #{hr_content}, #{fd_seq})
+		insert into tblhreview (hr_seq, m_id, hr_subject, hr_company, hr_regdate, hr_content, fd_seq) values (#{hr_seq}, #{m_id}, #{hr_subject}, #{hr_company}, default, #{hr_content}, #{fd_seq})
 	
 	</insert>
 	
@@ -78,7 +78,7 @@
 	
 	<insert id="addComment" parameterType="com.ham.domain.HRCommentDTO">	
 		
-		insert into tblhrcomment values (hrc_seq.nextval, #{hr_seq}, #{hrc_content}, sysdate, 'clover123')
+		insert into tblhrcomment values (hrc_seq.nextval, #{hr_seq}, #{hrc_content}, sysdate, #{m_id})
 	
 	</insert>
 	
@@ -153,30 +153,6 @@
 		delete from tblhrcomment where hr_seq =  #{hr_seq}
 	
 	</delete>
-	
-	<!-- 함 말해볼텨 -->
-	
-	<select id="getSpeakList" resultType="com.ham.domain.MemberSpeakDTO">
-		
-		select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
-		inner join tblmember m on sm.m_id=m.m_id) a 
-		inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
-		on a.sm_seq = b.sm_seq
-	
-	</select>
-	
-	<select id="getSpeakMList" resultType="com.ham.domain.BusinessSpeakDTO">
-		
-		select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
-		inner join tblmember m on sm.m_id=m.m_id) a 
-		inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
-		on a.sm_seq = b.sm_seq
-	
-	</select>
-	
-	<select id="getSpeakMList" resultType="com.ham.domain.MemberSpeakDTO">
-	
-	</select>
 	
 	
 
