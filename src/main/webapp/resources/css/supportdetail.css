@@ -1,0 +1,49 @@
+.m-box {
+	border: 1px solid #DDD;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.m-mabottom {
+	margin-bottom: 20px;s
+}
+
+.text-hover:hover {
+	cursor: pointer;
+}
+
+.m-weight {
+	font-weight: bold !important;
+}
+
+ .m-matop {
+ 	margin-top: 20px;
+ }
+ 
+ .m-maleft {
+ 	margin-left: 15px;
+ }
+ 
+ .btn {
+ 	border: none !important;
+ }
+ 
+ .btn-cursor {
+ 	cursor: default !important;
+ }
+ 
+ .green {
+ 	background-color: #02b742 !important;
+ }
+ 
+ .gray {
+ 	background-color: gray !important;
+ }
+ 
+ .m-font {
+ 	font-size: 1.2rem;
+ }
+ 
+ .m-bold {
+ 	font-weight: bold;
+ }
