@@ -1,6 +1,7 @@
 package com.ham.controller;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,20 +34,16 @@ import com.ham.domain.MySpeakMDTO;
 import com.ham.member.MyUserService;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_MEMBER')")
 public class MyUserController {
 	
 	@Autowired
 	private MyUserService service;
 	
 	@GetMapping("/user_profile.do")
-	public String userProfile(Model model, HttpServletRequest req) {
+	public String userProfile(Model model, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		 */
-		String id = "wain1719";
+		String id = p.getName();
 		
 		MyMemberDTO dto = service.editProfile(id);
 		
@@ -77,14 +73,9 @@ public class MyUserController {
 
 	//비밀번호 수정
 	@PostMapping("/user_profile_updatepw.do")
-	public String updatePw(String new_pw, HttpServletRequest req) {
+	public String updatePw(String new_pw, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		 */
-		String id = "wain1719";
+		String id = p.getName();
 		
 		MyMemberDTO dto = new MyMemberDTO();
 		
@@ -102,14 +93,9 @@ public class MyUserController {
 	}
 
 	@GetMapping("/myportfolio.do")
-	public String myPortfolio(Model model, HttpServletRequest req) {
+	public String myPortfolio(Model model, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		*/
-		String id = "wain1719";
+		String id = p.getName();
 				
 		List<MyPortfolioDTO> list = service.portfoliolist(id);
 		
@@ -125,14 +111,11 @@ public class MyUserController {
 	}
 	
 	@PostMapping("/storeportfolio.do")
-	public String storePortfolio(Model model, MyPortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req) {
+	public String storePortfolio(Model model, MyPortfolioDTO dto, MultipartFile[] attach, HttpServletRequest req, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		dto.setM_id(id); */
-		dto.setM_id("wain1719");
+		String id = p.getName();
+		
+		dto.setM_id(id);
 		
 		List<String> files = new ArrayList<String>();
 		
@@ -238,14 +221,9 @@ public class MyUserController {
 	}
 	
 	@GetMapping("/mylisten_list.do")
-	public String myListenList(Model model, HttpServletRequest req) {
+	public String myListenList(Model model, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		*/
-		String id = "violet123";
+		String id = p.getName();
 		
 		List<MyHReviewDTO> list = service.llist(id);
 		
@@ -261,14 +239,9 @@ public class MyUserController {
 	}
 
 	@GetMapping("/myspeak_list.do")
-	public String mySpeakList(Model model, HttpServletRequest req) {
+	public String mySpeakList(Model model, Principal p) {
 
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		*/
-		String id = "violet123";
+		String id = p.getName();
 		
 		List<MySpeakMDTO> list = service.slist(id);
 		
@@ -296,14 +269,9 @@ public class MyUserController {
 	}
 	
 	@PostMapping("/jobapply_ins.do")
-	public String jobApplyInsert(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto, MultipartFile attach, HttpServletRequest req) {
+	public String jobApplyInsert(MyJobAPLDTO jobdto, MyJAEduDTO edudto, MyJACareerDTO careerdto, MyJALicenseDTO licdto, MultipartFile attach, HttpServletRequest req, Principal p) {
 
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		*/
-		String id = "violet123";
+		String id = p.getName();
 		jobdto.setM_id(id);
 				
 		
@@ -349,14 +317,10 @@ public class MyUserController {
 	}
 
 	@GetMapping("/support_detail.do")
-	public String supportDetail(Model model, HttpServletRequest req) {
+	public String supportDetail(Model model, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		*/
-		String id = "magenta456";
+		
+		String id = p.getName();
 		
 		//로그인한 사용자의 모든 지원 내역 받아오기
 		List<MyApplicationDTO> list = service.getApplication(id);
@@ -392,14 +356,9 @@ public class MyUserController {
 	
 	//문의 내역
 	@GetMapping("/mycs_list.do")
-	public String csList(Model model, HttpServletRequest req) {
+	public String csList(Model model, Principal p) {
 		
-		//접속자 아이디
-		HttpSession session = req.getSession();
-		/* TODO 세션 아이디 로그인 후 변경
-		String id = (String)session.getAttribute("id");
-		*/
-		String id = "violet123";
+		String id = p.getName();
 		
 		List<MyCsCenterDTO> list = service.getCsList(id);
 
