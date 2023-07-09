@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "sec" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Ham</title>
 	
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	
@@ -28,65 +30,82 @@
 			</div>
 			<div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-1 mt-0">
 				<div class="col pe-3 pb-2">
-					<div class="card">
-						<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<div class="card" onclick="location.href='/shop/shopping_view?seq=${list[0].ja_seq }&rate=${list[0].rate}'">
+						<img src="/resources/img/mypage/${list[0].ja_pic}"
 							class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title m-0">고급 타일공</h5>
-							<p class="card-text m-0" style="color: #DB4444;">$375</p>
+							<h5 class="card-title m-0">${list[0].fd_name }</h5>
+							<p class="card-text m-0" style="color: #DB4444;">${list[0].ja_salary }원</p>
 							<div class="m-0 d-flex">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img class="me-1" src="/resources/img/Vector.svg"> <span
-									class="small">(30)</span>
+								<c:forEach begin="1" end="${(list[0].rate).substring(0,1)}" varStatus="vs">
+									<img src="/resources/img/Vector.svg"
+									<c:if test="${vs.last }">
+									class="me-1"
+									</c:if>
+									>
+								</c:forEach>
+								<span class="small">(${list[0].rate })</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col pe-lg-3 pe-md-0 pb-2">
-					<div class="card">
-						<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<div class="card" onclick="location.href='/shop/shopping_view?seq=${list[1].ja_seq }&rate=${list[1].rate}'">
+						<img src="/resources/img/mypage/${list[1].ja_pic}"
 							class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title m-0">고급 타일공</h5>
-							<p class="card-text m-0" style="color: #DB4444;">$375</p>
+							<h5 class="card-title m-0">${list[1].fd_name }</h5>
+							<p class="card-text m-0" style="color: #DB4444;">${list[1].ja_salary }원</p>
 							<div class="m-0 d-flex">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img class="me-1" src="/resources/img/Vector.svg"> <span
-									class="small">(30)</span>
+								<c:forEach begin="1" end="${(list[1].rate).substring(0,1)}" varStatus="vs">
+									<img src="/resources/img/Vector.svg"
+									<c:if test="${vs.last }">
+									class="me-1"
+									</c:if>
+									>
+								</c:forEach>
+								<span class="small">(${list[1].rate })</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col pe-3 pb-2">
-					<div class="card">
-						<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<div class="card" onclick="location.href='/shop/shopping_view?seq=${list[2].ja_seq }&rate=${list[2].rate}'">
+						<img src="/resources/img/mypage/${list[2].ja_pic}"
 							class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title m-0">고급 타일공</h5>
-							<p class="card-text m-0" style="color: #DB4444;">$375</p>
+							<h5 class="card-title m-0">${list[2].fd_name }</h5>
+							<p class="card-text m-0" style="color: #DB4444;">${list[2].ja_salary }원</p>
 							<div class="m-0 d-flex">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img class="me-1" src="/resources/img/Vector.svg"> <span
-									class="small">(30)</span>
+								<c:forEach begin="1" end="${(list[2].rate).substring(0,1)}" varStatus="vs">
+									<img src="/resources/img/Vector.svg"
+									<c:if test="${vs.last }">
+									class="me-1"
+									</c:if>
+									>
+								</c:forEach>
+								 <span class="small">(${list[2].rate })</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col pe-lg-0 pe-md-0 pb-2">
-					<div class="card">
-						<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<div class="card" onclick="location.href='/shop/shopping_view?seq=${list[3].ja_seq }&rate=${list[3].rate}'">
+						<img src="/resources/img/mypage/${list[3].ja_pic}"
 							class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title m-0">고급 타일공</h5>
-							<p class="card-text m-0" style="color: #DB4444;">$375</p>
+							<h5 class="card-title m-0">${list[3].fd_name }</h5>
+							<p class="card-text m-0" style="color: #DB4444;">${list[3].ja_salary }원</p>
 							<div class="m-0 d-flex">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img src="/resources/img/Vector.svg"> <img src="/resources/img/Vector.svg">
-								<img class="me-1" src="/resources/img/Vector.svg"> <span
-									class="small">(30)</span>
+								<c:forEach begin="1" end="${(list[3].rate).substring(0,1)}" varStatus="vs">
+									<img src="/resources/img/Vector.svg"
+									<c:if test="${vs.last }">
+									class="me-1"
+									</c:if>
+									>
+								</c:forEach>
+								 <span
+									class="small">(${list[3].rate})</span>
 							</div>
 						</div>
 					</div>
@@ -94,7 +113,7 @@
 			</div>
 		</div>
 		<div class="text-center w-100 mt-4 mb-4">
-			<button class="btn w-25">모든 인재 보기</button>
+			<button class="btn w-25" onclick="location.href='/shop/shopping_list.do'">모든 인재 보기</button>
 		</div>
 	</section>
 
