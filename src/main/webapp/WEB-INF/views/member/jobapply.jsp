@@ -177,6 +177,7 @@
 			<button type="submit" class="btn btn-primary btn-lg float-lg-end px-5 mt-3 p-maright j-margintop j-marginbottom"style="background-color: #5179D9;">등록</button>
 		</div>		
 		
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		</form>
 
 	</section>

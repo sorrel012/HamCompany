@@ -186,6 +186,7 @@
 						<button class="btn" id="acceptBtn" onclick="accept()">승인</button>
 						<button class="btn bg-secondary" id="denyBtn" onclick="deny()">거절</button>
 						<input type="hidden" name="o_seq" id="hiddenBtn">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					</form>
 				</div>
                 `

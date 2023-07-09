@@ -91,6 +91,7 @@
 				<div class="mt-4 text-end">
 	            	<button type="button" class="btn" id="editbtn2" style="width: 80px;" disabled onclick="showConfirmationModal2()">수정</button>
 	            </div>
+	            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 			</form>
 			<form id="editform2" method="POST" class="form-control p-4 bg-secondary bg-opacity-10 border-top-0" action="/user_profile_updatepw.do">
 				<div class="fw-bold mt-4">
@@ -106,6 +107,7 @@
 				<div class="mt-4 text-end">
 					<button type="button" class="btn" id="editbtn" style="width: 80px;" disabled onclick="showConfirmationModal()">수정</button>
 				</div>
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 			</form>
 		</div>
 		

@@ -112,7 +112,8 @@
 					<button type="submit" class="btn btn-primary w-5 fs-5 p-maright" style="background-color: #5179D9;">수정</button>
 				</div>
 			<input type="hidden" name="p_seq" value="${dto.p_seq}">		
-			</c:forEach>		
+			</c:forEach>	
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">	
 			</form>
 		</div>
 
