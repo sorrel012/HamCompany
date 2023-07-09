@@ -138,9 +138,8 @@
 	      
 	       $.ajax({
 	    	  url: '/idcheck',
-	    	  type: 'POST',
-	    	  data: {id : idValue,
-	    		   ${_csrf.parameterName }:"${_csrf.token }" },
+	    	  type: 'GET',
+	    	  data: {id : idValue},
 	    	  dataType: 'json',
 	    	  success: (result) => {
 	    		  

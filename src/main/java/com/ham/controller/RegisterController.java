@@ -80,7 +80,7 @@ public class RegisterController {
 		
 	}
 	
-	@PostMapping("/idcheck")
+	@GetMapping("/idcheck")
 	public @ResponseBody int idcheck(String id) {
 		
 		int result = service.checkAdmin(id) + service.checkMember(id) + service.checkBusiness(id);
