@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ public class SpeakController {
 	@Autowired
 	private SpeakService service;
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/speakmlist.do")
 	public String speakmList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort) {
 		
@@ -55,6 +57,7 @@ public class SpeakController {
 	}	
 	
 
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	//사업자 말해볼텨
 	@GetMapping("/speakblist.do")
 	public String speakbList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort) {
@@ -84,7 +87,7 @@ public class SpeakController {
 		
 	}
 	
-
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/speakmdetail.do")
 	public String speakmDetail(Model model, String seq) {
 
@@ -112,6 +115,7 @@ public class SpeakController {
 	}
 	
 	
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@GetMapping("/speakbdetail.do")
 	public String speakbDetail(Model model, String seq) {
 
@@ -139,6 +143,7 @@ public class SpeakController {
 	}
 	
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	//글 삭제
 	@GetMapping("/deleteSMComment.do") 
 	public String deleteSMC(String seq) {
@@ -149,6 +154,7 @@ public class SpeakController {
 		return "redirect:speakmlist.do";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@GetMapping("/deleteSBComment.do") 
 	public String deleteSBC(String seq) {
 		
@@ -168,20 +174,22 @@ public class SpeakController {
 	}
 	
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@PostMapping("/addspeakM.do")
 	public String addspeakM(MemberSpeakDTO dto, Principal p) {
 		
-		String id = p.toString();
+		String id = p.getName();
 		dto.setM_id(id);
 		service.addSpeakM(dto);
 		
 		return "redirect:speakmlist.do";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@PostMapping("/addspeakB.do")
 	public String addspeakB(BusinessSpeakDTO dto, Principal p) {
 		
-		String id = p.toString();
+		String id = p.getName();
 		dto.setB_id(id);
 		service.addSpeakM(dto);
 
@@ -214,7 +222,7 @@ public class SpeakController {
 		return "board/speakedit";
 	}
 
-	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	//글 수정 - member
 	@PostMapping("/editspeakm.do")
 	public String editspeakM(MemberSpeakDTO dto, String seq) {
@@ -224,7 +232,7 @@ public class SpeakController {
 		return "redirect:speakmdetail.do?seq="+seq;
 	}
 	
-	
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	//글 수정 - business
 	@PostMapping("/editspeakb.do")
 	public String editspeakB(BusinessSpeakDTO dto, String seq) {
@@ -235,13 +243,14 @@ public class SpeakController {
 	}
 	
 	//댓글 등록
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@RequestMapping(value="/addsmcomment.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String addSMComment(@RequestParam("sm_seq") String sm_seq, @RequestParam("smc_content") String smc_content, Principal p) {
 		
 		//1. 댓글 등록
 		MSCommentDTO dto = new MSCommentDTO();
-		String id = p.toString();
+		String id = p.getName();
 		dto.setM_id(id);
 		
 		dto.setSm_seq(sm_seq);
@@ -266,13 +275,14 @@ public class SpeakController {
 	
 	
 	//댓글 등록
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@RequestMapping(value="/addsbcomment.do", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String addSBComment(@RequestParam("sb_seq") String sb_seq, @RequestParam("sbc_content") String sbc_content, Principal p) {
 		
 		//1. 댓글 등록
 		BSCommentDTO dto = new BSCommentDTO();
-		String id = p.toString();
+		String id = p.getName();
 		dto.setB_id(id);
 		
 		dto.setSb_seq(sb_seq);
@@ -295,6 +305,7 @@ public class SpeakController {
 	}
 	
 	//검색
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/searchmlist.do")
 	public String searchM(Model model, String word) {
 		
@@ -308,6 +319,7 @@ public class SpeakController {
 		
 	}	
 	
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@GetMapping("/searchblist.do")
 	public String searchB(Model model, String word) {
 		

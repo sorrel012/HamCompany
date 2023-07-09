@@ -4,9 +4,9 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import com.ham.domain.HReviewAddDTO;
 import com.ham.domain.HReviewDTO;
 
 @Controller
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("hasRole('ROLE_MEMBER')")
 public class ListenController {
 	
 	@Autowired
@@ -108,7 +108,7 @@ public class ListenController {
 	@PostMapping("/addhreview.do")
 	public String addHReview(HReviewAddDTO dto, Principal p) {
 		
-		String id = p.toString();
+		String id = p.getName();
 		dto.setM_id(id);
 		service.addHReview(dto);
 		
@@ -147,7 +147,7 @@ public class ListenController {
 		//1. 댓글 등록
 		HRCommentDTO dto = new HRCommentDTO();
 		
-		String id = p.toString();
+		String id = p.getName();
 		dto.setM_id(id);
 		dto.setHr_seq(hr_seq);
 		dto.setHrc_content(hrc_content);

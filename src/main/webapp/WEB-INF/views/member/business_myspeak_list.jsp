@@ -80,7 +80,7 @@
 							class="text-dark text-wrap text-decoration-none text-hover custom-link"
 							href="#">${dto.sb_subject}</a></td>
 						<td class="col-2 text-wrap">${dto.sb_regdate.substring(0, 10)}</td>
-						<td class="col-2 text-wrap">${dto.sb_Hit}</td>
+						<td class="col-2 text-wrap">${dto.sb_hit}</td>
 						<td class="col-2 text-wrap">${dto.count}</td>
 					</tr>
 					</c:forEach>

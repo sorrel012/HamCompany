@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ import com.ham.domain.WishDTO;
 import com.ham.member.BusinessService;
 
 @Controller
-@PreAuthorize("hasRole("ROLE_BUSINESS"))
+@PreAuthorize("hasRole('ROLE_BUSINESS')")
 public class Business {
 
 	@Autowired
