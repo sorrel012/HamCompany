@@ -20,3 +20,4 @@ public class BusinessSpeakDTO {
 	private String count; //댓글 갯수
    
 }
+

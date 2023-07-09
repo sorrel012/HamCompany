@@ -42,214 +42,56 @@
 			<div class="d-flex align-items-center mb-4">
 				<img class="me-2 mb-0" src="/resources/img/Rectangle 18.svg"
 					alt="이미지"> <span class="my-text fw-bold h4 m-0">포트폴리오
-					둘러보기<span>
+					둘러보기</span>
 			</div>
 			<div class="jikgun mb-3">
 				<button class="mybtn dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false">전체</button>
+					data-bs-toggle="dropdown" aria-expanded="false">${p_service}</button>
 				<ul class="dropdown-menu">
-					<li><button class="dropdown-item" type="button">앱 개발</button></li>
-					<li><button class="dropdown-item" type="button">웹개발</button></li>
-					<li><button class="dropdown-item" type="button">인테리어</button></li>
-					<li><button class="dropdown-item" type="button">사진/비디오
-							촬영</button></li>
-					<li><button class="dropdown-item" type="button">디자인</button></li>
-					<li><button class="dropdown-item" type="button">뷰티</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do';">전체보기</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=앱 개발';">앱 개발</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=웹 개발';">웹 개발</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=타일/인테리어';">타일/인테리어</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=사진/비디오 촬영';">사진/비디오 촬영</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=디자인';">디자인</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=뷰티';">뷰티</button></li>
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=공예';">공예</button></li>
 				</ul>
 				<span style="color: #BBB; margin-left: 20px;">직군을 선택해주세요.</span>
 			</div>
-			<div>118,553개의 포트폴리오</div>
+			<div>총 ${pfcnt}개의 포트폴리오</div>
 		</div>
 
 		<div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-1 mt-0">
-			<div class="col pe-3 pb-2">
+			<c:forEach items="${pflist}" var="pfdto">
+			<div class="col pe-3 pb-2" onclick="location.href='/portfolio_view.do?p_seq=${pfdto.p_seq}'">
 				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<img src="/resources/img/${pfdto.pg_name}"
 						class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
+						<h5 class="card-title m-0">${pfdto.p_subject}</h5>
+						<p class="card-text m-0">${pfdto.p_service}</p>
 						<div class="m-0 d-flex">
 							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
+							<span>${pfdto.m_name}</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col pe-3 pb-2">
-				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-						class="card-img-top" alt="...">
-
-					<div class="card-body">
-						<h5 class="card-title m-0">타일공의 삶</h5>
-						<p class="card-text m-0">고급 타일공</p>
-						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>홍길동</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+			</c:forEach>
 		</div>
 		<div class="d-flex flex-row justify-content-center">
-			<button class="btn w-10" style="margin-right: 10px;">1</button>
-			<button class="btn w-10" style="margin-right: 10px;">2</button>
-			<button class="btn w-10" style="margin-right: 10px;">3</button>
-			<button class="btn w-10" style="margin-right: 10px;">4</button>
-			<button class="btn w-10" style="margin-right: 10px;">5</button>
-			<button class="btn w-10" style="margin-right: 10px;">&gt;&gt;</button>
+		<c:if test="${prev}">
+			<button class="btn w-10" style="margin-right: 10px;" onclick="location.href='/portfolio.do?num=${startPageNum - 1}&p_service=${p_service}';">&lt;&lt;</button>
+		</c:if>
+		
+		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+			<button class="btn w-10" style="margin-right: 10px;" onclick="location.href='/portfolio.do?num=${num}&p_service=${p_service}';">${num}</button>
+		</c:forEach>
+		
+		<c:if test="${next}">
+			<button class="btn w-10" style="margin-right: 10px;" onclick="location.href='/portfolio.do?num=${endPageNum + 1}&p_service=${p_service}';">&gt;&gt;</button>
+		</c:if>
 		</div>
 	</section>
 

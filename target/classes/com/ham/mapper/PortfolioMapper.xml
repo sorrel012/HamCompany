@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ham.mapper.PortfolioMapper">
+
+	<select id="pflist" parameterType="hashMap" resultType="com.ham.domain.PortfolioDTO">
+		 SELECT
+            p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+    		(select m_name from tblmember m where pf.m_id = m.m_id) as m_name,
+            (select pg_name from tblPGallery g where pf.p_seq = g.p_seq and rownum = 1) as pg_name 
+		FROM (
+            select p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+        row_number() over(order by p_seq desc) as rNum
+        from tblportfolio 
+        ) pf
+         where rNum between #{param1} and #{param2}
+         order by p_seq desc
+	</select>
+	
+	<select id="pflist2" parameterType="hashMap" resultType="com.ham.domain.PortfolioDTO">
+		 SELECT
+                p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+    		(select m_name from tblmember m where pf.m_id = m.m_id) as m_name,
+            (select pg_name from tblPGallery g where pf.p_seq = g.p_seq and rownum = 1) as pg_name 
+		FROM (
+            select p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+        row_number() over(order by p_seq desc) as rNum
+        from tblportfolio where p_service = #{param3}
+        ) pf
+         where rNum between #{param1} and #{param2} 
+         order by p_seq desc
+	</select>
+	
+	<!-- <select id="pflist2" resultType="com.ham.domain.PortfolioDTO">
+		SELECT
+    		p.*,  
+    		(select m_name from tblmember m where p.m_id = m.m_id) as m_name,
+            (select pg_name from tblPGallery g where p.p_seq = g.p_seq and rownum = 1) as pg_name 
+		FROM tblportfolio p where p_service = #{p_service} order by p_seq desc
+	</select> -->
+	
+	<select id="getpf" resultType="com.ham.domain.PortfolioDTO">
+		select
+			p.*,
+            (select m_name from tblmember m where p.m_id = m.m_id) as m_name
+		from tblportfolio p
+			where p.p_seq = #{p_seq}
+	</select>
+	
+	<select id="getpfcnt" resultType="String">
+		select count(*) from tblportfolio
+	</select>
+	
+	<select id="getpfcnt2" resultType="String">
+		select count(*) from tblportfolio where p_service = #{p_service}
+	</select>
+	
+ 	<select id="pfpiclist" resultType="com.ham.domain.PGalleryDTO">
+		select * from tblPGallery where p_seq = #{p_seq}
+	</select>
+	
+ 	<select id="getpfthumb" resultType="String">
+		 select pg_name from tblPGallery where p_seq = #{p_seq} and rownum = 1
+	</select>
+	
+	
+	
+</mapper>
