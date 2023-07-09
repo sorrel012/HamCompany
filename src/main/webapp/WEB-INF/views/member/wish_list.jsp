@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
+	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 
@@ -22,7 +24,8 @@
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
-					<li class="breadcrumb-item" aria-current="page">위시리스트</li>
+					<li class="breadcrumb-item" aria-current="page">회원정보</li>
+					<li class="breadcrumb-item text-danger bold" aria-current="page">위시리스트</li>
 				</ol>
 			</nav>
 		</section>
@@ -32,21 +35,21 @@
 				<div class="mb-1 fw-bold">회원정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">사업자 프로필</a></li>
+						class="text-decoration-none text-dark" href="/business_profile.do">사업자 프로필</a></li>
+					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/business_profile_detail.do">사업자 상세 프로필</a></li>
 					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">위시리스트</a></li>
+						class="text-decoration-none text-dark" href="/wish_list.do">위시리스트</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">주문 정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">주문 내역</a></li>
-					</li>
+						class="text-decoration-none text-dark" href="/order_list.do">주문 내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">커뮤니티</div>
 				<ul class="list-unstyled ps-3 mb-2">
 					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">작성한 글</a></li>
-					</li>
+						class="text-decoration-none text-dark" href="/business_myspeak_list.do">말해볼텨</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -63,264 +66,58 @@
 
 			<!-- wish -->
 			<section class="container-md mt-4 mb-5 p-0">
-
 				<div class="row g-1">
 					<div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-1 mt-0">
+					<c:forEach var="dto" items="${list}">
 						<div class="col pe-3 pb-2">
-							<div class="card">
+							<div class="card" id="${dto.ja_seq}">
 								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
+									class="card-img-top" alt="..."> <img id="${dto.w_seq}"
 									src="/resources/img/trash.png"
 									class="img-fluid position-absolute btn-trash"
 									style="right: 5px; top: 5px; width: 30px;">
 								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
+									<h6 class="card-title m-0 bold">${dto.fd_name}</h6>
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.ja_salary}" />원
 									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
+									  <!-- 이미지 태그를 동적으로 생성하는 스크립트 -->
+									  <script>
+									    var rate = ${dto.rate}; // ${dto.rate} 값 가져오기
+									    for (var i = 0; i < rate; i++) {
+									      document.write('<img src="/resources/img/Vector.svg">');
+									    }
+									  </script>
+									  <span class="small bold mt-1">&nbsp;(${dto.rate}점)</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col pe-lg-3 pe-md-0 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-3 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-lg-0 pe-md-0 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-3 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-lg-3 pe-md-0 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-3 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-lg-0 pe-md-0 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-3 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-lg-3 pe-md-0 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-3 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col pe-lg-0 pe-md-0 pb-2">
-							<div class="card">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
-									class="card-img-top" alt="..."> <img
-									src="/resources/img/trash.png"
-									class="img-fluid position-absolute btn-trash"
-									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
-									<h5 class="card-title m-0">고급 타일공</h5>
-									<p class="card-text m-0" style="color: #DB4444;">$375</p>
-									<div class="m-0 d-flex">
-										<img src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img
-											src="/resources/img/Vector.svg"> <img class="me-1"
-											src="/resources/img/Vector.svg"> <span class="small">(30)</span>
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
+					
 				</div>
 			</section>
 
-			<div class="d-flex justify-content-center mt-4">
-				<div>
-					<button class="btn w-10" style="margin-right: 10px;">1</button>
-					<button class="btn w-10" style="margin-right: 10px;">2</button>
-					<button class="btn w-10" style="margin-right: 10px;">3</button>
-					<button class="btn w-10" style="margin-right: 10px;">4</button>
-					<button class="btn w-10" style="margin-right: 10px;">5</button>
-					<button class="btn w-10" style="margin-right: 10px;">&gt;&gt;</button>
+		</div>
+		<!-- 모달창 -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+			aria-labelledby="deleteModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteModalLabel">삭제 확인</h5>
+					</div>
+					<div class="modal-body">
+						<p>정말로 삭제하시겠습니까?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-danger" id="confirmDeleteBtn">삭제</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 
 	</div>
 
@@ -346,6 +143,27 @@
      });
 
    });
+   
+   $('.btn-trash').click(function() {
+	   var seq = $(this).attr('id');
+	   
+	   // 모달 창 보이기
+	   $('#deleteModal').modal('show');
+
+	   // 삭제 버튼 클릭 시 동작
+	   $('#confirmDeleteBtn').click(function() {
+	     var url = '/wish_list_delete.do?seq=' + seq;  // URL 생성
+	     location.href = url;  // 페이지 이동
+	   });
+	   
+		// 취소 버튼 클릭 시 동작
+	   $('.modal-footer .btn-secondary').click(function() {
+	     $('#deleteModal').modal('hide');
+	     var seq = "";
+	   });
+	 });
+
+
  </script>
 </body>
 </html>
