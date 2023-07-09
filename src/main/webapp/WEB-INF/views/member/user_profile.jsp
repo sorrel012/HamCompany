@@ -35,6 +35,8 @@
 					<li class="nav-item pb-1 active"><a
 						class="text-decoration-none text-dark" href="/user_profile.do">프로필</a></li>
 					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/mycs_list.do">문의 내역</a></li>
+					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="/myportfolio.do">포트폴리오</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">지원정보</div>
