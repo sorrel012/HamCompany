@@ -8,7 +8,7 @@ import com.ham.domain.PortfolioDTO;
 
 public interface PortfolioService {
 	
-	List<PortfolioDTO> pflist();
+	List<PortfolioDTO> pflist(int displayPost, int postNum);
 	
 	PortfolioDTO getpf(String p_seq);
 	
@@ -19,5 +19,7 @@ public interface PortfolioService {
 	List<PGalleryDTO> pfpiclist(String p_seq);
 
 	List<PortfolioDTO> pflist(String p_service);
+
+	List<PortfolioDTO> pflist2(int displayPost, int postNum, String p_service);
 
 }

@@ -46,8 +46,9 @@
 			</div>
 			<div class="jikgun mb-3">
 				<button class="mybtn dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false">전체</button>
+					data-bs-toggle="dropdown" aria-expanded="false">${p_service}</button>
 				<ul class="dropdown-menu">
+					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do';">전체보기</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=앱 개발';">앱 개발</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=웹 개발';">웹 개발</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=타일/인테리어';">타일/인테리어</button></li>
@@ -80,12 +81,17 @@
 			</c:forEach>
 		</div>
 		<div class="d-flex flex-row justify-content-center">
-			<button class="btn w-10" style="margin-right: 10px;">1</button>
-			<button class="btn w-10" style="margin-right: 10px;">2</button>
-			<button class="btn w-10" style="margin-right: 10px;">3</button>
-			<button class="btn w-10" style="margin-right: 10px;">4</button>
-			<button class="btn w-10" style="margin-right: 10px;">5</button>
-			<button class="btn w-10" style="margin-right: 10px;">&gt;&gt;</button>
+		<c:if test="${prev}">
+			<button class="btn w-10" style="margin-right: 10px;" onclick="location.href='/portfolio.do?num=${startPageNum - 1}&p_service=${p_service}';">&lt;&lt;</button>
+		</c:if>
+		
+		<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+			<button class="btn w-10" style="margin-right: 10px;" onclick="location.href='/portfolio.do?num=${num}&p_service=${p_service}';">${num}</button>
+		</c:forEach>
+		
+		<c:if test="${next}">
+			<button class="btn w-10" style="margin-right: 10px;" onclick="location.href='/portfolio.do?num=${endPageNum + 1}&p_service=${p_service}';">&gt;&gt;</button>
+		</c:if>
 		</div>
 	</section>
 

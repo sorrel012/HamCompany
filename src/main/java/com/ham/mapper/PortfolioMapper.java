@@ -7,9 +7,8 @@ import com.ham.domain.PortfolioDTO;
 
 public interface PortfolioMapper {
 	
-	List<PortfolioDTO> pflist();
+	List<PortfolioDTO> pflist2(int displayPost, int postNum, String p_service);
 
-	List<PortfolioDTO> pflist2(String p_service);
 
 	PortfolioDTO getpf(String p_seq);
 	
@@ -18,6 +17,8 @@ public interface PortfolioMapper {
 	String getpfcnt2(String p_service);
 	
 	List<PGalleryDTO> pfpiclist(String p_seq);
+
+	List<PortfolioDTO> pflist(int displayPost, int postNum);
 
 
 }

@@ -2,21 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ham.mapper.PortfolioMapper">
 
-	<select id="pflist" resultType="com.ham.domain.PortfolioDTO">
-		SELECT
-    		p.*,  
-    		(select m_name from tblmember m where p.m_id = m.m_id) as m_name,
-            (select pg_name from tblPGallery g where p.p_seq = g.p_seq and rownum = 1) as pg_name 
-		FROM tblportfolio p order by p_seq desc
+	<select id="pflist" parameterType="hashMap" resultType="com.ham.domain.PortfolioDTO">
+		 SELECT
+            p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+    		(select m_name from tblmember m where pf.m_id = m.m_id) as m_name,
+            (select pg_name from tblPGallery g where pf.p_seq = g.p_seq and rownum = 1) as pg_name 
+		FROM (
+            select p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+        row_number() over(order by p_seq desc) as rNum
+        from tblportfolio 
+        ) pf
+         where rNum between #{param1} and #{param2}
+         order by p_seq desc
 	</select>
 	
-	<select id="pflist2" resultType="com.ham.domain.PortfolioDTO">
+	<select id="pflist2" parameterType="hashMap" resultType="com.ham.domain.PortfolioDTO">
+		 SELECT
+                p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+    		(select m_name from tblmember m where pf.m_id = m.m_id) as m_name,
+            (select pg_name from tblPGallery g where pf.p_seq = g.p_seq and rownum = 1) as pg_name 
+		FROM (
+            select p_seq, m_id, p_subject, p_service, p_location, p_time, p_year,
+        row_number() over(order by p_seq desc) as rNum
+        from tblportfolio where p_service = #{param3}
+        ) pf
+         where rNum between #{param1} and #{param2} 
+         order by p_seq desc
+	</select>
+	
+	<!-- <select id="pflist2" resultType="com.ham.domain.PortfolioDTO">
 		SELECT
     		p.*,  
     		(select m_name from tblmember m where p.m_id = m.m_id) as m_name,
             (select pg_name from tblPGallery g where p.p_seq = g.p_seq and rownum = 1) as pg_name 
 		FROM tblportfolio p where p_service = #{p_service} order by p_seq desc
-	</select>
+	</select> -->
 	
 	<select id="getpf" resultType="com.ham.domain.PortfolioDTO">
 		select

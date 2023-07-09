@@ -1,5 +1,6 @@
 package com.ham.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,28 @@ public class PortfolioServiceImpl implements PortfolioService {
 	private PortfolioMapper mapper;
 	
 	@Override
-	public List<PortfolioDTO> pflist() {
+	public List<PortfolioDTO> pflist2(int displayPost, int postNum, String p_service) {
 		
-		List<PortfolioDTO> list = mapper.pflist();
+		System.out.println(displayPost);
+		System.out.println(postNum);
+		System.out.println(p_service);
+		
+		List<PortfolioDTO> list = mapper.pflist2(displayPost, postNum, p_service);
+		
+		
+		return list;
+	}
+	
+
+
+	@Override
+	public List<PortfolioDTO> pflist(int displayPost, int postNum) {
+		
+		System.out.println(displayPost);
+		System.out.println();
+		System.out.println(postNum);
+		
+		List<PortfolioDTO> list = mapper.pflist(displayPost, postNum);
 		
 		return list;
 	}
@@ -26,7 +46,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public List<PortfolioDTO> pflist(String p_service) {
 		
-		List<PortfolioDTO> list = mapper.pflist2(p_service);
+		List<PortfolioDTO> list = null;//mapper.pflist2(p_service);
 		
 		return list;
 	}
