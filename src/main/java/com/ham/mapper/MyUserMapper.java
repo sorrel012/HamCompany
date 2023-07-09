@@ -3,6 +3,7 @@ package com.ham.mapper;
 import java.util.List;
 
 import com.ham.domain.MyApplicationDTO;
+import com.ham.domain.MyCsCenterDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -77,5 +78,7 @@ public interface MyUserMapper {
 	void updateaccept(String o_seq);
 
 	void updatedeny(String o_seq);
+
+	List<MyCsCenterDTO> getcslist(String id);
 
 }

@@ -3,6 +3,7 @@ package com.ham.member;
 import java.util.List;
 
 import com.ham.domain.MyApplicationDTO;
+import com.ham.domain.MyCsCenterDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -63,5 +64,7 @@ public interface MyUserService {
 	void updateAccept(String o_seq);
 
 	void updateDeny(String o_seq);
+
+	List<MyCsCenterDTO> getCsList(String id);
 	
 }

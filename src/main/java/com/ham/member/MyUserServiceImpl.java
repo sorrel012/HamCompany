@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ham.domain.MyApplicationDTO;
+import com.ham.domain.MyCsCenterDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -263,6 +264,16 @@ public class MyUserServiceImpl implements MyUserService {
 	@Override
 	public void updateDeny(String o_seq) {
 		mapper.updatedeny(o_seq);
+	}
+	
+	
+	//문의 내역
+	@Override
+	public List<MyCsCenterDTO> getCsList(String id) {
+		
+		List<MyCsCenterDTO> list = mapper.getcslist(id);
+		
+		return list;
 	}
 	
 }

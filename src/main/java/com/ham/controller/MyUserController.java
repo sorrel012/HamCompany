@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ham.domain.MyApplicationDTO;
+import com.ham.domain.MyCsCenterDTO;
 import com.ham.domain.MyFDetailDTO;
 import com.ham.domain.MyFieldDTO;
 import com.ham.domain.MyHReviewDTO;
@@ -380,13 +381,31 @@ public class MyUserController {
 		return "redirect:/support_detail.do";
 	}
 	
-	
 	@PostMapping("support_deny.do")
 	public String supportResult(String o_seq) {
 		
 		service.updateDeny(o_seq);
 		
 		return "redirect:/support_detail.do";
+	}
+	
+	
+	//문의 내역
+	@GetMapping("/mycs_list.do")
+	public String csList(Model model, HttpServletRequest req) {
+		
+		//접속자 아이디
+		HttpSession session = req.getSession();
+		/* TODO 세션 아이디 로그인 후 변경
+		String id = (String)session.getAttribute("id");
+		*/
+		String id = "violet123";
+		
+		List<MyCsCenterDTO> list = service.getCsList(id);
+
+		model.addAttribute("list", list);
+
+		return "member/mycs_list";
 	}
 	
 }

@@ -232,6 +232,8 @@
 			values (jal_seq.nextval, #{ja_seq}, #{jal_content}, #{jal_issdate})
 	</insert>
 	
+	<!-- 지원 내역 -->
+	
 	<select id="getapplication" resultType="com.ham.domain.MyApplicationDTO">
 		select
 		    p.p_seq, p.b_id, p.p_name, p.p_tel, p.p_address, p.p_address_detail, p.p_memo, p.p_email, p.p_regdate,
@@ -260,5 +262,20 @@
 			o_confirm = '거절'
 		where o_seq = #{o_seq}
 	</update>
+	
+	
+	<!-- 문의 내역 -->
+	<select id="getcslist" resultType="com.ham.domain.MyCsCenterDTO">
+		select 
+			csc_seq,
+			m_id,
+			b_id,
+			csc_subject,
+			csc_content,
+			csc_regdate,
+			csc_status
+		from tblCsCenter
+			where m_id=#{id}
+	</select>
 
 </mapper>
