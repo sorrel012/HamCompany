@@ -75,8 +75,8 @@
 					<img src="/resources/img/${pfdto.pg_name}"
 						class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title m-0">${pfdto.p_subject}</h5>
-						<p class="card-text m-0">${pfdto.p_service}</p>
+						<h5 class="card-title m-0" style="font-weight:bold;">${pfdto.p_subject}</h5>
+						<p class="card-text m-0 text-danger">${pfdto.p_service}</p>
 						<div class="m-0 d-flex">
 							<img src="/resources/img/로고.png" style="width: 24px;">
 							<span class="ms-2 mt-1">${pfdto.m_name}</span>
