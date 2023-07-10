@@ -86,7 +86,7 @@
 		    left outer join tblPGallery pg
 		        on p.p_seq = pg.p_seq
 		where p.m_id=#{id}
-		    order by p.p_seq, pg.pg_seq
+		    order by p.p_seq desc, pg.pg_seq desc
 	</select>
 	
 	<select id="editportfolio" resultMap="portfolioMap">
@@ -164,7 +164,7 @@
 		        rownum as rn
 		    from tblHReview
 		        where m_id = #{id}
-		            order by hr_seq
+		            order by hr_seq desc
 		) where rn between ${start} and ${end}
 	</select>
 	
@@ -195,7 +195,7 @@
 		        rownum as rn
 			from tblSpeakM		
 		        where m_id = #{id}
-		            order by sm_seq
+		            order by sm_seq desc
 		) where rn between ${start} and ${end}
 	</select>
 	
@@ -272,6 +272,7 @@
 		    inner join tblBDetail bd on b.b_id = bd.b_id
 		    inner join tblOrder o on p.p_seq = o.p_seq
 		where m_id = #{id}
+			order by p.p_seq desc
 	</select>
 	
 	<update id="updateaccept">
@@ -297,9 +298,11 @@
 			csc_subject,
 			csc_content,
 			csc_regdate,
-			csc_status
+			csc_status,
+			csc_comment
 		from tblCsCenter
 			where m_id=#{id}
+				order by csc_seq desc
 	</select>
 
 </mapper>

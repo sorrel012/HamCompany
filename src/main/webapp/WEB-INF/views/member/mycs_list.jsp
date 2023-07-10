@@ -131,7 +131,12 @@
     
 	    $('#staticBackdrop').modal('show');	    
 	    $('#content').text(' ◼  ' + content);
-	    $('#comment').text(' ◼  ' + comment);
+	    
+	    if(comment == null || comment == '') {
+	        $('#comment').text(' 🙏 처리 중입니다. 빠르게 처리하겠습니다.' );
+	    } else {
+	    	$('#comment').text(' ◼  ' + comment);
+	    }
 	    
 	}
 
