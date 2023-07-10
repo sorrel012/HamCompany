@@ -12,5 +12,7 @@ public class BlackListDTO {
 	private String blStatus;		//상태
 	private String blContent;		//신고 내용
 	private String blTitle;			//제목
+	
+	private String count;			//게시물 갯수
 
 }

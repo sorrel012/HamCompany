@@ -9,6 +9,13 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
     <link rel="stylesheet" href="/resources/css/checkprofile.css" />
+    
+    <style type="text/css">
+    	#list4 {
+    	    color: tomato !important; 
+    		font-weight: bold;
+    	}
+    </style>
 </head>
 <body>
 
@@ -24,31 +31,20 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">관리자페이지</li>
 					<li class="breadcrumb-item" aria-current="page">고객 문의</li>
+					<li class="breadcrumb-item" aria-current="page">문의 내역 관리</li>
 				</ol>
 			</nav>
 		</section>
 
-		<div class="col-sm-3 col-md-3 col-lg-2 container-lg">
-			<nav class="nav d-flex flex-column">
-				<div class="mb-1 fw-bold">회원 관리</div>
-				<ul class="list-unstyled ps-3 mb-2">
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">인재 프로필</a></li>
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">불량 회원</a></li>
-				</ul>
-				<div class="fw-bold mb-2">인재 매칭</div>
-				<div class="fw-bold mb-2 active">고객 문의</div>
-
-			</nav>
-		</div>
+		<!-- sidebar -->
+		<%@ include file="/WEB-INF/views/inc/admin_sidebar.jsp" %>
 
 		<div class="col-sm-9 col-md-9 col-lg-10 container-lg">
-			<div class="container-lg mb-4 p-0">
+			<div class="row mb-4 m-0 p-0">
 				<div class="text-start border-bottom border-2 border-dark d-flex">
 					<div class="text-start">
 						<h3 class="h3 pb-2 m-0 fw-bold">문의 내역 관리</h3>
-						<a>총 1,565건</a>
+						<a>총 ${list[0].count}건</a>
 					</div>
 				</div>
 			</div>
@@ -62,94 +58,28 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto" varStatus="num">
 					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
+						<c:if test="${dto.m_Id != null}">
+						<td class="col-2 text-truncate">${dto.m_Id}</td>
+						</c:if>
+						<c:if test="${dto.b_Id != null}">
+						<td class="col-2 text-truncate">${dto.b_Id}</td>
+						</c:if>
+						<td class="col-6 text-truncate">
+							<div class="text-hover" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal_${num.index}">
+								${dto.cscSubject} 
+							</div>
+						</td>
+						<c:if test="${dto.cscStatus == '처리중'}">
+						<td class="col-2 fw-bold text-danger text-truncate">${dto.cscStatus}</td>
+						</c:if>
+						<c:if test="${dto.cscStatus == '처리완료'}">
+						<td class="col-2 fw-bold text-success text-truncate">${dto.cscStatus}</td>
+						</c:if>
+						<td class="col-2 text-truncate">${dto.cscRegDate}</td>
 					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								문의입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">
@@ -165,6 +95,47 @@
 		</div>
 
 	</div>
+	
+	<!-- Modal -->
+	<c:forEach items="${list}" var="dto" varStatus="num">
+	<div class="modal fade" id="exampleModal_${num.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">문의내용</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form action="/checkinquiry.do" method="POST">
+	      <div class="modal-body">
+	        <div class="border rounded p-2">
+        	  <h5 class="fw-bold mb-2">❓ 문의 내용</h5>
+        	  <div class="ps-4">◼ ${dto.cscContent}</div>
+	        </div>
+	        <c:if test="${dto.cscStatus == '처리중'}">
+   	        <div class="border rounded p-2 mt-4">
+        	  <h5 class="fw-bold mb-2">❗ 답변 하기</h5>
+        	  <textarea name="answer" class="w-100 border-0 pt-0 p-3" placeholder="내용을 입력하세요." style="resize: none; height: 100px; outline: none;"></textarea>
+	        </div>
+	        </c:if>
+	        <c:if test="${dto.cscStatus == '처리완료'}">
+			<div class="border rounded p-2 mt-4">
+				<h5 class="fw-bold mb-2">❗ 답변</h5>
+				<textarea name="answer" class="w-100 border-0 pt-0 p-3" placeholder="내용을 입력하세요." style="resize: none; height: 100px; outline: none;" readonly="readonly">◼ ${dto.cscComment}</textarea>
+			</div>
+	        </c:if>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn bg-secondary" data-bs-dismiss="modal">닫기</button>
+	        <c:if test="${dto.cscStatus == '처리중'}">
+	        <button type="submit" class="btn bg-primary">답변하기</button>
+	        </c:if>
+	      </div>
+	      <input name="cscSeq" type="hidden" value="${dto.cscSeq}">
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	</c:forEach>
 
 
 	<!-- footer -->

@@ -9,6 +9,13 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
     <link rel="stylesheet" href="/resources/css/checkprofile.css" />
+    
+    <style type="text/css">
+    	#list1 {
+    	    color: tomato !important; 
+    		font-weight: bold;
+    	}
+    </style>
 </head>
 <body>
 
@@ -16,159 +23,178 @@
 	<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 
 
-	<div
-		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4">
+	    <div class="container-fluid row align-items-sm-start pt-4 p-0 m-0">
 
-		<section class="container-lg mb-4">
-			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item">관리자페이지</li>
-					<li class="breadcrumb-item" aria-current="page">회원 관리</li>
-					<li class="breadcrumb-item" aria-current="page">인재 프로필</li>
-				</ol>
-			</nav>
-		</section>
+        <section class="container-lg mb-4">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">관리자페이지</li>
+                    <li class="breadcrumb-item" aria-current="page">회원 관리</li>
+                    <li class="breadcrumb-item" aria-current="page">인재 프로필</li>
+                </ol>
+            </nav>
+        </section>
 
-		<div class="col-2 container-lg">
-			<nav class="nav d-flex flex-column">
-				<div class="mb-1 fw-bold">회원 관리</div>
-				<ul class="list-unstyled ps-3 mb-2">
-					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">인재 프로필</a></li>
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">불량 회원</a></li>
-				</ul>
-				<div class="fw-bold mb-2">인재 매칭</div>
-				<div class="fw-bold mb-2">고객 문의</div>
+		<!-- sidebar -->
+		<%@ include file="/WEB-INF/views/inc/admin_sidebar.jsp" %>
 
-			</nav>
-		</div>
+        <div class="col-10 container-lg">
+            <div class="container-lg mb-4 p-0">
+                <div class="text-start border-bottom border-2 border-dark d-flex">
+                    <div class="text-start">
+                        <h3 class="h3 pb-2 m-0 fw-bold">새 인재 프로필</h3>
+                    </div>
 
-		<div class="col-10 container-lg">
-			<div class="container-lg mb-4 p-0">
-				<div class="text-start border-bottom border-2 border-dark d-flex">
-					<div class="text-start">
-						<h3 class="h3 pb-2 m-0 fw-bold">새 인재 프로필</h3>
-					</div>
+                </div>
+                <div class="profile-view">
+                    <div class="profile-content">
+                        <h3 class="h3 pb-2 m-0 fw-bold mt-4 mb-4">몸도 마음도 건강한 인재입니다.</h3>
+                        <div class="d-flex align-items-center p-4 rounded">
+                            <img class="profile-img" src="/resources/img/Frame 684.png">
+                            <table class="user userinfo w-100 m-0 ms-3">
+                                <tr class="d-flex w-100 justify-content-between">
+                                    <td class="col-4">이름</td>
+                                    <td class="col-4">생년월일</td>
+                                    <td class="col-5">주소</td>
+                                </tr>
+                                <tr class="d-flex w-100 justify-content-between">
+                                    <td class="col-4">${dto.m_Name}</td>
+                                    <td class="col-4">${dto.m_Birth}</td>
+                                    <td class="col-5">${dto.m_Address}<br>${dto.m_AddressDetail}</td>
+                                </tr>
+                                <tr class="d-flex w-100 mt-3">
+                                    <td class="col-4">연락처</td>
+                                    <td class="col-4">이메일</td>
+                                    <td class="col-5"></td>
+                                </tr>
+                                <tr class="d-flex w-100">
+                                    <td class="col-4">${dto.m_Tel}</td>
+                                    <td class="col-4">${dto.m_Email}</td>
+                                    <td class="col-5"></td>
+                                </tr>
 
-				</div>
-				<div class="profile-view">
-					<div class="profile-content">
-						<h3 class="h3 pb-2 m-0 fw-bold mt-4 mb-5">몸도 마음도 건강한 인재입니다.</h3>
-						<div class="profile-top">
-							<img class="profile-img ms-3 mt-2" src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg">
-							<table class="user userinfo">
-								<tr>
-									<td>이름</td>
-									<td>생년월일</td>
-									<td>주소</td>
-								</tr>
-								<tr>
-									<td>홍길동</td>
-									<td>1992.05.14</td>
-									<td>서울시 강남구 역삼동</td>
-								</tr>
-								<tr>
-									<td>연락처</td>
-									<td>이메일</td>
-								</tr>
-								<tr>
-									<td>010-1111-1111</td>
-									<td>hong@gmail.com</td>
-								</tr>
+                            </table>
+                        </div>
 
-							</table>
-						</div>
-						<div class="eduinfo">
-							<table class="user careertbl">
-								<tr>
-									<td class="tbltitle">학력</td>
-								</tr>
-								<tr>
-									<td>서울 ㅇㅇ 고등학교 졸업</td>
-								</tr>
-								<tr>
-									<td>서울 ㅇㅇ 대학교 졸업</td>
-								</tr>
+                        <div class="eduinfo p-4">
+                            <table class="mb-4">
+                                <tr>
+                                    <td class="tbltitle">학력</td>
+                                </tr>
+                                <c:forEach items="${jaeList}" var="dto">
+                                <tr>
+                                    <td>${dto.jaeContent} 
+                                    	<span class="fw-bold">(${dto.jaeGraduation})</span>
+                                    </td>
+                                </tr>
+                                </c:forEach>
+                            </table>
 
+                            <table class="mb-4">
+                                <tr>
+                                    <td class="tbltitle">경력</td>
+                                </tr>
+                                <c:forEach items="${jacList}" var="dto">
+                                <tr>
+                                    <td><sapn>${dto.jacPeriod} : ${dto.jacContent}</td>
+                                </tr>
+                                </c:forEach>
+                            </table>
+                            <table class="table table-borderless mb-4">
+                                <tr>
+                                    <td class="tbltitle" colspan="2">희망 근무 조건</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">근무지 :</td>
+                                    <td>${dto.jaLocation}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">업종 :</td>
+                                    <td>${dto.fdName}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">근무기관 :</td>
+                                    <td>${dto.jaBeginDate} ~ ${dto.jaEndDate}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">근무일시 :</td>
+                                    <td>${dto.jaTime}</td>
+                                </tr>
 
-							</table>
-							<table class="user careertbl">
-								<tr>
-									<td class="tbltitle">경력</td>
-								</tr>
-								<tr>
-									<td>2018.09 ~ 2019.03 (<span>7개월</span>) : 타일팀 관리
-									</td>
-								</tr>
-								<tr>
-									<td>2022.01 ~ 2022.04 (<span>4개월</span>) : 타일마켓 관리(생활/건강)
-									</td>
-								</tr>
-								<tr>
-									<td>2022.05 ~ 2022.08 (<span>4개월</span>) : 타일 온라인팀 교육 및
-										컨설팅
-									</td>
-								</tr>
-								<tr>
-									<td>2022.05 ~ 2023.04 (<span>1년</span>) : 타일 기획, 온라인 시스템,
-										CS 시스템
-									</td>
-								</tr>
-							</table>
-							<table class="user careertbl worktbl">
-								<tr>
-									<td class="tbltitle" colspan="2">희망 근무 조건</td>
-								</tr>
-								<tr>
-									<td>근무지</td>
-									<td>경기도 수원시</td>
-								</tr>
-								<tr>
-									<td>업종</td>
-									<td>타일공</td>
-								</tr>
-								<tr>
-									<td>근무기관</td>
-									<td>기관 무관</td>
-								</tr>
-								<tr>
-									<td>근무일시</td>
-									<td>주4일(월,화,수,목)/풀타임(8시간이상)</td>
-								</tr>
-
-							</table>
-							<table class="user careertbl">
-								<tr>
-									<td class="tbltitle">자기소개서</td>
-								</tr>
-								<tr>
-									<td>안녕하세요 저는 김대환입니다. <br>고급 타일공입니다. 일 잘합니다. <br>
-										이번주 토요일 가능합니다 불러만 주십쇼 ........<br> 자기소개서.. 포트폴리오..... 넣긔
-										긔 가 뭐임? 긔 왜 몰라 긔엽긔 <br> ヾ(≧▽≦*)oφ(゜▽゜*)♪ 밥 먹었긔? 당근빠따~
-										φ(゜▽゜*)♪(´▽`ʃ♡ƪ) 민지 mz (min zi)
-									</td>
-								</tr>
-
-							</table>
-						</div>
-						<div id="ckpro-btns" class="mt-4 text-end">
-							<button class="btn btn2" style="width: 80px;">삭제</button>
-							<button class="btn" style="width: 80px;">승인</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                            </table>
+                            <table class="mb-4">
+                                <tr>
+                                    <td class="tbltitle">자기소개서</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    	${dto.jaIntro}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="ckpro-btns" class="mt-4 text-end">
+                        	<c:if test="${dto.jaStatus == '대기중'}">
+                            <button id="reject-btn" class="btn btn2" style="width: 80px;">거절</button>
+                            <button id="approve-btn" class="btn" style="width: 80px;">승인</button>
+                            </c:if>
+                            <button class="btn btn3" onclick="location.href='/checkprofile.do'">목록으로</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 		<!-- footer -->
 		<%@ include file="/WEB-INF/views/inc/footer.jsp"%>
 
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-		<script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
 
+	// 거절 버튼 클릭 이벤트 리스너
+	$("#reject-btn").click(function() {
+	    sendRequest("거절", "${dto.jaSeq}");
+	});
+	
+	// 승인 버튼 클릭 이벤트 리스너
+	$("#approve-btn").click(function() {
+	    sendRequest("승인", "${dto.jaSeq}");
+	});
+	
+	// AJAX를 사용하여 POST 요청을 보내는 함수
+	function sendRequest(action, jaSeq) {
+	  $.post("/checkprofile_view.do", { action: action, jaSeq: jaSeq },
+	    function(data) {
+	      console.log(action);
+	      console.log(jaSeq);
+	
+	      var title = '';
+	      var icon = '';
+	      
+	      if (action === '거절') {
+	        title = '거절되었습니다.';
+	        icon = 'error';
+	      } else if (action === '승인') {
+	        title = '승인되었습니다.';
+	        icon = 'success';
+	      }
+	
+	      Swal.fire({
+	        position: 'center',
+	        icon: icon,
+	        title: title,
+	        showConfirmButton: false,
+	        timer: 1500,
+		    onClose: function() {
+		        location.reload(); // 새로고침
+	      	}
+	      });
+	    }
+	  );
+	}
+	
 </script>
 </body>
 </html>

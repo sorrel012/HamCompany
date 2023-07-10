@@ -13,12 +13,12 @@
 		<div class="fw-bold mb-2">인재 매칭</div>
 		<ul class="list-unstyled ps-3 mb-2">
 			<li class="nav-item pb-1"><a id="list3"
-				class="text-decoration-none text-dark" href="#">매칭 관리</a></li>
+				class="text-decoration-none text-dark" href="/matching.do">매칭 관리</a></li>
 		</ul>
 		<div class="fw-bold mb-2">고객 문의</div>
 		<ul class="list-unstyled ps-3 mb-2">
 			<li class="nav-item pb-1"><a id="list4"
-				class="text-decoration-none text-dark" href="#">문의 내역 관리</a></li>
+				class="text-decoration-none text-dark" href="/checkinquiry.do">문의 내역 관리</a></li>
 		</ul>
 
 	</nav>

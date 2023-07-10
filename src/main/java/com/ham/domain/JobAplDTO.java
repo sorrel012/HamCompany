@@ -3,7 +3,7 @@ package com.ham.domain;
 import lombok.Data;
 
 @Data
-public class JopAplDTO {
+public class JobAplDTO {
 	
 	//tblJopApl
 	private String jaSeq;			//구직 신청서 번호
@@ -17,6 +17,7 @@ public class JopAplDTO {
 	private String jaTime;			//희망 근무 시간대
 	private String jaPic;			//회원 사진
 	private String jaRegDate;		//등록일자
+	private String jaStatus;		//상태
 	
 	private String count;			//게시글 갯수
 	

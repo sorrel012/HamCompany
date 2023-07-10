@@ -3,13 +3,15 @@
 
 <mapper namespace="com.ham.mapper.AdminMapper">
 
-	<select id="userList" resultType="com.ham.domain.JopAplDTO">
+	<select id="userList" resultType="com.ham.domain.JobAplDTO">
 		SELECT 
 		    m.m_name AS m_Name,
+		    j.ja_seq as jaSeq,
 		    j.ja_intro AS jaIntro,
 		    to_char(j.ja_regdate, 'yyyy-mm-dd') AS jaRegDate,
 		    f.f_name AS f_Name,
-		    (SELECT COUNT(*) FROM tbljobapl) AS count
+		    (SELECT COUNT(*) FROM tbljobapl) AS count,
+		    j.ja_status as jaStatus
 		FROM tbljobapl j
 		    INNER JOIN tblmember m
 		        ON j.m_id = m.m_id
@@ -17,16 +19,173 @@
 		        ON j.fd_seq = fd.fd_seq
 		    INNER JOIN tblfield f
 		        ON fd.f_seq = f.f_seq
+		ORDER BY j.ja_seq DESC
+	</select>
+	
+	<select id="userDetail" resultType="com.ham.domain.JobAplDetailDTO" parameterType="String">
+		SELECT
+		    j.ja_seq as jaSeq,
+		    m.m_Id as m_Id,
+		    fd.fd_seq as fdSeq,
+		    j.ja_salary as jaSalary,
+		    j.ja_intro as jaIntro,
+		    to_char(j.ja_begindate, 'yyyy-mm-dd') as jaBeginDate,
+		    to_char(j.ja_enddate, 'yyyy-mm-dd')  as jaEndDate,
+		    j.ja_location as jaLocation,
+		    j.ja_time as jaTime,
+		    j.ja_pic as jaPic,
+		    j.ja_status as jaStatus,
+		    to_char(j.ja_regdate, 'yyyy-mm-dd') as jaRegDate,
+		    m.m_name as m_Name,
+		    m.m_address as m_Address,
+		    m.m_address_detail as m_AddressDetail,
+		    m.m_tel as m_Tel,
+		    m.m_email as m_Email,
+		    to_char(m.m_birth, 'yyyy-mm-dd') as m_Birth,
+		    fd.fd_name as fdName
+		FROM tbljobapl j
+		    INNER JOIN tblmember m
+		        ON j.m_id = m.m_id
+		    INNER JOIN tblfdetail fd
+		        ON j.fd_seq = fd.fd_seq
+		WHERE ja_seq = #{jaSeq}
 	</select>
 	
 	<select id="blackList" resultType="com.ham.domain.BlackListDTO">
 		SELECT
+			bl_seq as blSeq,
 			bl_writer as blWriter,
 			bl_badmember as blBadmember,
 			bl_title as blTitle,
 			bl_status as blStatus,
-			to_char(bl_regdate, 'yyyy-mm-dd') as blRegdate
+			bl_content as blContent,
+			to_char(bl_regdate, 'yyyy-mm-dd') as blRegdate,
+			(SELECT COUNT(*) FROM tblBlacklist) as count
 		FROM tblBlacklist
 	</select>
+	
+	<select id="inquiryList" resultType="com.ham.domain.InquiryDTO">
+		SELECT
+			csc_seq as cscSeq,
+			m_id as m_Id,
+			b_id as b_Id,
+			csc_subject as cscSubject,
+			csc_content as cscContent,
+			to_char(csc_regdate, 'yyyy-mm-dd') as cscRegDate,
+			csc_status as cscStatus,
+			csc_comment as cscComment,
+			(SELECT COUNT(*) FROM tblCSCenter) as count
+		FROM tblCSCenter	
+	</select>
+	
+	<select id="jaEduList" resultType="com.ham.domain.JobAplDetailDTO" parameterType="String">
+		SELECT
+		    jae.jae_content as jaeContent,
+		    jae.jae_graduation as jaeGraduation
+		FROM tbljobapl j
+		    INNER JOIN tbljaedu jae
+		        ON j.ja_seq = jae.ja_seq
+		WHERE j.ja_seq = #{jaSeq}
+	</select>
+	
+	<select id="jaCareerList" resultType="com.ham.domain.JobAplDetailDTO" parameterType="String">
+		SELECT
+		    jac.jac_content as jacContent,
+		    jac.jac_period as jacPeriod
+		FROM tbljobapl j
+		    INNER JOIN tbljacareer jac
+		        ON j.ja_seq = jac.ja_seq
+		WHERE j.ja_seq = #{jaSeq}
+	</select>
 
+	<insert id="insertMarketUser" parameterType="String">
+		INSERT INTO tblMarket (mk_seq, ja_seq)
+			VALUES (mk_seq.nextVal, #{jaSeq}) 
+	</insert>
+	
+	<update id="updateJobAplStatus">
+		UPDATE tblJobApl 
+			SET
+				ja_status = #{action}
+			WHERE
+				ja_seq = #{jaSeq}
+	</update>
+	
+	<select id="selectMatching" resultType="com.ham.domain.MatchingDTO">
+		SELECT
+			o.o_seq as o_Seq,
+		    bd.bd_owner as bdOwner,
+		    bd.bd_name as bdName,
+		    bd.bd_address as bdAddress,
+		    bd.bd_address_detail as bdAddressDetail,
+		    bd.bd_intro as bdIntro,
+		    m.m_name as m_Name,
+		    o.o_confirm as o_Confirm
+		FROM tblorder o
+		    INNER JOIN tblpay p
+		        ON o.p_seq = p.p_seq
+		    INNER JOIN tblbusiness b
+		        ON p.b_id = b.b_id
+		    INNER JOIN tblbdetail bd
+		        ON b.b_id = bd.b_id
+		    INNER JOIN tblmarket mk
+		        ON p.mk_seq = mk.mk_seq
+		    INNER JOIN tbljobapl ja
+		        ON mk.ja_seq = ja.ja_seq
+		    INNER JOIN tblmember m
+		        ON ja.m_id = m.m_id
+		ORDER BY
+		    o.o_seq DESC
+	</select>
+	
+	<select id="selectMatchingCount" resultType="Integer" parameterType="String">
+		SELECT COUNT(*) FROM tblOrder
+    		WHERE o_confirm = #{statusName}
+	</select>
+	
+	<select id="selectMatchingDateCount" resultType="com.ham.domain.MatchingDTO">
+		SELECT
+		    to_char(o.o_confdate, 'mm-dd') as o_ConfDate,
+		    COUNT(*) AS dateCount
+		FROM
+		    tblorder o
+		GROUP BY
+		    o.o_confdate
+		ORDER BY
+		    o.o_confdate DESC
+	</select>
+	
+	<update id="updateConfirmStatus">
+		UPDATE tblOrder 
+		    SET
+		        o_confirm = #{action}
+		    WHERE 
+		    	o_seq = #{oSeq}
+	</update>
+	
+	<update id="updateBlackList">
+		UPDATE tblblacklist 
+			SET 
+				bl_status = #{action} 
+			WHERE 
+				bl_seq = #{blSeq}
+	</update>
+	
+	<update id="updateUserStatus">
+		UPDATE tblmember
+			SET	
+				m_status = #{num}
+			WHERE
+				m_id = #{blBadmember}
+	</update>
+	
+	<update id="updateInquiryAnswer">
+		UPDATE tblcscenter 
+			SET 
+				csc_comment = #{answer},
+				csc_status = '처리완료' 
+			WHERE
+				csc_seq = #{cscSeq} 
+	</update>
+	
 </mapper>
