@@ -1,6 +1,7 @@
 package com.ham.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ham.domain.BSCommentDTO;
 import com.ham.domain.BusinessSpeakDTO;
@@ -9,9 +10,9 @@ import com.ham.domain.MemberSpeakDTO;
 
 public interface SpeakMapper {
 	
-	List<MemberSpeakDTO> getSpeakList();
+	List<MemberSpeakDTO> getSpeakList(Map<String, String> map);
 
-	List<BusinessSpeakDTO> getSpeakMList();
+	List<BusinessSpeakDTO> getSpeakMList(Map<String, String> map);
 
 	int getSpeakBoardCount(String type);
 

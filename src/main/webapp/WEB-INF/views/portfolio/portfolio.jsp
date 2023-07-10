@@ -40,14 +40,20 @@
 
 		<div class="row g-1">
 			<div class="d-flex align-items-center mb-4">
-				<img class="me-2 mb-0" src="/resources/img/Rectangle 18.svg"
+				<img class="me-2 mb-0 primg" src="/resources/img/Rectangle_18.svg"
 					alt="이미지"> <span class="my-text fw-bold h4 m-0">포트폴리오
 					둘러보기</span>
 			</div>
 			<div class="jikgun mb-3">
 				<button class="mybtn dropdown-toggle" type="button"
 					data-bs-toggle="dropdown" aria-expanded="false">${p_service}</button>
-				<ul class="dropdown-menu">
+						<ul class="dropdown-menu">
+						<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do';">전체보기</button></li>
+					<c:forEach items="${getpfField}" var="fieldDTO">
+							<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=${fieldDTO.f_name}';">${fieldDTO.f_name}</button></li>
+					</c:forEach>
+						</ul>
+<!-- 				<ul class="dropdown-menu">
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do';">전체보기</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=앱 개발';">앱 개발</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=웹 개발';">웹 개발</button></li>
@@ -56,7 +62,7 @@
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=디자인';">디자인</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=뷰티';">뷰티</button></li>
 					<li><button class="dropdown-item" type="button" onclick="location.href='/portfolio.do?p_service=공예';">공예</button></li>
-				</ul>
+				</ul> -->
 				<span style="color: #BBB; margin-left: 20px;">직군을 선택해주세요.</span>
 			</div>
 			<div>총 ${pfcnt}개의 포트폴리오</div>

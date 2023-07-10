@@ -1,6 +1,7 @@
 package com.ham.board;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ham.domain.BSCommentDTO;
 import com.ham.domain.BusinessSpeakDTO;
@@ -12,9 +13,9 @@ public interface SpeakService {
 	
 	//함 말해볼텨
 
-	List<MemberSpeakDTO> getSpeakList();
+	List<MemberSpeakDTO> getSpeakList(Map<String, String> map);
 
-	List<BusinessSpeakDTO> getSpeakMList();
+	List<BusinessSpeakDTO> getSpeakMList(Map<String, String> map);
 
 	int getSpeakBoardCnt(String type);
 

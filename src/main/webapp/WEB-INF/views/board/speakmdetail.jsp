@@ -21,7 +21,7 @@
 	<section class="container-md mt-4 mb-5">
 		<h2 class="my-5">
 			<span class="fw-bold" style="color: #FF914D">함!</span> <span
-				class="text-danger fw-bold">들어</span>볼텨 <span class="fw-bold">[사용자]</span>
+					class="text-primary fw-bold">말해</span>볼텨 <span class="fw-bold">[구직회원]</span>
 		</h2>
 
 		<!--본문-->
@@ -61,13 +61,14 @@
 				</div>
 
 				<div>
+					<c:if test="${nowID == dto.m_id}">
 					<button type="button" class="btn btn-danger"
 						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem;" onclick="location.href='/speakedit.do?type=1&seq=${dto.sm_seq}';">수정</button>
 
 					<button type="button" class="btn"
 						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem; background-color: rgb(156, 156, 156);"
 						data-bs-toggle="modal" data-bs-target="#exampleModal" >삭제</button>
-					
+					</c:if>
 					<!-- Modal -->
 					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
@@ -142,7 +143,8 @@
  			url : "/addsmcomment.do", //여기바꾸기
  			data : {
  				sm_seq : "${dto.sm_seq}",
- 				smc_content : $(smc_content).val()
+ 				smc_content : $(smc_content).val(),
+ 				${_csrf.parameterName} : "${_csrf.token}"
  			},
  			dataType : 'JSON',
  			success: function(results){

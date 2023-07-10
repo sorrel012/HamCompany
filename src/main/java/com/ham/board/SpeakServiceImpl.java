@@ -1,6 +1,7 @@
 package com.ham.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class SpeakServiceImpl implements SpeakService{
 	
 	//함 말해볼텨
 	@Override
-	public List<MemberSpeakDTO> getSpeakList() {
+	public List<MemberSpeakDTO> getSpeakList(Map<String, String> map) {
 		
-		List<MemberSpeakDTO> list = mapper.getSpeakList();
+		List<MemberSpeakDTO> list = mapper.getSpeakList(map);
 
 		return list;
 		
@@ -31,9 +32,9 @@ public class SpeakServiceImpl implements SpeakService{
 	}
 
 	@Override
-	public List<BusinessSpeakDTO> getSpeakMList() {
+	public List<BusinessSpeakDTO> getSpeakMList(Map<String, String> map) {
 		
-		List<BusinessSpeakDTO> list = mapper.getSpeakMList();
+		List<BusinessSpeakDTO> list = mapper.getSpeakMList(map);
 		
 		return list;
 	}

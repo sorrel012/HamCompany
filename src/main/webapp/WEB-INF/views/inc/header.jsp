@@ -11,7 +11,7 @@
         </a>
         <ul class="navbar-nav mb-2 mb-lg-0 d-flex ms-3">
                <li class="nav-item">
-	             <a class="nav-link fw-bold" href="/shop/shopping_list.do">인재 둘러보기</a>
+	             <a class="nav-link fw-bold" href="/shop/shopping_list.do?f_seq=&page=">인재 둘러보기</a>
 	           </li>
 	           <li class="nav-item">
 	             <a class="nav-link fw-bold" href="/portfolio.do">포트폴리오</a>
@@ -56,7 +56,7 @@
 	           </li>
 	           
 	           <li class="nav-item">
-	             <a class="nav-link fw-bold" href="#">고객센터</a>
+	             <a class="nav-link fw-bold" href="/question.do">고객센터</a>
 	           </li>
            </sec:authorize>
            
@@ -64,13 +64,13 @@
            
            <sec:authorize access="hasRole('ROLE_BUSINESS')">
 	           <li class="nav-item">
-	             <a class="nav-link fw-bold" href="#">찜 목록</a>
+	             <a class="nav-link fw-bold" href="/wish_list.do">찜 목록</a>
 	           </li>
 	           <li class="nav-item">
-	             <a class="nav-link fw-bold" href="#">마이페이지</a>
+	             <a class="nav-link fw-bold" href="/business_profile.do">마이페이지</a>
 	           </li>
 	           <li class="nav-item">
-	             <a class="nav-link fw-bold" href="#">고객센터</a>
+	             <a class="nav-link fw-bold" href="/question.do">고객센터</a>
 	           </li>
            </sec:authorize>
            

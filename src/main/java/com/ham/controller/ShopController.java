@@ -73,8 +73,16 @@ public class ShopController {
 		
 		int isJjim = service.hasJjim(tempDto);
 		
-		String summary = dto.getIntro().substring(0, 140);
-		summary += "...";
+		
+		String summary = "";
+		
+		if (dto.getIntro().length() < 140) {
+			summary = dto.getIntro();
+		} else {
+			summary = dto.getIntro().substring(0, 140);
+			summary += "...";
+		}
+		
 		
 		
 		
@@ -91,7 +99,9 @@ public class ShopController {
 		return "shop/shopping_view";
 	}
 	
+	
 	@RequestMapping(value = "/shop/payment.do", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String payment(
 			   @RequestParam String salary,
 			   @RequestParam String f_name,
@@ -99,6 +109,7 @@ public class ShopController {
 			   @RequestParam String mk_seq,
 			   @RequestParam String date,
 			   @RequestParam String m_name,
+			   @RequestParam String ja_pic,
 			   Model model,
 			   Principal p) {
 		
@@ -111,6 +122,7 @@ public class ShopController {
 		map.put("mk_seq", mk_seq);
 		map.put("date", date);
 		map.put("m_name", m_name);
+		map.put("ja_pic", ja_pic);
 		
 		model.addAttribute("map", map);
 		model.addAttribute("id", p.getName());
@@ -118,7 +130,9 @@ public class ShopController {
 		return "shop/payment";
 	}
 	
+
 	@GetMapping("/shop/payok.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String payOk(String m_name, String fdName, String date, String salary, Model model) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -137,6 +151,7 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value = "/shop/paycheck.do", method=RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public @ResponseBody void paycheck(String b_id, String mk_seq, String p_name,
 										String p_tel, String p_address, String p_address_detail,
 										String p_memo, String p_email) {
@@ -157,6 +172,7 @@ public class ShopController {
 		
 	}
 	
+
 	@PostMapping("/shop/jjim.do")
 	public void jjim(String mk_seq, String id, int isJjim) {
 		

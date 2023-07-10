@@ -8,6 +8,7 @@
 	<title>HamCompany</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/myprofile.css" />
+	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 
@@ -23,7 +24,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">커뮤니티</li>
-					<li class="breadcrumb-item" aria-current="page">말해볼텨</li>
+					<li class="breadcrumb-item bold text-danger" aria-current="page">말해볼텨</li>
 				</ol>
 			</nav>
 		</section>
@@ -77,7 +78,7 @@
 					<c:forEach items="${list}" var="dto">
 					<tr class="text-center">
 						<td class="col-2 text-wrap">${dto.sm_seq}</td>
-						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" href="/speakmlist.do?sm_seq=${dto.sm_seq}"> ${dto.sm_subject} </a></td>
+						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" href="speakmdetail.do?&seq=${dto.sm_seq}"> ${dto.sm_subject} </a></td>
 						<td class="col-2 text-wrap">${dto.sm_regdate}</td>
 						<td class="col-2 text-wrap">${dto.sm_hit}</td>
 						<td class="col-2 text-wrap">${dto.sm_comment}</td>

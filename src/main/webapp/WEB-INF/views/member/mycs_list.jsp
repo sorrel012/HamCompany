@@ -9,6 +9,7 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/myprofile.css" />
 	<link rel="stylesheet" href="/resources/css/supportdetail.css" />
+	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 
@@ -24,7 +25,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">회원정보</li>
-					<li class="breadcrumb-item" aria-current="page">문의 내역</li>
+					<li class="breadcrumb-item bold text-danger" aria-current="page">문의 내역</li>
 				</ol>
 			</nav>
 		</section>

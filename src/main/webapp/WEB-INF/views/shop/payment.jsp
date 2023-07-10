@@ -71,10 +71,10 @@
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-6 mb-4">
 				<div class="container-lg box-shadow rounded">
-					<div class="d-flex align-items-center pe-4 ps-4 pt-5 pb-3">
+					<div class="d-flex align-items-center pe-2 ps-2 pt-5 pb-3">
 						<div class="w-75 d-flex align-items-center">
 							<img class="rounded-2"
-								src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg" alt="유저이미지"
+								src="/resources/img/job/${map.ja_pic}" alt="유저이미지"
 								style="width: 50px; height: 50px;">
 							<div class="fs-5 ms-3">${map.fdName}</div>
 						</div>
@@ -91,7 +91,8 @@
 							<input class="form-check-input" type="radio"
 								name="flexRadioDefault" id="flexRadioDefault2" checked>
 							<label class="form-check-label" for="flexRadioDefault2">
-								카카오 결제 </label>
+								<img src="/resources/img/카카오페이.png" style="width:20px;" class="rounded-2">
+								카카오페이 결제 </label>
 						</div>
 					</div>
 					<div class="pb-4">
@@ -119,6 +120,7 @@
 <script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 
 	
@@ -165,23 +167,30 @@
                 	type : 'POST',
                 	url : '/shop/paycheck.do',
                 	data : {
-                		"b_id" : '${id}',
-                		"mk_seq" : $('#mk_seq').val(),
-                		"p_name" : $('#name').val(),
-                		"p_tel" : $('#tel').val(),   
-                		"p_address" : $('#address').val(),
-                		"p_address_detail" : $('#detailAddress').val(),
-                		"p_memo" : $('#memo').val(),
-                		"p_email" : $('#email').val()
+                		b_id : '${id}',
+                		mk_seq : $('#mk_seq').val(),
+                		p_name : $('#name').val(),
+                		p_tel : $('#tel').val(),   
+                		p_address : $('#address').val(),
+                		p_address_detail : $('#detailAddress').val(),
+                		p_memo : $('#memo').val(),
+                		p_email : $('#email').val(),
+                		${_csrf.parameterName} : "${_csrf.token}"
                 	},
                 });
-                document.location.href="/shop/payok.do?m_name=" + "${map.m_name}&fdName="
- 				+ "${map.fdName}&date=" + "${map.date}&salary=" + "${map.salary}";
+                
+                swal("결제 성공!.", "결제가 완료되었습니다.", "success");
+                setTimeout(function() {
+                	document.location.href="/shop/payok.do?m_name=" + "${map.m_name}&fdName="
+     				+ "${map.fdName}&date=" + "${map.date}&salary=" + "${map.salary}";
+                }, 1500);
+                
             }else{
             	var msg = "결제 실패"
             	msg += "에러 내용" + rsp.error_msg;
+            	swal("결제 실패!", msg, "error");
             } 
-    		alert(msg); 
+    		
     	
     	}); 
     }); 
