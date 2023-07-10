@@ -91,12 +91,12 @@
 				class="col-sm-12 col-md-12 col-lg-4 p-0 bg-white d-flex align-items-center rounded-end h-75 ms-auto me-auto">
 				<div class="container-md d-flex flex-column">
 					<h1 class="h1 fw-bold title">${dto.p_subject}</h1>
-					<p class="fs-6">${dto.p_service}</p>
+					<p class="fs-6 text-danger" style="font-weight:bold;">${dto.p_service}</p>
 					<div class="d-flex">
-						<img src="/resources/img/profile.jpg" style="width: 50px;"
+						<img src="/resources/img/로고.png" style="width: 50px;"
 							class="rounded-circle">
 						<div class="mt-2 h-50">
-							<p class="m-0 mb-2 fw-bold">${dto.m_name}</p>
+							<p class="m-0 fw-bold mt-3 ms-2">${dto.m_name}</p>
 						</div>
 					</div>
 					<hr>

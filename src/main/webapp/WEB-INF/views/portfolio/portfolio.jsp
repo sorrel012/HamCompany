@@ -78,8 +78,8 @@
 						<h5 class="card-title m-0">${pfdto.p_subject}</h5>
 						<p class="card-text m-0">${pfdto.p_service}</p>
 						<div class="m-0 d-flex">
-							<img src="/resources/img/profile.jpg" style="width: 24px;">
-							<span>${pfdto.m_name}</span>
+							<img src="/resources/img/로고.png" style="width: 24px;">
+							<span class="ms-2 mt-1">${pfdto.m_name}</span>
 						</div>
 					</div>
 				</div>
