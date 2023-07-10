@@ -77,7 +77,7 @@
 					<c:forEach items="${list}" var="dto">
 					<tr class="text-center">
 						<td class="col-2 text-wrap">${dto.hr_seq}</td>
-						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" href="/listenlist.do?hr_seq=${dto.hr_seq}"> ${dto.hr_subject} </a></td>
+						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" href="/listendetail.do?seq=${dto.hr_seq}"> ${dto.hr_subject} </a></td>
 						<td class="col-2 text-wrap">${dto.hr_regdate}</td>
 						<td class="col-2 text-wrap">${dto.hr_hit}</td>
 						<td class="col-2 text-wrap">${dto.hr_comment}</td>
