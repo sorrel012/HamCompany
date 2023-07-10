@@ -4,16 +4,15 @@
 
 	
 	<!-- 함 말해볼텨 -->
-	
 	<select id="getSpeakList" resultType="com.ham.domain.MemberSpeakDTO">
-		
-		select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
-		inner join tblmember m on sm.m_id=m.m_id) a 
-		inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
-		on a.sm_seq = b.sm_seq
-	
-	</select>
-	
+      
+      select * from (select t1.*, rownum as rm from (select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
+      inner join tblmember m on sm.m_id=m.m_id) a 
+      inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
+      on a.sm_seq = b.sm_seq order by a.sm_regdate) t1) ftbl where rm between #{start} and #{end}
+   
+   </select>
+   
 	<select id="getSortedSpeakList" resultType="com.ham.domain.MemberSpeakDTO">
 		
 		<if test="sort == 1">
@@ -34,15 +33,16 @@
 	</select>
 	
 	<select id="getSpeakMList" resultType="com.ham.domain.BusinessSpeakDTO">
-		
-		select t1.*, t2.cnt as count from
+      
+      select * from (select tt.*, rownum as rm from (select t1.*, t2.cnt as count from
         (select sb.*, m.bd_name from tblspeakb sb
-		inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
+      inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
         on sb.b_id = m.b_id) t1 
-		inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
-		on t1.sb_seq = t2.sb_seq
-		
-	</select>
+      inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
+      on t1.sb_seq = t2.sb_seq order by sb_regdate) tt) ftbl where rm between #{start} and #{end}
+      
+   </select>
+
 	
 	<select id="getSortedSpeakMList" resultType="com.ham.domain.BusinessSpeakDTO">
 	

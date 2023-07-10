@@ -2,6 +2,7 @@ package com.ham.mapper;
 
 import java.util.List;
 
+import com.ham.domain.MyFieldDTO;
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
 
@@ -19,6 +20,11 @@ public interface PortfolioMapper {
 	List<PGalleryDTO> pfpiclist(String p_seq);
 
 	List<PortfolioDTO> pflist(int displayPost, int postNum);
+	
+	List<MyFieldDTO> getpfField();
+
+
+	Integer getpicCnt(String p_seq);
 
 
 }

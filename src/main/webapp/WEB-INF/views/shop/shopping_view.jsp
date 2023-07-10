@@ -11,9 +11,17 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/shopping.css" />
 	<script src="/js/popper.min.js"></script>
-	
 	<link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        
+        
+    <style>
+    
+    	.breadcrumb:hover {
+    		cursor: pointer;
+    	}
+    	
+    </style>    
 </head>
 <body>
 
@@ -32,8 +40,8 @@
 
 	<section class="container-lg mb-5">
 		<div class="d-lg-flex justify-content-center">
-			<div class="container-lg">
-				<img class="img-fluid rounded-3" src="/resources/img/singuppng.png"
+			<div class="container-lg align-items-center d-flex">
+				<img class="img-fluid rounded-3 w-100" src="/resources/img/job/${dto.ja_pic}"
 					alt="이미지">
 			</div>
 			<div
@@ -55,7 +63,7 @@
 						<span class="small ms-1">${rate}</span>
 					</div>
 					<div>
-						<div class="fs-5 fw-bold">${dto.salary}원</div>
+						<div class="fs-5 fw-bold"><fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.salary}" />원</div>
 					</div>
 					<hr>
 					<div class="d-flex flex-column mt-2">
@@ -78,6 +86,7 @@
 							<input type="hidden" value="${dto.salary}" name="salary">
 							<input type="hidden" value="${dto.jaBegindate} ~ ${dto.jaEnddate}" name="date">
 							<input type="hidden" value="${dto.m_name}" name="m_name">
+							<input type="hidden" value="${dto.ja_pic}" name="ja_pic">
 							<input type="hidden" name="${_csrf.parameterName }"
 value="${_csrf.token }">
 							
@@ -101,11 +110,11 @@ value="${_csrf.token }">
 			<c:forEach items="${simList}" var="simDto">
 			<div class="col-6 col-md-6 col-lg-3 pb-2">
 				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<img src="/resources/img/job/${simDto.ja_pic}"
 						class="card-img-top" alt="..." data-seq="${simDto.jaSeq}" data-rate="${simDto.rate}">
 					<div class="card-body">
 						<h5 class="card-title m-0">${simDto.fdName}</h5>
-						<p class="card-text m-0" style="color: #DB4444;">${simDto.salary}원</p>
+						<p class="card-text m-0" style="color: #DB4444;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${simDto.salary}" />원</p>
 						<div class="m-0 d-flex">
 							<c:set var="simRate" value="${simDto.rate}"/>
 							<c:if test="${simRate - 1 > 0}">
@@ -115,7 +124,7 @@ value="${_csrf.token }">
 								</c:forEach> 
 							</c:if>
 							
-							 <span class="small">${simDto.rate}</span>
+							 <span class="small fw-bold">(${simDto.rate}점)</span>
 						</div>
 					</div>
 				</div>
@@ -230,19 +239,6 @@ value="${_csrf.token }">
 		
 	    $('.my-btn').click(function() {
 	    	
-	    	$.ajax({
-	        	type : 'POST',
-            	url : '/shop/jjim.do',
-            	data : {
-            		mk_seq : '${dto.mk_seq}',
-            		id : '${id}',
-            		isJjim : isJjim,
-            		${_csrf.parameterName} : "${_csrf.token}"
-            	}
-            	
-	        });
-	    	
-	    	
 	        if ($(this).hasClass('active')) {
 		        $(this).removeClass('active'); // 클래스 제거
 		
@@ -257,6 +253,18 @@ value="${_csrf.token }">
 		        $(this).find('img').attr('src', '/resources/img/button/Vector-yes.png');
 		        isJjim = 0;
 	        }
+	        
+	        $.ajax({
+	        	type : 'POST',
+            	url : '/shop/jjim.do',
+            	data : {
+            		mk_seq : '${dto.mk_seq}',
+            		id : '${id}',
+            		isJjim : isJjim,
+            		${_csrf.parameterName} : "${_csrf.token}"
+            	}
+            	
+	        });
 	    });
 	});
 	
@@ -272,6 +280,11 @@ value="${_csrf.token }">
 		console.log(event.target);
 		location.href = "/shop/shopping_view.do?seq=" + event.target.dataset.seq + "&rate=" + event.target.dataset.rate;
 	});
+	
+	$('.breadcrumb').click(function() {
+		
+		location.href = "/shop/shopping_list.do?f_seq=&page=1";
+	})
 
 </script>
 </body>

@@ -39,6 +39,8 @@
 						class="text-decoration-none text-dark" href="/business_profile_detail.do">사업자 상세 프로필</a></li>
 					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="/wish_list.do">위시리스트</a></li>
+					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/business_inquiry.do">나의 문의내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">주문 정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
@@ -78,7 +80,7 @@
 						<td class="col-2 text-wrap">${dto.sb_seq}</td>
 						<td class="col-4 text-wrap"><a
 							class="text-dark text-wrap text-decoration-none text-hover custom-link"
-							href="#">${dto.sb_subject}</a></td>
+							href="/speakbdetail.do?&seq=${dto.sb_seq}">${dto.sb_subject}</a></td>
 						<td class="col-2 text-wrap">${dto.sb_regdate.substring(0, 10)}</td>
 						<td class="col-2 text-wrap">${dto.sb_hit}</td>
 						<td class="col-2 text-wrap">${dto.count}</td>

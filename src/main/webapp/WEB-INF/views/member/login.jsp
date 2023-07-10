@@ -36,14 +36,14 @@
 						</div>
 						<div class="container-fluid mt-2 d-flex justify-content-between">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value=""
+								<!-- <input class="form-check-input" type="checkbox" value=""
 									id="flexCheckDefault"> <label class="form-check-label"
-									for="flexCheckDefault"> 아이디 저장 </label>
+									for="flexCheckDefault"> 아이디 저장 </label> -->
 							</div>
 							<div class="d-flex">
 							
-								<a href="#" class="nav-link link-primary ms-3">아이디/비밀번호 찾기</a>
-								<span class="text-primary me-2 ms-2">/</span>
+								<!-- <a href="#" class="nav-link link-primary ms-3">아이디/비밀번호 찾기</a> -->
+								<!-- <span class="text-primary me-2 ms-2">/</span> -->
 									<a href="/index.do" class="nav-link link-primary">메인으로 이동</a>
 							</div>
 						</div>
@@ -64,8 +64,31 @@
 	</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
+	var login = '${login}';
+	
+	if (login === 'fail') {
+		Swal.fire({
+			  position: 'center',
+			  icon: 'error',
+			  title: '로그인에 실패했습니다.',
+			  showConfirmButton: false,
+			  timer: 1500
+		}).then(() => {
+			location.href="/login.do";
+		});	
+	} else if (login === 'success') {
+		Swal.fire({
+			  position: 'center',
+			  icon: 'success',
+			  title: '로그인에 성공했습니다.',
+			  showConfirmButton: false,
+			  timer: 1500
+		}).then(() => {
+			location.href="/index.do";
+		});	
+	}
 </script>
 </body>
 </html>

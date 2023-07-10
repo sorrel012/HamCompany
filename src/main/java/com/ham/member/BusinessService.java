@@ -9,6 +9,7 @@ import com.ham.domain.BusinessDTO;
 import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.OrderDTO;
+import com.ham.domain.QuestionDTO;
 import com.ham.domain.ReviewDTO;
 import com.ham.domain.WishDTO;
 
@@ -43,6 +44,12 @@ public interface BusinessService {
 	List<BusinessSpeakDTO> business_speak_list(Map<String, String> map);
 
 	String order_list_size(String b_id);
+
+	int question_add(QuestionDTO dto);
+
+	int question_add2(QuestionDTO dto);
+
+	List<QuestionDTO> getInquiryList(String b_id);
 
 	
 	

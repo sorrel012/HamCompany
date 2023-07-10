@@ -23,7 +23,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">커뮤니티</li>
-					<li class="breadcrumb-item" aria-current="page">들어볼텨</li>
+					<li class="breadcrumb-item bold text-danger" aria-current="page">들어볼텨</li>
 				</ol>
 			</nav>
 		</section>
@@ -181,4 +181,5 @@
 
 </script>
 </body>
+
 </html>

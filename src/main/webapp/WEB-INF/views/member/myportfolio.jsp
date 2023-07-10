@@ -24,7 +24,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">회원정보</li>
-					<li class="breadcrumb-item" aria-current="page">포트폴리오</li>
+					<li class="breadcrumb-item bold text-danger" aria-current="page">포트폴리오</li>
 				</ol>
 			</nav>
 		</section>

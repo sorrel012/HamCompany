@@ -151,4 +151,18 @@
 		WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
+	<insert id="question_add" parameterType="com.ham.domain.QuestionDTO">
+		insert into tblcscenter (csc_seq, b_id, csc_subject, csc_content, csc_regdate, csc_status) 
+		values (csc_seq.nextVal, #{b_id}, #{csc_subject}, #{csc_content}, sysdate, '처리중')
+	</insert>
+	
+	<insert id="question_add2" parameterType="com.ham.domain.QuestionDTO">
+		insert into tblcscenter (csc_seq, m_id, csc_subject, csc_content, csc_regdate, csc_status) 
+		values (csc_seq.nextVal, #{m_id}, #{csc_subject}, #{csc_content}, sysdate, '처리중')
+	</insert>
+	
+	<select id="getInquiryList" resultType="com.ham.domain.QuestionDTO">
+      	select * from tblcscenter where b_id = #{b_id} 
+   </select>
+	
 </mapper>

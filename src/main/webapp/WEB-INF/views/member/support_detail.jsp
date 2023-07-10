@@ -20,11 +20,11 @@
 		class="container-fluid row d-lg-flex align-items-sm-start p-5 pt-4">
 
 		<section class="container-lg mb-4">
-			<nav style="-bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">마이페이지</li>
 					<li class="breadcrumb-item" aria-current="page">지원정보</li>
-					<li class="breadcrumb-item" aria-current="page">지원 내역</li>
+					<li class="breadcrumb-item bold text-danger" aria-current="page">지원 내역</li>
 				</ol>
 			</nav>
 		</section>
@@ -258,4 +258,5 @@
     
 </script>
 </body>
+
 </html>

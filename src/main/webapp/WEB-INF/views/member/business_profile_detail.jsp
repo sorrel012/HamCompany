@@ -39,6 +39,8 @@
 						class="text-decoration-none text-dark" href="/business_profile_detail.do">사업자 상세 프로필</a></li>
 					<li class="nav-item pb-1"><a
 						class="text-decoration-none text-dark" href="/wish_list.do">위시리스트</a></li>
+					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/business_inquiry.do">나의 문의내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">주문 정보</div>
 				<ul class="list-unstyled ps-3 mb-2">

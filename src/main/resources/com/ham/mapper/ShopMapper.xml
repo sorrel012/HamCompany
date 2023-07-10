@@ -20,6 +20,7 @@
 		    ja.ja_seq as jaSeq,
 		    ja.ja_salary as salary,
 		    fd.fd_name as fdName,
+		    ja.ja_pic as ja_pic,
 		    (select 
                  avg(er_rate)
             from tblereview er
@@ -55,7 +56,8 @@
 		     to_char(ja.ja_begindate, 'yyyy-mm-dd') as jaBegindate,
 		     to_char(ja.ja_enddate, 'yyyy-mm-dd') as jaEnddate,
 		     ja.ja_time as jaTime,
-		     m.mk_seq as mk_seq
+		     m.mk_seq as mk_seq,
+		     ja.ja_pic as ja_pic
 		from tbljobapl ja
 		    inner join tblmarket m
 		        on ja.ja_seq = m.ja_seq
@@ -93,6 +95,7 @@
 			    ja.ja_seq as jaSeq,
 			    ja.ja_salary as salary,
 			    fd_name as fdName,
+			    ja_pic as ja_pic,
 			    (select 
 	                 avg(er_rate)
 	            from tblereview er

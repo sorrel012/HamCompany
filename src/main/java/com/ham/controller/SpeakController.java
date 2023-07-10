@@ -1,7 +1,9 @@
 package com.ham.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,66 +32,96 @@ public class SpeakController {
 	
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/speakmlist.do")
-	public String speakmList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort) {
-		
-		//사용자 말해볼텨 리스트 불러오기
-		if (sort.equals("0")) {
-			
-			List<MemberSpeakDTO> list = service.getSpeakList();
-			int count = service.getSpeakBoardCnt("1");
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-		} else {
-			
-			List<MemberSpeakDTO> list = service.getSortedSpeakList(sort);
-			int count = service.getSpeakBoardCnt("1");
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-		}
-		
-		return "board/speakmlist";
-	}	
-	
+	   public String speakmList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort, @RequestParam(defaultValue = "1") int page) {
+	      
+	      
+	      int itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
 
-	@PreAuthorize("hasRole('ROLE_BUSINESS')")
-	//사업자 말해볼텨
-	@GetMapping("/speakblist.do")
-	public String speakbList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort) {
+	      int start = (page - 1) * itemsPerPage + 1;
+	      int end = page * itemsPerPage;
+	      
+	      Map<String, String> map = new HashMap<String, String>();
+	      
+	       map.put("start", start + "");
+	       map.put("end", end + "");
+	       
+	       
+	      //사용자 말해볼텨 리스트 불러오기
+	      if (sort.equals("0")) {
+	         
+	         List<MemberSpeakDTO> list = service.getSpeakList(map);
+	         int size = list.size();
+	         int count = service.getSpeakBoardCnt("1");
+	         
+	         model.addAttribute("list", list);
+	         model.addAttribute("count", count);
+	         model.addAttribute("sorted", sort);
+	         model.addAttribute("page", page);
+	          model.addAttribute("size", size);
+	          
+	         
+	      } else {
+	         
+	         List<MemberSpeakDTO> list = service.getSortedSpeakList(sort);
+	         int count = service.getSpeakBoardCnt("1");
+	         
+	         model.addAttribute("list", list);
+	         model.addAttribute("count", count);
+	         model.addAttribute("sorted", sort);
+	         
+	      }
+	      
+	      return "board/speakmlist";
+	   }   
+	   
+
+	   //사업자 말해볼텨
+		@PreAuthorize("hasRole('ROLE_BUSINESS')")
+	   @GetMapping("/speakblist.do")
+	   public String speakbList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort, @RequestParam(defaultValue = "1") int page) {
+	   
+	      int itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
+
+	      int start = (page - 1) * itemsPerPage + 1;
+	      int end = page * itemsPerPage;
+	      
+	      Map<String, String> map = new HashMap<String, String>();
+	      
+	       map.put("start", start + "");
+	       map.put("end", end + "");
+	       
+	      //사업자 말해볼텨 리스트 불러오기
+	      if (sort.equals("0")) {
+	         
+	         List<BusinessSpeakDTO> list = service.getSpeakMList(map);
+	         int size = list.size();
+	         int count = service.getSpeakBoardCnt("2");
+	         
+	         model.addAttribute("list", list);
+	         model.addAttribute("count", count);
+	         model.addAttribute("sorted", sort);
+	         model.addAttribute("page", page);
+	          model.addAttribute("size", size);
+	         
+	      } else {
+	         
+	         List<BusinessSpeakDTO> list = service.getSortedSpeakMList(sort);
+	         int count = service.getSpeakBoardCnt("2");
+	         
+	         model.addAttribute("list", list);
+	         model.addAttribute("count", count);
+	         model.addAttribute("sorted", sort);
+	         
+	      }
+	      
+	      return "board/speakblist";
+	      
+	   }
 	
-		//사업자 말해볼텨 리스트 불러오기
-		if (sort.equals("0")) {
-			
-			List<BusinessSpeakDTO> list = service.getSpeakMList();
-			int count = service.getSpeakBoardCnt("2");
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-		} else {
-			
-			List<BusinessSpeakDTO> list = service.getSortedSpeakMList(sort);
-			int count = service.getSpeakBoardCnt("2");
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-		}
-		
-		return "board/speakblist";
-		
-	}
 	
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/speakmdetail.do")
-	public String speakmDetail(Model model, String seq) {
+	public String speakmDetail(Model model, String seq, Principal p) {
 
 		//사용자 말해볼텨 글 상세정보 불러오기
 		MemberSpeakDTO dto = service.getSpeakMDetail(seq);
@@ -106,10 +138,14 @@ public class SpeakController {
 		//댓글 갯수 가져오기
 		int ccnt = service.getSpeckMCommentCnt(seq);
 		
+		//현재 로그인한 id
+		String nowID = p.getName();
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("clist", clist);
 		model.addAttribute("ccnt", ccnt);
 		model.addAttribute("seq", seq);
+		model.addAttribute("nowID", nowID);
 		
 		return "board/speakmdetail";
 	}
@@ -117,7 +153,7 @@ public class SpeakController {
 	
 	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@GetMapping("/speakbdetail.do")
-	public String speakbDetail(Model model, String seq) {
+	public String speakbDetail(Model model, String seq, Principal p) {
 
 		//사업자 말해볼텨 글 상세정보 불러오기
 		BusinessSpeakDTO dto = service.getSpeakBDetail(seq);
@@ -134,10 +170,14 @@ public class SpeakController {
 		//댓글 갯수 가져오기
 		int ccnt = service.getSpeckBCommentCnt(seq);
 		
+		//현재 로그인한 회원
+		String nowID = p.getName();
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("clist", clist);
 		model.addAttribute("ccnt", ccnt);
 		model.addAttribute("seq", seq);
+		model.addAttribute("nowID", nowID);
 		
 		return "board/speakbdetail";
 	}

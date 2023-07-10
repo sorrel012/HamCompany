@@ -70,7 +70,7 @@
 				<c:if test="${status.count % 4 == 0}">class="col pe-lg-0 pe-md-0 pb-2"</c:if>
 			>
 				<div class="card" >
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<img src="/resources/img/job/${dto.ja_pic}"
 						class="card-img-top" alt="..." data-seq="${dto.jaSeq}" data-rate="${dto.rate}"> 
 					<div class="card-body">
 						<h5 class="card-title m-0">${dto.fdName}</h5>
@@ -88,7 +88,7 @@
 								<img src="/resources/img/Vector.svg">
 							</c:if>
 
-							<span class="small ms-1">${dto.rate}</span>
+							<span class="small ms-1 fw-bold">(${dto.rate}점)</span>
 						</div>
 					</div>
 				</div>
@@ -118,23 +118,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-	$(document).ready(function () {
-		
-	   $('.list-group-item').click(function () {
-	     $('.list-group-item').each((index, item) => {
-	       $(item).removeClass('active'); // 클래스 제거
-	     })
-	     $(this).addClass('active');
-	   });
 	
-	   $('.btn-jjim').mouseover(function () {
-	     $(this).attr('src', '/resources/img/jjim_hover.png');
-	   });
-	   $('.btn-jjim').mouseout(function () {
-	     $(this).attr('src', '/resources/img/jjim.png');
-	   });
-	
-	});
 	
 	$('.card-img-top').click(function() {
 		
@@ -145,7 +129,7 @@
 	$('.dropdown-item').click(function() {
 		
 		console.log(event.target.value);
-		console.log('dsds');
+		
 	});
 </script>
 </body>

@@ -26,13 +26,29 @@
 				<div id="carouselExampleIndicators"
 					class="carousel slide w-100 carousel-dark" data-bs-ride="carousel">
 					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleIndicators"
+					
+					
+					
+					<%-- <c:forEach begin="1" end="${picCnt}" var="num"> --%>
+					
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"
+							aria-label="Slide 1"></button>
+					
+					<%-- </c:forEach> --%>
+					
+					<c:forEach begin="2" end="${picCnt}" var="num">
+					
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${num-1}" aria-current="true"
+							aria-label="Slide ${num}"></button>
+					
+					</c:forEach>
+						<!-- <button type="button" data-bs-target="#carouselExampleIndicators"
 							data-bs-slide-to="0" class="active" aria-current="true"
 							aria-label="Slide 1"></button>
 						<button type="button" data-bs-target="#carouselExampleIndicators"
 							data-bs-slide-to="1" aria-label="Slide 2"></button>
 						<button type="button" data-bs-target="#carouselExampleIndicators"
-							data-bs-slide-to="2" aria-label="Slide 3"></button>
+							data-bs-slide-to="2" aria-label="Slide 3"></button> -->
 					</div>
 					<div class="carousel-inner h-100">
 					<c:forEach items="${pfpiclist}" var="pfpicdto">
