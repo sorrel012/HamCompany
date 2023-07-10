@@ -9,7 +9,6 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/myprofile.css" />
 	<link rel="stylesheet" href="/resources/css/supportdetail.css" />
-	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 
@@ -78,7 +77,7 @@
 					<c:forEach items="${list}" var="dto">
 					<tr class="text-center align-middle">
 						<td class="col-2 text-wrap">${dto.csc_seq}</td>
-						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" onclick="showModal('${dto.csc_content}')"> ${dto.csc_subject}</a></td>
+						<td class="col-4 text-wrap"><a class="text-dark text-wrap text-decoration-none text-hover" onclick="showModal('${dto.csc_content}', '${dto.csc_comment}')"> ${dto.csc_subject}</a></td>
 						<td class="col-2 text-wrap">${dto.csc_regdate}</td>
 						<td class="col-2" style="height: 60px;">
 							<c:choose>
@@ -109,8 +108,12 @@
 				</div>
 				<div class="modal-body">
 					<div class="m-box m-mabottom">
-						<h5 class="m-bold">✅ 문의 내용</h5>
+						<h5 class="m-bold">❓ 문의 내용</h5>
 						<div id="content" class="m-matop m-maleft m-font"></div>
+					</div>
+					<div class="m-box m-mabottom">
+						<h5 class="m-bold">❗ 답변</h5>
+						<div id="comment" class="m-matop m-maleft m-font"></div>
 					</div>
 				</div>					
 			</div>
@@ -124,13 +127,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 
-	function showModal(content) {
+	function showModal(content, comment) {
     
 	    $('#staticBackdrop').modal('show');	    
 	    $('#content').text(' ◼  ' + content);
+	    
+	    if(comment == null || comment == '') {
+	        $('#comment').text(' 🙏 처리 중입니다. 빠르게 처리하겠습니다.' );
+	    } else {
+	    	$('#comment').text(' ◼  ' + comment);
+	    }
 	    
 	}
 
 </script>
 </body>
+
 </html>

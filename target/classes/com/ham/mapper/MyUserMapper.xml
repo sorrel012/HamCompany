@@ -86,7 +86,7 @@
 		    left outer join tblPGallery pg
 		        on p.p_seq = pg.p_seq
 		where p.m_id=#{id}
-		    order by p.p_seq, pg.pg_seq
+		    order by p.p_seq desc, pg.pg_seq desc
 	</select>
 	
 	<select id="editportfolio" resultMap="portfolioMap">
@@ -150,17 +150,22 @@
 	
 	<!-- 커뮤니티 -->
 	<select id="llist" resultType="com.ham.domain.MyHReviewDTO">
-		select 
-			hr_seq,
-			m_id,
-			hr_subject,
-			hr_company,
-			hr_regdate,
-			hr_content,
-			fd_seq,
-			hr_hit
-		from tblHReview
-			where m_id=#{id}
+		select * 
+		from (
+		    select 
+		        hr_seq,
+				m_id,
+				hr_subject,
+				hr_company,
+				hr_regdate,
+				hr_content,
+				fd_seq,
+				hr_hit,
+		        rownum as rn
+		    from tblHReview
+		        where m_id = #{id}
+		            order by hr_seq desc
+		) where rn between ${start} and ${end}
 	</select>
 	
 	<select id="lcomment" resultType="String">
@@ -169,17 +174,29 @@
 		from tblHRComment
 			where hr_seq=#{hr_seq}
 	</select>
+	
+	<select id="lsize" resultType="String">
+		select 
+			count(*)
+		from tblHReview
+			where m_id = #{id}
+	</select>
 
 	<select id="slist" resultType="com.ham.domain.MySpeakMDTO">
-		select 
-			sm_seq,
-			m_id,
-			sm_subject,
-			sm_content,
-			sm_regdate,
-			sm_hit
-		from tblSpeakM
-			where m_id=#{id}
+		select * 
+		from (
+		    select 
+		        sm_seq,
+				m_id,
+				sm_subject,
+				sm_content,
+				sm_regdate,
+				sm_hit,
+		        rownum as rn
+			from tblSpeakM		
+		        where m_id = #{id}
+		            order by sm_seq desc
+		) where rn between ${start} and ${end}
 	</select>
 	
 	<select id="scomment" resultType="String">
@@ -187,6 +204,13 @@
 			count(smc_content) as sm_comment
 		from tblSMComment
 			where sm_seq=#{sm_seq}
+	</select>	
+	
+	<select id="ssize" resultType="String">
+		select 
+			count(*)
+		from tblSpeakM		
+			where m_id = #{id}
 	</select>
 	
 	
@@ -248,6 +272,7 @@
 		    inner join tblBDetail bd on b.b_id = bd.b_id
 		    inner join tblOrder o on p.p_seq = o.p_seq
 		where m_id = #{id}
+			order by p.p_seq desc
 	</select>
 	
 	<update id="updateaccept">
@@ -273,9 +298,11 @@
 			csc_subject,
 			csc_content,
 			csc_regdate,
-			csc_status
+			csc_status,
+			csc_comment
 		from tblCsCenter
 			where m_id=#{id}
+				order by csc_seq desc
 	</select>
 
 </mapper>

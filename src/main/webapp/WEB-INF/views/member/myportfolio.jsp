@@ -9,7 +9,6 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/myprofile.css" />
 	<link rel="stylesheet" href="/resources/css/myportfolio.css" />
-	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 

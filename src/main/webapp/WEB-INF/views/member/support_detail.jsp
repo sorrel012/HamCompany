@@ -9,7 +9,6 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/myprofile.css" />
 	<link rel="stylesheet" href="/resources/css/supportdetail.css" />
-	<link rel="stylesheet" href="/resources/css/business.css" />
 </head>
 <body>
 
@@ -164,6 +163,7 @@
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>	
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
     function showModal(bd_name, p_regdate, p_name, p_tel, p_email, p_address, p_address_detail, p_memo, o_confirm, o_seq) {
@@ -184,8 +184,8 @@
                 `
                 <div class="modal-footer">
 					<form method="POST" id="form" >
-						<button class="btn" id="acceptBtn" onclick="accept()">승인</button>
-						<button class="btn bg-secondary" id="denyBtn" onclick="deny()">거절</button>
+						<button type="button" class="btn" id="acceptBtn" onclick="accept()">승인</button>
+						<button type="button" class="btn bg-secondary" id="denyBtn" onclick="deny()">거절</button>
 						<input type="hidden" name="o_seq" id="hiddenBtn">
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					</form>
@@ -198,33 +198,65 @@
         
     }
     
-    function accept() {
+    function accept() {        
+
+        event.preventDefault();
         
-        if(!confirm('신청을 승인하시겠습니까?')) {
+        Swal.fire({
+            title: '신청을 승인하시겠습니까?',
+            text: "승인 후 취소할 수 없습니다.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'okay'
+          }).then((result) => {
+              
+            if (result.isConfirmed) {
+              Swal.fire(
+                '승인 완료!',
+                '주문 내역이 승인되었습니다.',
+                'success'
+              ).then(() => {
+                  $('#form').attr('action', '/support_accept.do').submit();
+              });
+              
+            } 
             
-            $('#form').on('submit',function(){
-                event.preventDefault();
-        	})        	
-		} else {
-		    $('#form').attr('action', '/support_accept.do').submit();
-		}
-        
+          })
     }
     
     function deny() {
         
-        if(!confirm('신청을 거절하시겠습니까?')) {
+		event.preventDefault();
+        
+        Swal.fire({
+            title: '신청을 거절하시겠습니까?',
+            text: "거절 후 취소할 수 없습니다.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'okay'
+          }).then((result) => {
+              
+            if (result.isConfirmed) {
+              Swal.fire(
+                '거절 완료!',
+                '주문 내역이 거절되었습니다.',
+                'success'
+              ).then(() => {
+                  $('#form').attr('action', '/support_deny.do').submit();
+              });             
+              
+            } 
             
-            $('#form').on('submit',function(){
-                event.preventDefault();
-        	})        	
-		} else {
-		    $('#form').attr('action', '/support_deny.do').submit();
-		}
+          })
         
     }
     
     
 </script>
 </body>
+
 </html>

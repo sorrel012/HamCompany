@@ -4,6 +4,7 @@ import java.io.File;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ham.domain.MyApplicationDTO;
@@ -222,37 +224,68 @@ public class MyUserController {
 	}
 	
 	@GetMapping("/mylisten_list.do")
-	public String myListenList(Model model, Principal p) {
+	public String myListenList(Model model, @RequestParam(defaultValue = "1") int page, Principal p) {
 		
-		String id = p.getName();
-		
-		List<MyHReviewDTO> list = service.llist(id);
+		int itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
+
+	    int start = (page - 1) * itemsPerPage + 1;
+	    int end = page * itemsPerPage;
+	    
+	    Map<String, String> map = new HashMap<String, String>();
+	    
+	    String id = p.getName();
+	    
+	    map.put("id", id);
+	    map.put("start", start + "");
+	    map.put("end", end + "");
+	    
+		List<MyHReviewDTO> list = service.llist(map);
 		
 		for(MyHReviewDTO dto : list) {
 			
 			dto.setHr_comment(service.lcomment(dto.getHr_seq()));
 			
 		}
+
+		String size = service.lsize(id);
 		
 		model.addAttribute("list", list);
+	    model.addAttribute("page", page);
+	    model.addAttribute("size", size);
 
 		return "member/mylisten_list";
 	}
 
 	@GetMapping("/myspeak_list.do")
-	public String mySpeakList(Model model, Principal p) {
-
-		String id = p.getName();
+	public String mySpeakList(Model model, @RequestParam(defaultValue = "1") int page, Principal p) {
 		
-		List<MySpeakMDTO> list = service.slist(id);
+		int itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
+
+	    int start = (page - 1) * itemsPerPage + 1;
+	    int end = page * itemsPerPage;
+	    
+	    Map<String, String> map = new HashMap<String, String>();
+	    
+	    String id = p.getName();
+	    
+	    map.put("id", id);
+	    map.put("start", start + "");
+	    map.put("end", end + "");
+	    
+		List<MySpeakMDTO> list = service.slist(map);
 		
 		for(MySpeakMDTO dto : list) {
 			
 			dto.setSm_comment(service.scomment(dto.getSm_seq()));
 			
 		}
+
+		String size = service.ssize(id);
 		
 		model.addAttribute("list", list);
+	    model.addAttribute("page", page);
+	    model.addAttribute("size", size);
+		
 
 		return "member/myspeak_list";
 	}
