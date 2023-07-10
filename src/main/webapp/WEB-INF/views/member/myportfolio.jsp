@@ -80,7 +80,7 @@
 					<c:forEach items="${list}" var="dto">
 					<tr class="text-center align-middle">
 						<td class="col-2 text-truncate" style="height: 60px;">${dto.p_seq}</td>
-						<td class="col-6 text-truncate" style="height: 60px;"><a class="text-black text-decoration-none text-hover" href="/portfolio.do?p_seq=${dto.p_seq}">${dto.p_subject}</a></td>
+						<td class="col-6 text-truncate" style="height: 60px;"><a class="text-black text-decoration-none text-hover" href="/portfolio_view.do?p_seq=${dto.p_seq}">${dto.p_subject}</a></td>
 						<td class="col-2 text-truncate" style="height: 60px;">${dto.p_service}</td>
 						<td class="col-2 text-truncate" style="height: 60px;">
 							<button class="btn" onclick="location.href='/editportfolio.do?p_seq=${dto.p_seq}';">수정</button>
