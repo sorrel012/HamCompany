@@ -12,5 +12,6 @@ public class MyCsCenterDTO {
 	private String csc_content;
 	private String csc_regdate;
 	private String csc_status;
+	private String csc_comment;
 	
 }
