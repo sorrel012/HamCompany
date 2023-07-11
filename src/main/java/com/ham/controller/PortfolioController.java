@@ -3,12 +3,12 @@ package com.ham.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ham.domain.MyFieldDTO;
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
 import com.ham.member.PortfolioService;
@@ -16,7 +16,6 @@ import com.ham.member.PortfolioService;
 
 
 @Controller
-@PreAuthorize("isAuthenticated()")
 public class PortfolioController {
 	
 	@Autowired
@@ -26,6 +25,11 @@ public class PortfolioController {
 	public String portfolio(Model model, @RequestParam(defaultValue = "1") int num, String p_service) {
 		
 		List<PortfolioDTO> pflist;
+		
+		List<MyFieldDTO> getpfField = service.getpfField();
+		
+
+		
 
 		
 		String pfcnt;
@@ -143,6 +147,7 @@ public class PortfolioController {
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("prev", prev);
 		model.addAttribute("next", next);
+		model.addAttribute("getpfField", getpfField);
 		
 		
 		return "portfolio/portfolio";
@@ -153,10 +158,17 @@ public class PortfolioController {
 		
 		List<PGalleryDTO> pfpiclist = service.pfpiclist(p_seq);
 		
+		
+		
+		Integer picCnt = service.getpicCnt(p_seq);
+		Integer picCntMin = picCnt-1;
+		
 		PortfolioDTO dto = service.getpf(p_seq);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("pfpiclist", pfpiclist);
+		model.addAttribute("picCnt", picCnt);
+		model.addAttribute("picCntMin", picCntMin);
 		
 		return "portfolio/portfolio_view";
 	}

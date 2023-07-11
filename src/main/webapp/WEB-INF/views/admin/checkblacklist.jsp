@@ -9,6 +9,13 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
     <link rel="stylesheet" href="/resources/css/checkprofile.css" />
+    
+    <style type="text/css">
+	   	#list2 {
+	   	    color: tomato !important; 
+	   		font-weight: bold;
+	   	}
+    </style>
 </head>
 <body>
 
@@ -29,31 +36,19 @@
 			</nav>
 		</section>
 
-		<div class="col-sm-3 col-md-3 col-lg-2 container-lg">
-			<nav class="nav d-flex flex-column">
-				<div class="mb-1 fw-bold">회원 관리</div>
-				<ul class="list-unstyled ps-3 mb-2">
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">인재 프로필</a></li>
-					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">불량 회원</a></li>
-				</ul>
-				<div class="fw-bold mb-2">인재 매칭</div>
-				<div class="fw-bold mb-2">고객 문의</div>
-
-			</nav>
-		</div>
+		<!-- sidebar -->
+		<%@ include file="/WEB-INF/views/inc/admin_sidebar.jsp" %>
 
 		<div class="col-sm-9 col-md-9 col-lg-10 container-lg">
-			<div class="container-lg mb-4 p-0">
+			<div class="row mb-4 m-0 p-0">
 				<div class="text-start border-bottom border-2 border-dark d-flex">
 					<div class="text-start">
 						<h3 class="h3 pb-2 m-0 fw-bold">불량 회원 관리</h3>
-						<a>총 1,565건</a>
+						<a>총 ${list[0].count}건</a>
 					</div>
 				</div>
 			</div>
-			<table class="table table-hover">
+			<table class="row table table-hover m-0">
 				<thead class="table-light">
 					<tr class="row text-center">
 						<td class="col-2">불량 회원</td>
@@ -64,106 +59,33 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto" varStatus="num">
 					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
+						<td class="col-2 text-truncate">${dto.blBadmember}</td>
+						<td class="col-4 text-truncate">
+							<div class="text-hover" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal_${num.index}">
+								${dto.blTitle} 
+							</div>
+						</td>
+						<c:if test="${dto.blStatus == '경고'}">
+						<td class="col-2 text-warning fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<c:if test="${dto.blStatus == '차단'}">
+						<td class="col-2 text-danger fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<c:if test="${dto.blStatus == '처리중'}">
+						<td class="col-2 text-success fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<c:if test="${dto.blStatus == '반려'}">
+						<td class="col-2 text-primary fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<c:if test="${dto.blStatus == '차단해제'}">
+						<td class="col-2 text-primary fw-bold text-truncate">${dto.blStatus}</td>
+						</c:if>
+						<td class="col-2 text-truncate">${dto.blWriter}</td>
+						<td class="col-2 text-truncate">${dto.blRegdate}</td>
 					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-4 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">처리 대기중</td>
-						<td class="col-2 text-truncate">이순신</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">
@@ -179,14 +101,108 @@
 		</div>
 
 	</div>
+	
+	<!-- Modal -->
+	<c:forEach items="${list}" var="dto" varStatus="num">
+	<div class="modal fade" id="exampleModal_${num.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">신고자: ${dto.blWriter}</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<h5 class="h5 fw-bold">신고내용</h5>
+	      	<div class="ps-3 pt-0">${dto.blContent}</div>
+	      </div>
+	      <div class="modal-footer">
+	      	<c:if test="${dto.blStatus == '차단해제' }">
+	        <button type="button" class="btn bg-primary reject" value="${dto.blSeq}, ${dto.blBadmember}, 0">반 려</button>
+	        <button type="button" class="btn bg-warning warning" value="${dto.blSeq}, ${dto.blBadmember}, 0">경	고</button>
+	        <button type="button" class="btn blocked" value="${dto.blSeq}, ${dto.blBadmember}, 1">차 단</button>
+	        </c:if>
+	        <c:if test="${dto.blStatus == '차단' }">
+	        	<button type="button" class="btn bg-primary unblock" value="${dto.blSeq}, ${dto.blBadmember}, 0">차단해제</button>
+	        </c:if>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</c:forEach>
 
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>	
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+$(".reject").click(function() {
+	  let list = event.target.value.split(", ");
+	  let num = list[2];
+	  sendRequest("반려", list[0], list[1], num);
+	});
 
+$(".warning").click(function() {
+	let list = event.target.value.split(", ");
+	let num = list[2];
+	sendRequest("경고", list[0], list[1], num);
+});
+
+$(".blocked").click(function() {
+	let list = event.target.value.split(", ");
+	let num = list[2];
+	sendRequest("차단", list[0], list[1], num);
+});
+
+$(".unblock").click(function() {
+	let list = event.target.value.split(", ");
+	let num = list[2];
+	sendRequest("차단해제", list[0], list[1], num);
+});
+
+function sendRequest(action, blSeq, blBadmember, num) {
+	  var title = '';
+	  var icon = '';
+
+	  if (action === '차단') {
+	    title = '차단되었습니다.';
+	    icon = 'success';
+	  } else if (action === '반려') {
+	    title = '반려되었습니다.';
+	    icon = 'success';
+	  } else if (action === '경고') {
+		title = '경고처리 되었습니다.';
+		icon = 'success';
+	  } else if (action === '차단해제') {
+		title = '차단해제 되었습니다.';
+		icon = 'success';  
+	  }
+	  
+
+	  Swal.fire({
+	    position: 'center',
+	    icon: icon,
+	    title: title,
+	    showConfirmButton: false,
+	    timer: 1500,
+	    onClose: function() {
+	        location.reload(); // 새로고침
+      	}
+	  });
+
+	  $.ajax({
+	    type: "POST",
+	    url: "/checkblacklist.do",
+	    data: { action: action, blSeq: blSeq, blBadmember: blBadmember, num: num },
+	    success: function(data) {
+	      console.log(action);
+	      console.log(blSeq);
+	      console.log(blBadmember);
+	      console.log(num);
+	    }
+	  });
+	}
 </script>
 </body>
 </html>

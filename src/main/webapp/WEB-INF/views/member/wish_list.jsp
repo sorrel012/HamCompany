@@ -40,6 +40,8 @@
 						class="text-decoration-none text-dark" href="/business_profile_detail.do">사업자 상세 프로필</a></li>
 					<li class="nav-item pb-1 active"><a
 						class="text-decoration-none text-dark" href="/wish_list.do">위시리스트</a></li>
+					<li class="nav-item pb-1"><a
+						class="text-decoration-none text-dark" href="/business_inquiry.do">나의 문의내역</a></li>
 				</ul>
 				<div class="mb-1 fw-bold">주문 정보</div>
 				<ul class="list-unstyled ps-3 mb-2">
@@ -70,7 +72,7 @@
 					<div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-1 mt-0">
 					<c:forEach var="dto" items="${list}">
 						<div class="col pe-3 pb-2">
-							<div class="card" id="${dto.ja_seq}">
+							<div class="card" id="${dto.ja_seq}" onclick="window.location.href='/shop/shopping_view.do?seq=${dto.ja_seq}&rate=${dto.rate}'">
 								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
 									class="card-img-top" alt="..."> <img id="${dto.w_seq}"
 									src="/resources/img/trash.png"
@@ -82,7 +84,8 @@
 									<div class="m-0 d-flex">
 									  <!-- 이미지 태그를 동적으로 생성하는 스크립트 -->
 									  <script>
-									    var rate = ${dto.rate}; // ${dto.rate} 값 가져오기
+									    var rate = ${dto.rate}; // ${dto.rate} 값 가져오기	
+									    
 									    for (var i = 0; i < rate; i++) {
 									      document.write('<img src="/resources/img/Vector.svg">');
 									    }
@@ -162,6 +165,8 @@
 	     var seq = "";
 	   });
 	 });
+   
+  
 
 
  </script>

@@ -1,6 +1,7 @@
 package com.ham.member;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ham.domain.MyApplicationDTO;
 import com.ham.domain.MyCsCenterDTO;
@@ -41,13 +42,17 @@ public interface MyUserService {
 	void deleteportfolio(String p_seq);
 	
 	//커뮤니티
-	List<MyHReviewDTO> llist(String id);
+	List<MyHReviewDTO> llist(Map<String, String> map);
 
 	String lcomment(String hr_seq);
 
-	List<MySpeakMDTO> slist(String id);
+	String lsize(String id);
+
+	List<MySpeakMDTO> slist(Map<String, String> map);
 
 	String scomment(String sm_seq);
+
+	String ssize(String id);
 
 	
 	//구직 신청

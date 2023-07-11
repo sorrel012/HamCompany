@@ -62,12 +62,14 @@
 				</div>
 
 				<div>
+					<c:if test="${nowID == dto.b_id}">
 					<button type="button" class="btn btn-danger"
 						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem;" onclick="location.href='/speakedit.do?type=2&seq=${dto.sb_seq}';">수정</button>
 
 					<button type="button" class="btn"
 						style="-bs-btn-padding-y: 0.7rem; - -bs-btn-padding-x: 2.5rem; - -bs-btn-font-size: 1.1rem; background-color: rgb(156, 156, 156);"
 						data-bs-toggle="modal" data-bs-target="#exampleModal" >삭제</button>
+					</c:if>
 					
 					<!-- Modal -->
 					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

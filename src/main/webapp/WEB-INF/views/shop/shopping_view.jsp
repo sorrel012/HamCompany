@@ -320,6 +320,7 @@ value="${_csrf.token }">
 		location.href = "/shop/shopping_list.do?f_seq=&page=1";
 	})
 
+
 	window.onload = function() {
 	    $('#blackBtn').click(function() {
 	    	
@@ -339,6 +340,7 @@ value="${_csrf.token }">
 	    	
 	    });
 	};
+
 
 </script>
 </body>

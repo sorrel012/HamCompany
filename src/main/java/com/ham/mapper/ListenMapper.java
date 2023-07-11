@@ -1,6 +1,7 @@
 package com.ham.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.HRCommentDTO;
@@ -11,7 +12,7 @@ import com.ham.domain.MemberSpeakDTO;
 
 public interface ListenMapper {
 
-	List<HReviewDTO> getHReviewList();
+	List<HReviewDTO> getHReviewList(Map<String, String> map);
 
 	int getBoardCount();
 

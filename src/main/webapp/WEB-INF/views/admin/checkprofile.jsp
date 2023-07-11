@@ -9,6 +9,13 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
     <link rel="stylesheet" href="/resources/css/checkprofile.css" />
+    	
+    <style type="text/css">
+    	#list1 {
+    	    color: tomato !important; 
+    		font-weight: bold;
+    	}
+    </style>
 </head>
 <body>
 
@@ -29,129 +36,48 @@
 			</nav>
 		</section>
 
-		<div class="col-2 container-lg">
-			<nav class="nav d-flex flex-column">
-				<div class="mb-1 fw-bold">회원 관리</div>
-				<ul class="list-unstyled ps-3 mb-2">
-					<li class="nav-item pb-1 active"><a
-						class="text-decoration-none text-dark" href="#">인재 프로필</a></li>
-					<li class="nav-item pb-1"><a
-						class="text-decoration-none text-dark" href="#">불량 회원</a></li>
-				</ul>
-				<div class="fw-bold mb-2">인재 매칭</div>
-				<div class="fw-bold mb-2">고객 문의</div>
+		<!-- sidebar -->
+		<%@ include file="/WEB-INF/views/inc/admin_sidebar.jsp" %>
 
-			</nav>
-		</div>
-
-		<div class="col-10 container-lg">
-			<div class="container-lg mb-4 p-0">
+		<div class="col-sm-9 col-md-9 col-lg-10 container-lg">
+			<div class="row mb-4 m-0 p-0">
 				<div class="text-start border-bottom border-2 border-dark d-flex">
 					<div class="text-start">
 						<h3 class="h3 pb-2 m-0 fw-bold">새 인재 프로필</h3>
-						<a>총 1,565건</a>
+						<a>총 ${list[0].count}건</a>
 					</div>
 				</div>
 			</div>
-			<table class="table table-hover">
+			<table class="row table table-hover m-0">
 				<thead class="table-light">
 					<tr class="row text-center">
 						<td class="col-2">이름</td>
-						<td class="col-6">자기소개서</td>
+						<td class="col-5">자기소개서</td>
 						<td class="col-2">분야</td>
 						<td class="col-2">등록일</td>
+						<td class="col-1">상태</td>
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${list}" var="dto">
 					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
+						<td class="col-2 text-truncate">${dto.m_Name}</td>
+						<td class="col-5 text-truncate"><a
+							class="text-black text-decoration-none text-hover" href="checkprofile_view.do?jaSeq=${dto.jaSeq}">
+								${dto.jaIntro} </a></td>
+						<td class="col-2 text-truncate">${dto.f_Name}</td>
+						<td class="col-2 text-truncate">${dto.jaRegDate}</td>
+						<c:if test="${dto.jaStatus == '대기중'}">
+						<td class="col-1 text-warning fw-bold">${dto.jaStatus}</td>
+						</c:if>
+						<c:if test="${dto.jaStatus == '승인'}">
+						<td class="col-1 text-success fw-bold">${dto.jaStatus}</td>
+						</c:if>
+						<c:if test="${dto.jaStatus == '거절'}">
+						<td class="col-1 text-danger fw-bold">${dto.jaStatus}</td>
+						</c:if>
 					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-					<tr class="row text-center">
-						<td class="col-2 text-truncate">홍길동</td>
-						<td class="col-6 text-truncate"><a
-							class="text-black text-decoration-none text-hover" href="#">
-								몸도 마음도 건강한 인재입니다. </a></td>
-						<td class="col-2 text-truncate">웹개발</td>
-						<td class="col-2 text-truncate">2023-06-28</td>
-					</tr>
-
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="d-flex justify-content-center mt-4">

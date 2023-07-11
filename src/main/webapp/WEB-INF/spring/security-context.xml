@@ -12,16 +12,19 @@
    <!-- 로그인 성공 처리 담당자 -->
    <bean id="customLoginSuccess" class="com.ham.security.CustomLoginSuccessHandler"></bean>
    
+   <!-- 로그인 실패 처리 담당자 -->
+   <bean id="customLoginFailure" class="com.ham.security.CustomLoginFailHandler"></bean>
+   
    <!-- 암호화객체(사용자 정의) -->
    <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
    
+   <!-- 403 처리 담당자 -->
+   <bean id="customAccessDenied" class="com.ham.security.CustomAccessDeniedHandler"></bean>
    
    <security:http>
-      <!-- <security:intercept-url pattern="/board/add.do" access="isAuthenticated()" /> -->
-      <!--  <security:intercept-url pattern="/board/add.do" access="hasRole('ROLE_MEMBER')" />-->
-   
-      <security:form-login login-page="/login.do" authentication-success-handler-ref="customLoginSuccess"/>
+      <security:form-login login-page="/login.do" authentication-success-handler-ref="customLoginSuccess" authentication-failure-handler-ref="customLoginFailure"/>
       <security:logout logout-url="/logout.do" invalidate-session="true" logout-success-url="/index.do"/>
+      <security:access-denied-handler ref="customAccessDenied"/>
    </security:http>
    
    <security:authentication-manager>

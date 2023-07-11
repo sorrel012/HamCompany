@@ -10,6 +10,7 @@ import com.ham.domain.BusinessDTO;
 import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.OrderDTO;
+import com.ham.domain.QuestionDTO;
 import com.ham.domain.ReviewDTO;
 import com.ham.domain.WishDTO;
 import com.ham.mapper.BusinessMapper;
@@ -143,6 +144,30 @@ public class BusinessServiceImpl implements BusinessService {
 		//System.out.println(size);
 		
 		return size;
+	}
+
+	@Override
+	public int question_add(QuestionDTO dto) {
+		
+		int result = mapper.question_add(dto);
+		
+		return result;
+	}
+
+	@Override
+	public int question_add2(QuestionDTO dto) {
+		
+		int result = mapper.question_add2(dto);
+		
+		return result;
+	}
+
+	@Override
+	public List<QuestionDTO> getInquiryList(String b_id) {
+		
+		List<QuestionDTO> list = mapper.getInquiryList(b_id);
+		
+		return list;
 	}
 
 	

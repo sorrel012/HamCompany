@@ -1,7 +1,9 @@
 package com.ham.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,42 +30,57 @@ public class ListenController {
 	private ListenService service;
 	
 	//listen - 함 들어볼텨
-	@GetMapping("/listenlist.do")
-	public String listenSortedList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort) {
-		
-		
-		if (sort.equals("0")) {
-			List<HReviewDTO> list = service.getHReviewList();
-			int count = service.getBoardCnt();
-			
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-			return "board/listenlist";
-		} else {
-			List<HReviewDTO> list = service.getSortedHReviewList(sort);
-			int count = service.getBoardCnt();
-			
-			model.addAttribute("list", list);
-			model.addAttribute("count", count);
-			model.addAttribute("sorted", sort);
-			
-			return "board/listenlist";
-		}
-		
-	}
+	   @GetMapping("/listenlist.do")
+	   public String listenSortedList(Model model, @RequestParam(value = "sort", defaultValue="0") String sort, @RequestParam(defaultValue = "1") int page) {
+	      
+	      int itemsPerPage = 5; // 한 페이지에 보여줄 아이템 수
+
+	      int start = (page - 1) * itemsPerPage + 1;
+	      int end = page * itemsPerPage;
+	      
+	      Map<String, String> map = new HashMap<String, String>();
+	      
+	       map.put("start", start + "");
+	       map.put("end", end + "");
+	          
+	      
+	      if (sort.equals("0")) {
+	         List<HReviewDTO> list = service.getHReviewList(map);
+	         int size = list.size();
+	         int count = service.getBoardCnt();
+	         
+	         model.addAttribute("list", list);
+	         model.addAttribute("count", count);
+	         model.addAttribute("sorted", sort);
+	         model.addAttribute("page", page);
+	          model.addAttribute("size", size);
+	         
+	         return "board/listenlist";
+	      } else {
+	         List<HReviewDTO> list = service.getSortedHReviewList(sort);
+	         int count = service.getBoardCnt();
+	         
+	         model.addAttribute("list", list);
+	         model.addAttribute("count", count);
+	         model.addAttribute("sorted", sort);
+	         
+	         return "board/listenlist";
+	      }
+	      
+	   }
 	
 	
 	@GetMapping("/listendetail.do")
-	public String listenDetail(Model model, String seq) {
+	public String listenDetail(Model model, String seq,  Principal p) {
 		
 		//seq에 해당하는 글 내용 불러오기
 		HReviewDTO dto = service.getListenDetail(seq);
 		
 		//글 조회수 업데이트
 		service.updateViewCnt(seq);
+		
+		//현재 로그인한 아이디
+		String nowID = p.getName();
 		
 		String vcnt = service.getViewCnt(seq);
 		dto.setHr_hit(vcnt);
@@ -78,6 +95,7 @@ public class ListenController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("clist", clist);
 		model.addAttribute("ccnt", ccnt);
+		model.addAttribute("nowID", nowID);
 		
 		return "board/listendetail";
 	}

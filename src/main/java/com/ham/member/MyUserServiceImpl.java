@@ -1,6 +1,7 @@
 package com.ham.member;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -134,9 +135,9 @@ public class MyUserServiceImpl implements MyUserService {
 	
 	//커뮤니티
 	@Override
-	public List<MyHReviewDTO> llist(String id) {
+	public List<MyHReviewDTO> llist(Map<String, String> map) {
 		
-		List<MyHReviewDTO> list = mapper.llist(id);
+		List<MyHReviewDTO> list = mapper.llist(map);
 		
 		return list;
 	}
@@ -150,9 +151,17 @@ public class MyUserServiceImpl implements MyUserService {
 	}
 	
 	@Override
-	public List<MySpeakMDTO> slist(String id) {
+	public String lsize(String id) {
 		
-		List<MySpeakMDTO> list = mapper.slist(id);
+		String size = mapper.lsize(id);
+		
+		return size;
+	}
+	
+	@Override
+	public List<MySpeakMDTO> slist(Map<String, String> map) {
+		
+		List<MySpeakMDTO> list = mapper.slist(map);
 		
 		return list;
 	}
@@ -163,6 +172,14 @@ public class MyUserServiceImpl implements MyUserService {
 		String comment = mapper.scomment(sm_seq);
 		
 		return comment;
+	}
+	
+	@Override
+	public String ssize(String id) {
+
+		String size = mapper.ssize(id);
+		
+		return size;
 	}
 	
 	@Override

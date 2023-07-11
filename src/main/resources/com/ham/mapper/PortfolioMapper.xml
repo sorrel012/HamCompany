@@ -62,6 +62,13 @@
 		 select pg_name from tblPGallery where p_seq = #{p_seq} and rownum = 1
 	</select>
 	
+	 <select id="getpfField" resultType="com.ham.domain.MyFieldDTO">
+		select * from tblField
+	</select>
+	
+	<select id="getpicCnt" resultType="Integer">
+		select count(*) from tblPGallery where p_seq = #{p_seq}
+	</select>
 	
 	
 </mapper>

@@ -1,16 +1,14 @@
 package com.ham.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.HRCommentDTO;
 import com.ham.domain.HReviewAddDTO;
 import com.ham.domain.HReviewDTO;
-import com.ham.domain.MSCommentDTO;
-import com.ham.domain.MemberSpeakDTO;
 import com.ham.mapper.ListenMapper;
 
 
@@ -22,9 +20,9 @@ public class ListenSeviceImpl implements ListenService{
 
 	//함 들어볼텨
 	@Override
-	public List<HReviewDTO> getHReviewList() {
+	public List<HReviewDTO> getHReviewList(Map<String, String> map) {
 		
-		List<HReviewDTO> list = mapper.getHReviewList();
+		List<HReviewDTO> list = mapper.getHReviewList(map);
 		
 		return list;
 	}

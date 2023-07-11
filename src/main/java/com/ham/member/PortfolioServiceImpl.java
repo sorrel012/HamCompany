@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ham.domain.MyFieldDTO;
 import com.ham.domain.PGalleryDTO;
 import com.ham.domain.PortfolioDTO;
 import com.ham.mapper.PortfolioMapper;
@@ -75,6 +76,20 @@ public class PortfolioServiceImpl implements PortfolioService {
 		List<PGalleryDTO> pfpiclist = mapper.pfpiclist(p_seq);
 		
 		return pfpiclist;
+	}
+	
+	@Override
+	public List<MyFieldDTO> getpfField() {
+
+		List<MyFieldDTO> getpfField = mapper.getpfField();
+		
+		return getpfField;
+	}
+	
+	@Override
+	public Integer getpicCnt(String p_seq) {
+
+		return mapper.getpicCnt(p_seq);
 	}
 
 }

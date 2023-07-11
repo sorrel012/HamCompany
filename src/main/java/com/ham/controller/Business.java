@@ -18,18 +18,19 @@ import com.ham.domain.BusinessDTO;
 import com.ham.domain.BusinessSpeakDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.OrderDTO;
+import com.ham.domain.QuestionDTO;
 import com.ham.domain.ReviewDTO;
 import com.ham.domain.WishDTO;
 import com.ham.member.BusinessService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_BUSINESS')")
 public class Business {
 
 	@Autowired
 	private BusinessService service;
 	
 	//비즈니스 프로필
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@GetMapping("/business_profile.do")
 	public String businessProfile(Model model, Principal p) {
 	
@@ -43,6 +44,7 @@ public class Business {
 	}
 	
 	//비즈니스 프로필 - 상위 수정
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@PostMapping("/business_profile1_editok.do")
 	public String editok(@ModelAttribute("dto") BusinessDTO dto) {
 		
@@ -58,6 +60,7 @@ public class Business {
 	}
 	
 	//비즈니스 프로필 - 하위 수정
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@PostMapping("/business_profile2_editok.do")
 	public String editok2(@ModelAttribute("dto") BusinessDTO dto) {
 		
@@ -73,6 +76,7 @@ public class Business {
 	}
 	
 	//businessProfileDetail.jsp
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@GetMapping("/business_profile_detail.do")
 	public String businessProfileDetail(Model model, Principal p) {
 		
@@ -89,6 +93,7 @@ public class Business {
 	}
 	
 	//비즈니스 프로필 - 상위 수정
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	@PostMapping("/business_detail_edit.do")
 	public String businessDetailEdit(@ModelAttribute("dto") BusinessDTO dto) {
 		
@@ -108,6 +113,7 @@ public class Business {
 	}
 	
 	@GetMapping("/wish_list.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String wishList(Model model, Principal p) {
 		
 		List<WishDTO> list = service.wish_list(p.getName());
@@ -115,6 +121,13 @@ public class Business {
 		
 		//System.out.println(list);
 		//System.out.println(list2);
+		for(WishDTO dto : list) {
+			
+			if(dto.getRate() == null) {
+				dto.setRate("0");
+			}
+			
+		}
 		
 		model.addAttribute("list", list);
 		
@@ -122,6 +135,7 @@ public class Business {
 	}
 	
 	@GetMapping("/wish_list_delete.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String wishList(String seq) {
 		
 		System.out.println(seq);
@@ -131,6 +145,7 @@ public class Business {
 	}
 	
 	@GetMapping("/order_list.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String orderList(Model model, @RequestParam(defaultValue = "1") int page, Principal p) {
 		
 		int itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
@@ -160,6 +175,7 @@ public class Business {
 	}
 	
 	@GetMapping("/order_list_select.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String orderList_select(Model model, String seq) {
 		
 		System.out.println(seq);
@@ -180,6 +196,7 @@ public class Business {
 	
 	//비즈니스 프로필 - 상위 수정
 	@PostMapping("/order_list_review_add.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String order_list_review_add(@ModelAttribute("dto") ReviewDTO dto) {
 		
 		System.out.println("dto = " +dto);
@@ -198,6 +215,7 @@ public class Business {
 	
 	//비즈니스 프로필 - 상위 수정
 	@PostMapping("/order_list_review_edit.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String order_list_review_edit(@ModelAttribute("dto") ReviewDTO dto) {
 		
 		System.out.println("dto = " +dto);
@@ -233,6 +251,7 @@ public class Business {
 	*/
 	
 	@GetMapping("/business_myspeak_list.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String business_myspeak_list(Model model, @RequestParam(defaultValue = "1") int page, Principal p) {
 	    int itemsPerPage = 10; // 한 페이지에 보여줄 아이템 수
 
@@ -261,5 +280,66 @@ public class Business {
 
 	    return "member/business_myspeak_list";
 	}
+	
+	@GetMapping("/question.do")
+	@PreAuthorize("isAuthenticated()")
+	public String question(Model model) {
+		
+		//List<OrderDTO> list2 = service.order_list_select(seq);;
+		
+		return "member/question";
+	}
+	
+	//비즈니스 프로필 - 상위 수정
+	@PostMapping("/question_add.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
+	public String question_add(@ModelAttribute("dto") QuestionDTO dto, Principal p) {
+		
+		dto.setB_id(p.getName());
+		
+		int result = service.question_add(dto);
+		
+		if (result > 0) {
+	        
+			return "redirect:/index.do";
+	    } else {
+	        // 실패 처리 로직 추가 (예: 에러 페이지로 이동)
+	        return "redirect:/error";
+	    }
+	
+	}
+	
+	//비즈니스 프로필 - 상위 수정
+	@PostMapping("/question_add2.do")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
+	public String question_add2(@ModelAttribute("dto") QuestionDTO dto, Principal p) {
+		
+		dto.setM_id(p.getName());
+		
+		int result = service.question_add2(dto);
+		
+		if (result > 0) {
+	        
+			return "redirect:/index.do";
+	    } else {
+	        // 실패 처리 로직 추가 (예: 에러 페이지로 이동)
+	        return "redirect:/error";
+	    }
+	
+	}
+	
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
+	@GetMapping("/business_inquiry.do")
+   public String BInquiry(Model model, Principal p) {
+	
+	  String b_id = p.getName();
+      
+      List<QuestionDTO> list = service.getInquiryList(b_id);
+      
+      
+      model.addAttribute("list", list);
+      
+      return "member/business_inquiry";
+   }
 	
 }
