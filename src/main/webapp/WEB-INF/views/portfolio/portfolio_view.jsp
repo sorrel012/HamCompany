@@ -51,13 +51,14 @@
 							data-bs-slide-to="2" aria-label="Slide 3"></button> -->
 					</div>
 					<div class="carousel-inner h-100">
-					<c:forEach items="${pfpiclist}" var="pfpicdto">
-						<div class="carousel-item active h-100">
+					<c:forEach items="${pfpiclist}" var="pfpicdto" varStatus="status">
+						<div class="carousel-item ${status.index == 0 ? 'active' : ''} h-100">
 							<img src="/resources/img/${pfpicdto.pg_name}"
 								class="d-block ms-auto me-auto mt-5 w-75 h-75" alt="...">
 						</div>
 					</c:forEach>
-					
+
+					</div>				
 					
 					
 <!-- 						<div class="carousel-item active h-100" style="height: 500px;">
@@ -72,7 +73,6 @@
 							<img src="/img/portfolio3.png"
 								class="d-block  ms-auto me-auto mt-5 w-75 h-75" alt="...">
 						</div> -->
-					</div>
 					<button class="carousel-control-prev" type="button"
 						data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
