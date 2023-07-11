@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/adminMatching.css" />
+	<link rel="stylesheet" href="/resources/css/business.css" />
 	
     <style type="text/css">
     	#list3 {
@@ -29,7 +30,7 @@
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">인재 매칭</li>
-					<li class="breadcrumb-item" aria-current="page" style="color: tomato">매칭 관리</li>
+					<li class="breadcrumb-item text-danger bold" aria-current="page">매칭 관리</li>
 				</ol>
 			</nav>
 		</section>

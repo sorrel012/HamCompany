@@ -38,9 +38,8 @@
 	
 	<select id="getBest" resultType="com.ham.domain.BestDTO">
 		select a.* from
-		(select * from vwIndex
-		    order by rnum asc) a
-		    where a.rnum &lt;= 4
+		(select * from vwIndex) a
+		    where rownum &lt;= 4
 	</select>
 
 </mapper>

@@ -9,6 +9,7 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/profile.css" />
     <link rel="stylesheet" href="/resources/css/checkprofile.css" />
+    <link rel="stylesheet" href="/resources/css/business.css" />
     
     <style type="text/css">
 	   	#list2 {
@@ -31,7 +32,7 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">관리자페이지</li>
 					<li class="breadcrumb-item" aria-current="page">회원 관리</li>
-					<li class="breadcrumb-item" aria-current="page">불량 회원</li>
+					<li class="breadcrumb-item bold text-danger" aria-current="page">불량 회원</li>
 				</ol>
 			</nav>
 		</section>

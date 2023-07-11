@@ -46,5 +46,22 @@ public class LoginController {
       return "member/logout";
    }
    
+   @GetMapping("campaign.do")
+   public String campaign() {
+      
+      return "inc/campaign";
+   }
+   
+   @GetMapping("privacy.do")
+   public String privacy() {
+      
+      return "inc/privacy";
+   }
+   
+   @GetMapping("addinquiry.do")
+   public String addinquiry() {
+      
+      return "inc/addinquiry";
+   }
 }
 

@@ -118,6 +118,7 @@ public class Business {
 		
 		List<WishDTO> list = service.wish_list(p.getName());
 		
+		System.out.println(list);
 		
 		//System.out.println(list);
 		//System.out.println(list2);

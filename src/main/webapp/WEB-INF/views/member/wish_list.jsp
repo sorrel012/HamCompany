@@ -72,13 +72,13 @@
 					<div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-1 mt-0">
 					<c:forEach var="dto" items="${list}">
 						<div class="col pe-3 pb-2">
-							<div class="card" id="${dto.ja_seq}" onclick="window.location.href='/shop/shopping_view.do?seq=${dto.ja_seq}&rate=${dto.rate}'">
-								<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+							<div class="card" id="${dto.ja_seq}">
+								<img src="/resources/img/job/${dto.ja_pic}"
 									class="card-img-top" alt="..."> <img id="${dto.w_seq}"
 									src="/resources/img/trash.png"
 									class="img-fluid position-absolute btn-trash"
 									style="right: 5px; top: 5px; width: 30px;">
-								<div class="card-body">
+								<div class="card-body" onclick="window.location.href='/shop/shopping_view.do?seq=${dto.ja_seq}&rate=${dto.rate}'">
 									<h6 class="card-title m-0 bold">${dto.fd_name}</h6>
 									<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.ja_salary}" />원
 									<div class="m-0 d-flex">
@@ -114,7 +114,7 @@
 						<p>정말로 삭제하시겠습니까?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
+						<button type="button" class="btn btn-secondary border-0"
 							data-dismiss="modal">취소</button>
 						<button type="button" class="btn btn-danger" id="confirmDeleteBtn">삭제</button>
 					</div>
