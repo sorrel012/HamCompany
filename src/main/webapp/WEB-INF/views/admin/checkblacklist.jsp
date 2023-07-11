@@ -116,7 +116,7 @@
 	      	<div class="ps-3 pt-0">${dto.blContent}</div>
 	      </div>
 	      <div class="modal-footer">
-	      	<c:if test="${dto.blStatus == '차단해제' }">
+	      	<c:if test="${dto.blStatus == '차단해제' or dto.blStatus == '처리중' }">
 	        <button type="button" class="btn bg-primary reject" value="${dto.blSeq}, ${dto.blBadmember}, 0">반 려</button>
 	        <button type="button" class="btn bg-warning warning" value="${dto.blSeq}, ${dto.blBadmember}, 0">경	고</button>
 	        <button type="button" class="btn blocked" value="${dto.blSeq}, ${dto.blBadmember}, 1">차 단</button>
@@ -194,7 +194,7 @@ function sendRequest(action, blSeq, blBadmember, num) {
 	  $.ajax({
 	    type: "POST",
 	    url: "/checkblacklist.do",
-	    data: { action: action, blSeq: blSeq, blBadmember: blBadmember, num: num },
+	    data: { action: action, blSeq: blSeq, blBadmember: blBadmember, num: num, ${_csrf.parameterName}: "${_csrf.token}" },
 	    success: function(data) {
 	      console.log(action);
 	      console.log(blSeq);

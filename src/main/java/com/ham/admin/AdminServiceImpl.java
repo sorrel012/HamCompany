@@ -128,6 +128,7 @@ public class AdminServiceImpl implements AdminService {
 	public int modifyBlackList(Map<String, String> map) {
 		
 		int blackListResult = mapper.updateBlackList(map);
+		System.out.println(blackListResult);
 		
 		return blackListResult;
 	}

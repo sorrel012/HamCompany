@@ -282,7 +282,7 @@ function sendRequest(action, oSeq) {
 	  $.ajax({
 	    type: "POST",
 	    url: "/matching.do",
-	    data: { action: action, oSeq: oSeq },
+	    data: { action: action, oSeq: oSeq, ${_csrf.parameterName}: "${_csrf.token}" },
 	    success: function(data) {
 	      console.log(action);
 	      console.log(oSeq);

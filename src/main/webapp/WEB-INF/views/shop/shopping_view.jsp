@@ -199,8 +199,8 @@ value="${_csrf.token }">
 						</div>
 					</div>
 				</div>
-				<div class="w-25 text-center">
-					<button type="button" class="btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#csModal${status.index}">댓글 신고하기</button>
+				<div class="text-center">
+					<button type="button" class="btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#csModal${status.index}" style="width: 124px;">댓글 신고하기</button>
 				</div>
 			</div>
 			<div class="container mt-3 border p-3">

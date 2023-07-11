@@ -203,7 +203,7 @@ public class ShopController {
 		dto.setBl_badmember("violet123");
 		dto.setBl_title(bl_title);
 		dto.setBl_content(bl_content);
-		dto.setBl_writer("violet123");
+		dto.setBl_writer("zxc123");
 		dto.setEr_content(er_content);
 		
 		service.addBlacklist(dto);

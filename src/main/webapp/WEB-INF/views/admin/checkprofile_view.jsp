@@ -165,7 +165,7 @@
 	
 	// AJAX를 사용하여 POST 요청을 보내는 함수
 	function sendRequest(action, jaSeq) {
-	  $.post("/checkprofile_view.do", { action: action, jaSeq: jaSeq },
+	  $.post("/checkprofile_view.do", { action: action, jaSeq: jaSeq, ${_csrf.parameterName}: "${_csrf.token}"},
 	    function(data) {
 	      console.log(action);
 	      console.log(jaSeq);
