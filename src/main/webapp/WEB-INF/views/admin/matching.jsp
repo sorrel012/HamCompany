@@ -187,11 +187,11 @@ const chApply = new Chart(ctx, {
   type: 'bar',
   data: {
     labels: [
-    	'${dateCount[4].o_Confirm}',
-    	'${dateCount[3].o_Confirm}',
-    	'${dateCount[2].o_Confirm}',
-    	'${dateCount[1].o_Confirm}',
-    	'${dateCount[0].o_Confirm}'], //sysdate로 바꿔주세요
+    	'${dateCount[4].o_ConfDate}',
+    	'${dateCount[3].o_ConfDate}',
+    	'${dateCount[2].o_ConfDate}',
+    	'${dateCount[1].o_ConfDate}',
+    	'${dateCount[0].o_ConfDate}'], //sysdate로 바꿔주세요
     datasets: [{
       label: '일별 신청 통계',
       data: [

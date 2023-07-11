@@ -105,7 +105,7 @@
 	        <h1 class="modal-title fs-5" id="exampleModalLabel">문의내용</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <form action="/checkinquiry.do" method="POST">
+	      <form action="/checkinquiry.do" method="POST" onsubmit="showNotification()">
 	      <div class="modal-body">
 	        <div class="border rounded p-2">
         	  <h5 class="fw-bold mb-2">❓ 문의 내용</h5>
@@ -143,7 +143,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-
 </script>
 </body>
 </html>
