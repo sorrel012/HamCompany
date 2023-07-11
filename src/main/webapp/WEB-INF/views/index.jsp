@@ -221,6 +221,7 @@
         }).siblings('p').removeClass('text-white'); // text-white 클래스도 제거합니다.
     });
   });
+  
 </script>
 </body>
 </html>
