@@ -133,6 +133,7 @@
 			<version>2.15.0</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
@@ -183,6 +184,44 @@
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+		
+		<!-- Spring Security -->
+	      <dependency>
+	         <groupId>org.springframework.security</groupId>
+	         <artifactId>spring-security-web</artifactId>
+	         <version>5.0.7.RELEASE</version>
+	      </dependency>
+	      
+	      <dependency>
+	         <groupId>org.springframework.security</groupId>
+	         <artifactId>spring-security-config</artifactId>
+	         <version>5.0.7.RELEASE</version>
+	      </dependency>
+	      
+	      <dependency>
+	         <groupId>org.springframework.security</groupId>
+	         <artifactId>spring-security-core</artifactId>
+	         <version>5.0.7.RELEASE</version>
+	      </dependency>
+	      
+	      <dependency>
+	         <groupId>org.springframework.security</groupId>
+	         <artifactId>spring-security-taglibs</artifactId>
+	         <version>5.0.7.RELEASE</version>
+	      </dependency>
+   
+		<!-- iamport -->
+	      <dependency>
+	         <groupId>org.apache.logging.log4j</groupId>
+	         <artifactId>log4j-core</artifactId>
+	         <version>2.11.2</version>
+	      </dependency>
 
 	</dependencies>
 	<build>

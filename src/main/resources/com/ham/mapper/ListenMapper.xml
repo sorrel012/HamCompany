@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ham.mapper.ListenMapper">
+	
+	<!--  함 들어볼텨 -->
+	<select id="getHReviewList" resultType="com.ham.domain.HReviewDTO">
+		
+		
+      select * from (select t1.*, rownum as rm from (select a.*, b.cnt from (select hr.*, m.m_name, fd.fd_name from tblhreview hr inner join tblmember m on hr.m_id = m.m_id 
+      inner join tblfdetail fd on hr.fd_seq = fd.fd_seq) a
+      inner join (select hr.hr_seq as seq, count(hrc.hrc_content) as cnt from tblhreview hr left outer join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq left outer join tblmember m on hrc.m_id = m.m_id group by hr.hr_seq) b
+      on a.hr_seq = b.seq order by a.hr_regdate) t1) ftbl where rm between #{start} and #{end}
+		
+	</select>
+	
+	<select id="getBoardCount" resultType="Integer">
+		
+		select count(*) from tblhreview
+		
+	</select>
+	
+	<select id="getListenDetail" resultType="com.ham.domain.HReviewDTO">
+	
+		select hr.*, m.m_name, fd.fd_name from tblhreview hr inner join tblmember m on hr.m_id = m.m_id inner join tblfdetail fd on hr.fd_seq = fd.fd_seq where hr_seq = #{hr_seq}
+		
+	</select>
+	
+	<select id="getCommentList" resultType="com.ham.domain.HRCommentDTO">
+		
+		select hrc.*, m.m_name from tblhreview hr inner join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq inner join tblmember m on hrc.m_id = m.m_id where hrc.hr_seq = #{hr_seq}
+		
+	</select>
+	
+	<select id="getCommentCount" resultType="Integer">
+		
+		select count(*) from tblhreview hr inner join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq inner join tblmember m on hrc.m_id = m.m_id where hrc.hr_seq = #{hr_seq}
+		
+	</select>
+	
+	<delete id="deleteComment">
+	
+		delete from tblhreview where hr_seq = #{hr_seq}
+	
+	</delete>
+	
+	<select id="getField" resultType="com.ham.domain.HReviewAddDTO">
+	
+		select * from tblfield
+		
+	</select>
+	
+	<select id="getFdetail" resultType="com.ham.domain.HReviewAddDTO">
+	
+		select * from tblfdetail
+		
+	</select>
+	
+	<insert id="insertHReview" parameterType="com.ham.domain.HReviewAddDTO">
+	
+		<selectKey keyProperty="hr_seq" order="BEFORE" resultType="String">
+			select hr_seq.nextVal from dual
+		</selectKey>
+		
+		
+		insert into tblhreview (hr_seq, m_id, hr_subject, hr_company, hr_regdate, hr_content, fd_seq) values (#{hr_seq}, #{m_id}, #{hr_subject}, #{hr_company}, default, #{hr_content}, #{fd_seq})
+	
+	</insert>
+	
+	<update id="editHReview" parameterType="com.ham.domain.HReviewAddDTO">
+		
+		update tblhreview set 
+		hr_subject = #{hr_subject}, 
+		hr_company = #{hr_company}, 
+		hr_content=#{hr_content}, 
+		fd_seq = #{fd_seq} 
+		where hr_seq = #{hr_seq}
+		
+	</update>
+	
+	<insert id="addComment" parameterType="com.ham.domain.HRCommentDTO">	
+		
+		insert into tblhrcomment values (hrc_seq.nextval, #{hr_seq}, #{hrc_content}, sysdate, #{m_id})
+	
+	</insert>
+	
+	<select id="getLastComment" resultType="com.ham.domain.HRCommentDTO">
+		
+		select hrc.*, m.m_name from tblhrcomment hrc 
+		inner join tblhreview hr on hrc.hr_seq = hr.hr_seq
+		inner join tblmember m on hrc.m_id = m.m_id
+		where hr.hr_seq = ${hr_seq} and hrc.hrc_seq = (select max(hrc.hrc_seq) as lastseq from tblhrcomment hrc 
+				inner join tblhreview hr on hrc.hr_seq = hr.hr_seq
+				where hr.hr_seq = ${hr_seq})
+	
+	</select>
+	
+	<select id="getSearchResult" resultType="com.ham.domain.HReviewDTO">
+	
+		select a.*, b.cnt from (select hr.*, m.m_name, fd.fd_name from tblhreview hr inner join tblmember m on hr.m_id = m.m_id 
+		inner join tblfdetail fd on hr.fd_seq = fd.fd_seq) a
+		inner join (select hr.hr_seq as seq, count(hrc.hrc_content) as cnt from tblhreview hr left outer join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq left outer join tblmember m on hrc.m_id = m.m_id group by hr.hr_seq) b
+		on a.hr_seq = b.seq where hr_content like '%${word}%'
+	
+	</select>
+	
+	<select id="getSearchCount" resultType="Integer">
+		
+		
+		select count(*) as cnt from (select hr.*, m.m_name, fd.fd_name from tblhreview hr inner join tblmember m on hr.m_id = m.m_id 
+		inner join tblfdetail fd on hr.fd_seq = fd.fd_seq) a
+		inner join (select hr.hr_seq as seq, count(hrc.hrc_content) as cnt from tblhreview hr left outer join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq left outer join tblmember m on hrc.m_id = m.m_id group by hr.hr_seq) b
+		on a.hr_seq = b.seq where hr_content like '%${word}%'
+	
+	</select>
+	
+	<select id="getSortedHReviewList" resultType="com.ham.domain.HReviewDTO">
+	
+		<if test="sort == 1">
+			
+			select a.*, b.cnt from (select hr.*, m.m_name, fd.fd_name from tblhreview hr inner join tblmember m on hr.m_id = m.m_id 
+			inner join tblfdetail fd on hr.fd_seq = fd.fd_seq) a
+			inner join (select hr.hr_seq as seq, count(hrc.hrc_content) as cnt from tblhreview hr left outer join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq left outer join tblmember m on hrc.m_id = m.m_id group by hr.hr_seq) b
+			on a.hr_seq = b.seq  order by hr_seq asc
+		
+		
+		</if>
+		
+		<if test="sort == 2">
+		
+			select a.*, b.cnt from (select hr.*, m.m_name, fd.fd_name from tblhreview hr inner join tblmember m on hr.m_id = m.m_id 
+			inner join tblfdetail fd on hr.fd_seq = fd.fd_seq) a
+			inner join (select hr.hr_seq as seq, count(hrc.hrc_content) as cnt from tblhreview hr left outer join tblhrcomment hrc on hr.hr_seq = hrc.hr_seq left outer join tblmember m on hrc.m_id = m.m_id group by hr.hr_seq) b
+			on a.hr_seq = b.seq  order by hr_seq desc
+		
+		
+		</if>
+		
+	</select>
+	
+	<update id="updateViewCnt">
+		
+		update tblhreview set hr_hit = hr_hit + 1 where hr_seq = ${hr_seq}
+	
+	</update>
+	
+	<select id="getViewCnt" resultType="String">
+	
+		select hr_hit from tblhreview where hr_seq = ${hr_seq}
+	
+	</select>
+	
+	<delete id="deleteContentCmt">
+	
+		delete from tblhrcomment where hr_seq =  #{hr_seq}
+	
+	</delete>
+	
+	
+
+</mapper>

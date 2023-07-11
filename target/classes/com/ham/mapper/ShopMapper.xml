@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ham.mapper.ShopMapper">
+
+	
+
+	<!-- <resultMap type="com.test.domain.MemberDTO" id="jaMap">
+		<result property="ja_seq" column="ja_seq"/>
+		<result property="ja_salary" column="ja_salary"/>
+		<result property="fd_name" column="fd_name"/>
+	</resultMap> -->
+   	
+   	<select id="shopList" parameterType="String" resultType="com.ham.domain.JobApliDTO">
+ 		
+ 		select
+		    *
+		    from (select
+		    rownum as rnum,
+		    ja.ja_seq as jaSeq,
+		    ja.ja_salary as salary,
+		    fd.fd_name as fdName,
+		    ja.ja_pic as ja_pic,
+		    (select 
+                 avg(er_rate)
+            from tblereview er
+                inner join tblOrder o
+                    on er.o_seq = o.o_seq
+                        inner join tblPay p
+                            on o.p_seq = p.p_seq
+                                inner join tblMarket mk
+                                    on p.mk_seq = mk.mk_seq
+                                        where mk.ja_seq = ja.ja_seq) as rate
+			from tbljobapl ja
+			    inner join tblmarket m
+			        on ja.ja_seq = m.ja_seq
+			            inner join tblfdetail fd
+			                on ja.fd_seq = fd.fd_seq
+			                	<if test='!f_seq.equals("")'>
+						 			where fd.f_seq = #{f_seq}
+						 		</if>)
+			                    	where rnum between #{start} and #{end}
+		                    	
+		              	
+ 		
+ 	</select>
+ 	
+ 	<select id="shopView" parameterType="String" resultType="com.ham.domain.JobApliDTO">
+ 		select 
+		     f.f_name as f_name,
+		     fd.fd_name as fdName,
+		     ja.ja_salary as salary,
+		     m.m_name as m_name,
+		     ja.ja_intro as intro,
+		     ja.ja_location as jaLocation,
+		     to_char(ja.ja_begindate, 'yyyy-mm-dd') as jaBegindate,
+		     to_char(ja.ja_enddate, 'yyyy-mm-dd') as jaEnddate,
+		     ja.ja_time as jaTime,
+		     m.mk_seq as mk_seq,
+		     ja.ja_pic as ja_pic
+		from tbljobapl ja
+		    inner join tblmarket m
+		        on ja.ja_seq = m.ja_seq
+		            inner join tblfdetail fd
+		                on ja.fd_seq = fd.fd_seq
+		                    inner join tblfield f
+		                        on fd.f_seq =  f.f_seq
+		                            inner join tblmember m
+		                                on ja.m_id = m.m_id
+		                                    where ja.ja_seq = #{seq}
+ 	</select>
+ 	
+ 	<select id="elist" parameterType="String" resultType="String">
+ 		
+ 		select 
+    		jae_content || ' ' || jae_graduation
+		from tbljaedu
+			where ja_seq = #{seq}
+ 		
+ 	</select>
+ 	
+ 	<select id="clist" parameterType="String" resultType="String">
+ 		
+ 		select 
+		    jac_period || ' : ' || jac_content as career
+		from tbljacareer
+		    where ja_seq = #{seq} 
+		        order by career
+
+ 		
+ 	</select> 
+ 	
+ 	<select id="similarList" parameterType="String" resultType="com.ham.domain.JobApliDTO">
+	 		select 
+			    ja.ja_seq as jaSeq,
+			    ja.ja_salary as salary,
+			    fd_name as fdName,
+			    ja_pic as ja_pic,
+			    (select 
+	                 avg(er_rate)
+	            from tblereview er
+	                inner join tblOrder o
+	                    on er.o_seq = o.o_seq
+	                        inner join tblPay p
+	                            on o.p_seq = p.p_seq
+	                                inner join tblMarket mk
+	                                    on p.mk_seq = mk.mk_seq
+	                                        where mk.ja_seq = ja.ja_seq) as rate
+			from tbljobapl ja
+			     inner join tblfdetail fd
+			        on ja.fd_seq = fd.fd_Seq
+			        	inner join tblmarket m
+                            on ja.ja_seq = m.ja_seq
+			        	<![CDATA[
+			            where f_seq = (select 
+			                    f_seq 
+			                from tbljobapl ja
+			                    inner join tblfdetail fd
+			                        on ja.fd_seq = fd.fd_seq
+			                            where ja.ja_seq = #{seq})
+			                             and rownum <= 4 and ja.ja_seq != #{seq}
+			                             ]]>
+			                            
+ 	</select>
+
+	<select id="jaRate" resultType="com.ham.domain.JobApliDTO">
+	select 
+	     avg(er_rate) as rate,
+	     mk.ja_seq as jaSeq
+	from tblereview er
+	    inner join tblOrder o
+	        on er.o_seq = o.o_seq
+	            inner join tblPay p
+	                on o.p_seq = p.p_seq
+	                    inner join tblMarket mk
+	                        on p.mk_seq = mk.mk_seq
+	                        	group by mk.ja_seq
+	                          
+	</select>
+	
+	<select id="reviewList" parameterType="String" resultType="com.ham.domain.EReviewDTO">
+	
+	select 
+	    to_char(er_regdate, 'yyyy-mm-dd') as er_regdate,
+	    er.*,
+        mk.ja_seq
+	from tblereview er
+	    inner join tblOrder o
+	        on er.o_seq = o.o_seq
+	            inner join tblPay p
+	                on o.p_seq = p.p_seq
+	                    inner join tblMarket mk
+	                        on p.mk_seq = mk.mk_seq
+                                where ja_seq = #{seq}
+	
+	</select>
+	
+	
+	<insert id="addPay">
+	
+		insert into tblPay (p_seq, b_id, mk_seq, p_name, p_tel, p_address, p_address_detail, p_memo, p_email, p_regdate)
+			values (p_seq.nextVal, #{b_id}, #{mk_seq}, #{p_name}, #{p_tel}, #{p_address}, #{p_address_detail}, #{p_memo}, #{p_email}, sysdate)
+	
+	</insert>
+	
+	<select id="fieldList" resultType="com.ham.domain.FieldDTO">
+	
+		select 
+		    fd.f_seq as f_seq,
+		    f.f_name as f_name,
+		    count(*) as f_cnt
+		from tbljobapl ja
+		    inner join tblmarket m
+		        on ja.ja_seq = m.ja_seq
+		            inner join tblfdetail fd
+		                on ja.fd_seq = fd.fd_seq
+		                    inner join tblfield f
+		                        on f.f_seq = fd.f_seq
+		                            group by fd.f_seq, f.f_name
+		                                order by f_cnt desc
+	</select>
+	
+	
+	<insert id="addJjim" parameterType="com.ham.domain.JobApliDTO">
+		insert into tblWish (w_seq, b_id, mk_seq)
+        	values (w_seq.nextVal, #{id}, #{mk_seq})
+    </insert>
+    
+    <delete id="delJjim" parameterType="com.ham.domain.JobApliDTO">
+    	delete from tblWish where mk_seq = #{mk_seq} and b_id = #{id}
+    </delete>
+    
+    <select id="hasJjim" resultType="Integer">
+    	select count(*) as isJjim from tblWish where b_id = #{id} and mk_seq = #{mk_seq} 
+    </select>
+    
+    <select id="listSize" parameterType="String" resultType="Integer">
+ 		
+ 		select
+		    count(*)
+		    from (select
+		    rownum as rnum,
+		    ja.ja_seq as jaSeq,
+		    ja.ja_salary as salary,
+		    fd.fd_name as fdName,
+		    (select 
+                 avg(er_rate)
+            from tblereview er
+                inner join tblOrder o
+                    on er.o_seq = o.o_seq
+                        inner join tblPay p
+                            on o.p_seq = p.p_seq
+                                inner join tblMarket mk
+                                    on p.mk_seq = mk.mk_seq
+                                        where mk.ja_seq = ja.ja_seq) as rate
+			from tbljobapl ja
+			    inner join tblmarket m
+			        on ja.ja_seq = m.ja_seq
+			            inner join tblfdetail fd
+			                on ja.fd_seq = fd.fd_seq
+                                <if test='!f_seq.equals("")'>
+						 			where fd.f_seq = #{f_seq}
+						 		</if>)
+			                    	
+		               		
+ 	</select>
+	
+</mapper>

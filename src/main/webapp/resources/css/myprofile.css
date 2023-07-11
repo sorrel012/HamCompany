@@ -1,0 +1,36 @@
+.nav-item.active > a {
+    color: tomato !important; 
+    font-weight: bold;
+}
+
+.text-hover:hover {
+    font-weight: bold;
+}
+
+.a-detail {
+	margin-top: 5px; 
+}
+
+.a-email {
+	margin-bottom: 43px;
+}
+
+.p-height {
+	margin-bottom: 170px;
+}
+
+#editform1 {
+	margin-bottom: 10px;
+}
+
+#editform2 {
+	border: 1px solid #CCC !important;
+}
+
+.btn-border {
+	border: none;
+}
+
+.l-matop {
+	margin-top: 11.5rem !important;
+}

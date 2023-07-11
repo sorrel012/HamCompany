@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ham.mapper.MemberMapper">
+
+	<select id="checkMember" resultType="Integer">
+		select count(*) from tblMember where m_id = #{id}
+	</select>
+	
+	<select id="checkBusiness" resultType="Integer">
+		select count(*) from tblBusiness where b_id = #{id}
+	</select>
+	
+	<select id="checkAdmin" resultType="Integer">
+		select count(*) from tblAdmin where a_id = #{id}
+	</select>
+	
+	<select id="readMember" resultType="com.ham.domain.MemberDTO">
+		select m_name, m_pw, m_email, m_id from tblMember where m_id = #{id}
+	</select>
+	
+	<select id="readBusiness" resultType="com.ham.domain.BusinessDTO">
+		select b_pw, b_email , b_id from tblBusiness where b_id = #{id}
+	</select>
+	
+	<select id="readAdmin" resultType="com.ham.domain.AdminDTO">
+		select a_pw, a_tel , a_id from tblAdmin where a_id = #{id}
+	</select>
+	
+	<insert id="memberSignup">
+		insert into tblMember (m_id, m_pw, m_tel, m_email, m_birth, m_name, m_address, m_address_detail)
+			values (#{m_id}, #{m_pw}, #{m_tel}, #{m_email}, #{m_birth}, #{m_name}, #{m_address}, #{m_address_detail})
+	</insert>
+	
+	<insert id="businessSignup">
+		insert into tblBusiness (b_id, b_pw, b_tel, b_email, b_num)
+			values (#{b_id}, #{b_pw}, #{b_tel}, #{b_email}, #{b_num})
+	</insert>
+	
+	<select id="getBest" resultType="com.ham.domain.BestDTO">
+		select a.* from
+		(select * from vwIndex
+		    order by rnum asc) a
+		    where a.rnum &lt;= 4
+	</select>
+
+</mapper>
