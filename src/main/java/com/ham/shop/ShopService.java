@@ -1,9 +1,8 @@
 package com.ham.shop;
 
 import java.util.List;
-import java.util.Map;
 
-import com.ham.domain.BlacklistDTO;
+import com.ham.domain.BlackListDTO;
 import com.ham.domain.EReviewDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.JobApliDTO;
@@ -37,6 +36,6 @@ public interface ShopService {
 
 	int listSize(String f_seq);
 
-	void addBlacklist(BlacklistDTO dto);
+	void addBlacklist(BlackListDTO dto);
 	
 }

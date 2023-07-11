@@ -227,7 +227,7 @@
  	</select>
  	
  	
- 	<insert id="addBlacklist" parameterType="com.ham.domain.BlacklistDTO">
+ 	<insert id="addBlacklist" parameterType="com.ham.domain.BlackListDTO">
 		insert into tblblacklist (bl_seq, bl_regdate, bl_status, bl_writer, bl_badmember, bl_content, bl_title, er_content)
         	values (bl_seq.nextVal, sysdate, '처리중', #{bl_writer}, #{bl_badmember}, #{bl_content}, #{bl_title}, #{er_content})
     </insert>

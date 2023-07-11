@@ -15,4 +15,10 @@ public class BlackListDTO {
 	
 	private String count;			//게시물 갯수
 
+	private String bl_writer;
+    private String bl_badmember;
+    private String bl_content;
+    private String bl_title;
+    private String er_content;
+
 }

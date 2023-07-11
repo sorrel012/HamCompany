@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ham.domain.BlacklistDTO;
+import com.ham.domain.BlackListDTO;
 import com.ham.domain.EReviewDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.JobApliDTO;
@@ -199,7 +198,7 @@ public class ShopController {
 	public String blacklist(String bl_badmember, String bl_title, String bl_content, String bl_writer, String er_content, HttpServletRequest req) throws IOException {
 	
 				
-		BlacklistDTO dto = new BlacklistDTO();
+		BlackListDTO dto = new BlackListDTO();
 		
 		dto.setBl_badmember("violet123");
 		dto.setBl_title(bl_title);

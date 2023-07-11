@@ -1,13 +1,11 @@
 package com.ham.shop;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
-import com.ham.domain.BlacklistDTO;
+import com.ham.domain.BlackListDTO;
 import com.ham.domain.EReviewDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.JobApliDTO;
@@ -98,7 +96,7 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public void addBlacklist(BlacklistDTO dto) {
+	public void addBlacklist(BlackListDTO dto) {
 		
 		mapper.addBlacklist(dto);
 	}
