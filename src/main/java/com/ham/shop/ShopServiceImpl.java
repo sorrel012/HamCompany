@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
+import com.ham.domain.BlacklistDTO;
 import com.ham.domain.EReviewDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.JobApliDTO;
@@ -94,6 +95,12 @@ public class ShopServiceImpl implements ShopService {
 	public int listSize(String f_seq) {
 		
 		return mapper.listSize(f_seq);
+	}
+
+	@Override
+	public void addBlacklist(BlacklistDTO dto) {
+		
+		mapper.addBlacklist(dto);
 	}
 
 

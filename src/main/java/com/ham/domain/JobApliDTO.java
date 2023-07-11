@@ -25,4 +25,5 @@ public class JobApliDTO {
 	private String mk_seq;
 	private String f_seq;
 	private String id;
+	private String ja_pic;
 }

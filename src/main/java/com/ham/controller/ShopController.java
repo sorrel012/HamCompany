@@ -1,9 +1,13 @@
 package com.ham.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ham.domain.BlacklistDTO;
 import com.ham.domain.EReviewDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.JobApliDTO;
@@ -73,8 +78,16 @@ public class ShopController {
 		
 		int isJjim = service.hasJjim(tempDto);
 		
-		String summary = dto.getIntro().substring(0, 140);
-		summary += "...";
+		
+		String summary = "";
+		
+		if (dto.getIntro().length() < 140) {
+			summary = dto.getIntro();
+		} else {
+			summary = dto.getIntro().substring(0, 140);
+			summary += "...";
+		}
+		
 		
 		
 		
@@ -91,7 +104,9 @@ public class ShopController {
 		return "shop/shopping_view";
 	}
 	
+	
 	@RequestMapping(value = "/shop/payment.do", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String payment(
 			   @RequestParam String salary,
 			   @RequestParam String f_name,
@@ -99,6 +114,7 @@ public class ShopController {
 			   @RequestParam String mk_seq,
 			   @RequestParam String date,
 			   @RequestParam String m_name,
+			   @RequestParam String ja_pic,
 			   Model model,
 			   Principal p) {
 		
@@ -111,6 +127,7 @@ public class ShopController {
 		map.put("mk_seq", mk_seq);
 		map.put("date", date);
 		map.put("m_name", m_name);
+		map.put("ja_pic", ja_pic);
 		
 		model.addAttribute("map", map);
 		model.addAttribute("id", p.getName());
@@ -118,7 +135,9 @@ public class ShopController {
 		return "shop/payment";
 	}
 	
+
 	@GetMapping("/shop/payok.do")
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public String payOk(String m_name, String fdName, String date, String salary, Model model) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -137,6 +156,7 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value = "/shop/paycheck.do", method=RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_BUSINESS')")
 	public @ResponseBody void paycheck(String b_id, String mk_seq, String p_name,
 										String p_tel, String p_address, String p_address_detail,
 										String p_memo, String p_email) {
@@ -157,6 +177,7 @@ public class ShopController {
 		
 	}
 	
+
 	@PostMapping("/shop/jjim.do")
 	public void jjim(String mk_seq, String id, int isJjim) {
 		
@@ -171,7 +192,25 @@ public class ShopController {
 		} else if (isJjim == 1) {
 			service.delJjim(dto);
 		}
-		
+			
+	}
 	
+	@PostMapping("/shop/blacklist.do")
+	public String blacklist(String bl_badmember, String bl_title, String bl_content, String bl_writer, String er_content, HttpServletRequest req) throws IOException {
+	
+				
+		BlacklistDTO dto = new BlacklistDTO();
+		
+		dto.setBl_badmember("violet123");
+		dto.setBl_title(bl_title);
+		dto.setBl_content(bl_content);
+		dto.setBl_writer("violet123");
+		dto.setEr_content(er_content);
+		
+		service.addBlacklist(dto);
+		
+		String referer = req.getHeader("Referer");
+		
+		return "redirect:"+ referer;
 	}
 }

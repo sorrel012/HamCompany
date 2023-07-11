@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ham.domain.BlacklistDTO;
 import com.ham.domain.EReviewDTO;
 import com.ham.domain.FieldDTO;
 import com.ham.domain.JobApliDTO;
@@ -37,6 +38,8 @@ public interface ShopMapper {
 	int hasJjim(JobApliDTO dto);
 
 	int listSize(String f_seq);
+
+	void addBlacklist(BlacklistDTO dto);
 
 	
 	

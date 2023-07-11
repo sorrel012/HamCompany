@@ -9,5 +9,5 @@ public class EReviewDTO {
 	private String er_regdate;
 	private String er_content;
 	private String er_rate;
-	
+	private String er_id;
 }

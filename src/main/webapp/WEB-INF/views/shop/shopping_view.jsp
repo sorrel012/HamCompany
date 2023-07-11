@@ -11,9 +11,17 @@
 	<%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 	<link rel="stylesheet" href="/resources/css/shopping.css" />
 	<script src="/js/popper.min.js"></script>
-	
 	<link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        
+        
+    <style>
+    
+    	.breadcrumb:hover {
+    		cursor: pointer;
+    	}
+    	
+    </style>    
 </head>
 <body>
 
@@ -32,8 +40,8 @@
 
 	<section class="container-lg mb-5">
 		<div class="d-lg-flex justify-content-center">
-			<div class="container-lg">
-				<img class="img-fluid rounded-3" src="/resources/img/singuppng.png"
+			<div class="container-lg align-items-center d-flex">
+				<img class="img-fluid rounded-3 w-100" src="/resources/img/job/${dto.ja_pic}"
 					alt="이미지">
 			</div>
 			<div
@@ -55,7 +63,7 @@
 						<span class="small ms-1">${rate}</span>
 					</div>
 					<div>
-						<div class="fs-5 fw-bold">${dto.salary}원</div>
+						<div class="fs-5 fw-bold"><fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.salary}" />원</div>
 					</div>
 					<hr>
 					<div class="d-flex flex-column mt-2">
@@ -78,6 +86,7 @@
 							<input type="hidden" value="${dto.salary}" name="salary">
 							<input type="hidden" value="${dto.jaBegindate} ~ ${dto.jaEnddate}" name="date">
 							<input type="hidden" value="${dto.m_name}" name="m_name">
+							<input type="hidden" value="${dto.ja_pic}" name="ja_pic">
 							<input type="hidden" name="${_csrf.parameterName }"
 value="${_csrf.token }">
 							
@@ -101,11 +110,11 @@ value="${_csrf.token }">
 			<c:forEach items="${simList}" var="simDto">
 			<div class="col-6 col-md-6 col-lg-3 pb-2">
 				<div class="card">
-					<img src="/resources/img/ec488ead716906761e43e0e6c459956b.jpg"
+					<img src="/resources/img/job/${simDto.ja_pic}"
 						class="card-img-top" alt="..." data-seq="${simDto.jaSeq}" data-rate="${simDto.rate}">
 					<div class="card-body">
 						<h5 class="card-title m-0">${simDto.fdName}</h5>
-						<p class="card-text m-0" style="color: #DB4444;">${simDto.salary}원</p>
+						<p class="card-text m-0" style="color: #DB4444;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${simDto.salary}" />원</p>
 						<div class="m-0 d-flex">
 							<c:set var="simRate" value="${simDto.rate}"/>
 							<c:if test="${simRate - 1 > 0}">
@@ -115,7 +124,7 @@ value="${_csrf.token }">
 								</c:forEach> 
 							</c:if>
 							
-							 <span class="small">${simDto.rate}</span>
+							 <span class="small fw-bold">(${simDto.rate}점)</span>
 						</div>
 					</div>
 				</div>
@@ -169,12 +178,12 @@ value="${_csrf.token }">
 				alt="이미지"> <span class="my-text fw-bold h4 m-0">리 뷰</span>
 		</div>
 		
-		<c:forEach items="${rlist}" var="rdto">
+		<c:forEach items="${rlist}" var="rdto" varStatus="status">
 		<div class="container-md p-3 rounded-1 mb-5 box-shadow">
 			<div class="d-flex">
 				<div class="container d-flex align-items-center">
 					<div>
-						<small class="text-secondary">${rdto.er_regdate}</small>
+						${rdto.er_id}<small class="text-secondary ms-3">${rdto.er_regdate}</small>
 						<div class="m-0 mt-1 d-flex">
 							<c:set var="rate" value="${rdto.er_rate}"/>
 							
@@ -190,15 +199,8 @@ value="${_csrf.token }">
 						</div>
 					</div>
 				</div>
-				<div>
-					<button type="button"
-						class="btn btn-secondary bg-white text-dark border-0"
-						data-bs-html="true" data-bs-container="body"
-						data-bs-trigger="focus" data-bs-toggle="popover"
-						data-bs-placement="bottom"
-						data-bs-content="<a href='#' class='text-danger text-decoration-none'>댓글 신고하기</a><br><a href='#' class='text-danger text-decoration-none'>사용자 신고하기</a>">
-						<span class="material-symbols-outlined"> more_horiz </span>
-					</button>
+				<div class="w-25 text-center">
+					<button type="button" class="btn btn-primary border-0" data-bs-toggle="modal" data-bs-target="#csModal${status.index}">댓글 신고하기</button>
 				</div>
 			</div>
 			<div class="container mt-3 border p-3">
@@ -207,8 +209,48 @@ value="${_csrf.token }">
 			
 		</div>
 		
+		<div class="modal fade" id="csModal${status.index}" tabindex="-1" aria-labelledby="csModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">댓글 신고하기</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		      		<form method="POST" action="/shop/blacklist.do" id="blackForm">
+		      			<div>
+		      			신고 대상 : 
+		      			<input type="text" name="bl_badmember" value="${rdto.er_id}" id="bl_badmember" disabled class="border-0 text-dark mb-2">
+		      			</div>
+						<div>
+						<p>신고 댓글 내용 : <p> 
+		      			<input type="text" name="er_content" value="${rdto.er_content}" id="er_content" disabled class="border-0 text-dark w-100">
+						</div>
+						<div>
+							신고 제목 : <input type="text" name="bl_title" id="bl_title" class="w-100 mb-1 rounded-2 border-1">
+						</div>
+						<div>
+							신고 내용 : <textarea name="bl_content" id="bl_content" class="w-100 mb-1 rounded-2 border-1" style="height: 200px; resize: none;"></textarea>
+						</div>
+						<input type="hidden" value="${id}" name="bl_writer">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+						<input type="hidden" name="bl_badmember" value="${rdto.er_id}">
+						<input type="hidden" name="er_content" value="${rdto.er_content}">
+					</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn bg-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="submit" class="btn bg-primary" id="blackBtn">신고</button>
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
 		
 		</c:forEach>
+		
+		
+		
 	</section>
 
 
@@ -216,6 +258,7 @@ value="${_csrf.token }">
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>	
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 
 	$(document).ready(function() {
@@ -229,19 +272,6 @@ value="${_csrf.token }">
 		}
 		
 	    $('.my-btn').click(function() {
-	    	
-	    	$.ajax({
-	        	type : 'POST',
-            	url : '/shop/jjim.do',
-            	data : {
-            		mk_seq : '${dto.mk_seq}',
-            		id : '${id}',
-            		isJjim : isJjim,
-            		${_csrf.parameterName} : "${_csrf.token}"
-            	}
-            	
-	        });
-	    	
 	    	
 	        if ($(this).hasClass('active')) {
 		        $(this).removeClass('active'); // 클래스 제거
@@ -257,6 +287,18 @@ value="${_csrf.token }">
 		        $(this).find('img').attr('src', '/resources/img/button/Vector-yes.png');
 		        isJjim = 0;
 	        }
+	        
+	        $.ajax({
+	        	type : 'POST',
+            	url : '/shop/jjim.do',
+            	data : {
+            		mk_seq : '${dto.mk_seq}',
+            		id : '${id}',
+            		isJjim : isJjim,
+            		${_csrf.parameterName} : "${_csrf.token}"
+            	}
+            	
+	        });
 	    });
 	});
 	
@@ -272,6 +314,31 @@ value="${_csrf.token }">
 		console.log(event.target);
 		location.href = "/shop/shopping_view.do?seq=" + event.target.dataset.seq + "&rate=" + event.target.dataset.rate;
 	});
+	
+	$('.breadcrumb').click(function() {
+		
+		location.href = "/shop/shopping_list.do?f_seq=&page=1";
+	})
+
+	window.onload = function() {
+	    $('#blackBtn').click(function() {
+	    	
+	    	if($('#bl_title').val() != "" && $('#bl_content').val() != "") {
+
+	    		swal("신고 성공!.", "신고가 완료되었습니다.", "success");
+                setTimeout(function() {
+                	document.getElementById('blackForm').submit();
+                }, 1500);
+	    		
+	    		
+	    		
+	    		
+	    	} else {
+	    		alert('제목과 내용을 입력해주세요.');
+	    	}
+	    	
+	    });
+	};
 
 </script>
 </body>
