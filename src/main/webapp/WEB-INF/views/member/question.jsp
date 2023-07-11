@@ -61,11 +61,12 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="confirmationModalLabel">수정 확인</h5>
+	        <h5 class="modal-title" id="confirmationModalLabel">문의 확인</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        수정을 진행하시겠습니까?
+	        불편을 끼쳐드려 죄송합니다. <br>
+	        문의를 진행하시겠습니까?
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">취소</button>

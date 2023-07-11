@@ -5,10 +5,6 @@ a:hover {
 	cursor: pointer;
 }
 </style>
-    
-<div class="mt-4 text-end">
-		<button type="button" class="btn" id="editbtn" style="width: 80px;" disabled onclick="showConfirmationModal()">수정</button>
-	</div>
 	
 <!-- 모달 창 1 -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
