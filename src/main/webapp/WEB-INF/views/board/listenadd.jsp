@@ -21,39 +21,68 @@
 	
     <!-- mainContent -->
     <section class="container-md mt-4 mb-5">
-        <h2 class="fw-bold mt-5 mb-3"> 함! 들어볼텨 </h2>
+        <h2 class="my-5">
+			<span class="fw-bold" style="color: #FF914D">함!</span> <span
+				class="text-danger fw-bold">들어</span>볼텨
+		</h2>
 
         <!--본문-->
-        <div class="border border-1 border-secondary border-opacity-50 rounded p-4">
-
-            <div class="fw-bold">말머리</div>
-
-            <select class="form-select w-25 mt-2 mb-4" aria-label="Default select example">
-                <option value="1" selected>일상</option>
-                <option value="2">질문&답변</option>
-              </select>
-
-            <div class="fw-bold">제목</div>
-            <input class="form-control mt-2 w-50 mb-5" type="text" placeholder="제목" aria-label=".form-control-lg example">
-
-            <div class="fw-bold">본문</div>
-            <div class="main-content-sel3">
-                 <textarea name="text" id="editor" placeholder="내용을 입력하세요."></textarea>
-            </div>
-
-            <div class="d-flex justify-content-end mt-5">
-
-                <button type="button" class="btn me-4"
-                style="--bs-btn-padding-y: 0.7rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1.1rem; background-color : rgb(156, 156, 156);">취소</button>
-
-
-                <button type="button" class="btn btn-danger"
-                style="--bs-btn-padding-y: 0.7rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1.1rem;">등록</button>
-
-                
-            </div>
-            
-		</div>	
+        <form method="post" action="/addhreview.do">
+	        <div class="border border-1 border-secondary border-opacity-50 rounded p-4">
+	
+	            <div class="fw-bold">제목</div>
+	            <input class="form-control mt-2 w-50 mb-5" id="hr_subject" name="hr_subject" type="text" placeholder="제목" aria-label=".form-control-lg example">
+	            
+	            <div class="d-flex">
+	            	<div class="me-5">
+			            <div class="fw-bold">회사명</div>
+			            <input id="hr_company" name="hr_company" class="form-control mt-2 w-100 mb-5" type="text" placeholder="회사명" aria-label=".form-control-lg example">
+	            	</div>
+	            	
+	            	<div class="me-5">
+		           		<div class="fw-bold">분야</div>
+		           		<div style="width: 100%;" class="me-3 mt-2">
+							<select id="field" name="field" class="form-select w-100" aria-label="Default select example" onchange="showFDetail(this.value);">
+								<c:forEach items="${flist}" var="dto">
+									<option value="${dto.f_seq}">${dto.f_name}</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					
+					<div class="w-25">
+		           		<div class="fw-bold">세부 분야</div>
+		           		<div style="width: 100%;" class="me-3 mt-2">
+							<select id="fd_seq" name="fd_seq" class="form-select w-100" aria-label="Default select example">
+								
+								
+							</select>
+						</div>
+					</div>
+	            </div>
+	            
+	
+	            <div class="fw-bold">본문</div>
+	            <div class="main-content-sel3">
+	                 <textarea id="hr_content" name="hr_content"></textarea>
+	            </div>
+	
+	            <div class="d-flex justify-content-end mt-5">
+	
+	                <button type="button" class="btn me-4"
+	                style="--bs-btn-padding-y: 0.7rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1.1rem; background-color : rgb(156, 156, 156);" onclick="history.back();">취소</button>
+	
+	
+	                <button type="submit" class="btn btn-danger"
+	                style="--bs-btn-padding-y: 0.7rem; --bs-btn-padding-x: 2.5rem; --bs-btn-font-size: 1.1rem;">등록</button>
+	
+	                
+	            </div>
+	            
+			</div>
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+			
+		</form>
 
     </section>
 	
@@ -65,10 +94,33 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-ClassicEditor.create( document.querySelector( '#editor' ), {
+ClassicEditor.create( document.querySelector( '#hr_content' ), {
     removePlugins: [ 'Heading' ],
     language: "ko",
 });
+
+var fieldDetailSelectElement = document.getElementById("fd_seq");
+
+// 이벤트 리스너를 등록하여 selectElement의 값이 변경될 때마다 동작하도록 설정
+function showFDetail(f_seq) {
+	
+	//기존에 있던 option 다 없애기
+	while (fieldDetailSelectElement.options.length > 0) {
+		fieldDetailSelectElement.remove(0);
+	}
+  
+	<c:forEach var="dto" items="${fdlist}">
+	  if ("${dto.f_seq}" === f_seq) {
+	    var option = document.createElement("option");
+	    option.value = "${dto.fd_seq}";
+	    option.text = "${dto.fd_name}";
+	    fieldDetailSelectElement.appendChild(option);
+	  } 
+	    
+	</c:forEach>
+   
+};
+
 </script>
 </body>
 </html>

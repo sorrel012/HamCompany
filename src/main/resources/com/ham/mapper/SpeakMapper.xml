@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ham.mapper.SpeakMapper">
+
+	
+	<!-- 함 말해볼텨 -->
+	<select id="getSpeakList" resultType="com.ham.domain.MemberSpeakDTO">
+      
+      select * from (select t1.*, rownum as rm from (select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
+      inner join tblmember m on sm.m_id=m.m_id) a 
+      inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
+      on a.sm_seq = b.sm_seq order by a.sm_regdate) t1) ftbl where rm between #{start} and #{end}
+   
+   </select>
+   
+	<select id="getSortedSpeakList" resultType="com.ham.domain.MemberSpeakDTO">
+		
+		<if test="sort == 1">
+			select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
+			inner join tblmember m on sm.m_id=m.m_id) a 
+			inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
+			on a.sm_seq = b.sm_seq order by a.sm_seq desc
+		</if>
+		
+		<if test="sort == 2">
+			select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
+			inner join tblmember m on sm.m_id=m.m_id) a 
+			inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
+			on a.sm_seq = b.sm_seq order by a.sm_seq asc
+		</if>
+	
+	
+	</select>
+	
+	<select id="getSpeakMList" resultType="com.ham.domain.BusinessSpeakDTO">
+      
+      select * from (select tt.*, rownum as rm from (select t1.*, t2.cnt as count from
+        (select sb.*, m.bd_name from tblspeakb sb
+      inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
+        on sb.b_id = m.b_id) t1 
+      inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
+      on t1.sb_seq = t2.sb_seq order by sb_regdate) tt) ftbl where rm between #{start} and #{end}
+      
+   </select>
+
+	
+	<select id="getSortedSpeakMList" resultType="com.ham.domain.BusinessSpeakDTO">
+	
+		<if test="sort == 1">
+			select t1.*, t2.cnt as count from
+	        (select sb.*, m.bd_name from tblspeakb sb
+			inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
+	        on sb.b_id = m.b_id) t1 
+			inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
+			on t1.sb_seq = t2.sb_seq order by t1.sb_seq desc
+		
+		</if>
+		
+		<if test="sort == 2">
+			select t1.*, t2.cnt as count from
+	        (select sb.*, m.bd_name from tblspeakb sb
+			inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
+	        on sb.b_id = m.b_id) t1 
+			inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
+			on t1.sb_seq = t2.sb_seq order by t1.sb_seq asc
+		
+		</if>
+		
+		
+	</select>
+	
+	
+	<select id="getSpeakBoardCount" resultType="Integer">
+	
+		<if test="type == 1">
+			
+			select count(*) as cnt from tblspeakm
+
+		</if>
+		
+		<if test="type == 2">
+			
+			select count(*) as cnt from tblspeakb
+			
+		</if>
+	
+	</select>
+	
+	<select id="getSpeakMDetail" resultType="com.ham.domain.MemberSpeakDTO">
+	
+		select sm.*, m.m_name from tblspeakm sm inner join tblmember m on sm.m_id = m.m_id where sm_seq = ${sm_seq}
+	
+	</select>
+	
+	
+	<update id="updateSpeakMDetail">
+		
+		update tblspeakm set sm_hit = sm_hit + 1 where sm_seq = ${sm_seq}
+	
+	</update>
+	
+	<select id="getSpeakMCnt" resultType="String">
+	
+		select sm_hit from tblspeakm where sm_seq = ${sm_seq}
+	
+	</select>
+	
+	<select id="getSpeckMComment" resultType="com.ham.domain.MSCommentDTO">
+	
+	
+		select smc.*, m.m_name from tblspeakm sm inner join tblsmcomment smc on sm.sm_seq = smc.sm_seq inner join tblmember m on m.m_id = smc.m_id where smc.sm_seq = ${sm_seq}
+	
+	</select>
+	
+	<select id="getSpeckMCommentCnt" resultType="Integer">
+	
+		select count(*) as cnt from tblspeakm sm inner join tblsmcomment smc on sm.sm_seq = smc.sm_seq where smc.sm_seq = ${sm_seq}
+		
+	</select>
+	
+	<select id="getSpeakBDetail" resultType="com.ham.domain.BusinessSpeakDTO">
+	
+		select sb.*, b.bd_name from tblspeakb sb inner join tblbdetail b on b.b_id = sb.b_id where sb.sb_seq = ${sb_seq} 
+	
+	</select>
+	
+	<update id="updateSpeakBDetail">
+		
+		update tblspeakb set sb_hit = sb_hit + 1 where sb_seq = ${sb_seq}
+		
+	</update>
+	
+	<select id="getSpeakBCnt" resultType="String">
+	
+		select sb_hit from tblspeakb where sb_seq = ${sb_seq}
+		
+	</select>
+	
+	<select id="getSpeckBComment" resultType="com.ham.domain.BSCommentDTO">
+	
+		select sbc.*, bd.bd_name from tblspeakb sb inner join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq inner join tblbdetail bd on bd.b_id = sbc.b_id where sbc.sb_seq = ${sb_seq}
+		
+	</select>
+	
+	<select id="getSpeckBCommentCnt" resultType="Integer">
+	
+		select count(*) as cnt from tblspeakb sb inner join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq where sbc.sb_seq = ${sb_seq}
+	
+	</select>
+	
+	<delete id="deleteSMContentCmt">
+		
+		delete from tblsmcomment where sm_seq = ${sm_seq}
+		
+	</delete>
+	
+	<delete id="deleteSMComment">
+	
+		delete from tblspeakm where sm_seq = ${sm_seq}
+	
+	</delete>
+	
+	
+	<delete id="deleteSBContentCmt">
+	
+		delete from tblsbcomment where sb_seq = ${sb_seq}
+	
+	</delete>
+	
+	<delete id="deleteSBComment">
+	
+		delete from tblspeakb where sb_seq = ${sb_seq}
+	
+	</delete>
+	
+	<insert id="addSpeakM" parameterType="com.ham.domain.MemberSpeakDTO">
+		
+		<selectKey keyProperty="sm_seq" order="BEFORE" resultType="String">
+			select sm_seq.nextVal from dual
+		</selectKey>
+		
+		insert into tblspeakm (sm_seq, m_id, sm_subject, sm_content, sm_regdate) values (#{sm_seq}, #{m_id}, #{sm_subject}, #{sm_content}, sysdate)
+	
+	</insert>
+
+	<insert id="addSpeakB" parameterType="com.ham.domain.BusinessSpeakDTO">
+	
+		<selectKey keyProperty="sb_seq" order="BEFORE" resultType="String">
+			select sb_seq.nextVal from dual
+		</selectKey>
+		
+		insert into tblspeakb (sb_seq, b_id, sb_subject, sb_content, sb_regdate) values (#{sb_seq}, #{b_id}, #{sb_subject}, #{sb_content}, sysdate)
+	
+	</insert>
+	
+	<select id="geteditSMContent" resultType="com.ham.domain.MemberSpeakDTO">
+		
+		select * from tblspeakm where sm_seq = ${sm_seq}
+	
+	</select>
+	
+	<select id="geteditSBContent" resultType="com.ham.domain.BusinessSpeakDTO">
+	
+		select * from tblspeakb where sb_seq = ${sb_seq}
+		
+	</select>
+	
+	
+	<update id="editspeakM" parameterType="com.ham.domain.MemberSpeakDTO">
+	
+		update tblspeakm set 
+			sm_subject = #{sm_subject}, 
+			sm_content=#{sm_content}
+			where sm_seq = #{sm_seq}
+	
+	
+	</update>
+	
+	
+	<update id="editspeakB" parameterType="com.ham.domain.BusinessSpeakDTO">
+		
+		update tblspeakb set 
+			sb_subject = #{sb_subject}, 
+			sb_content=#{sb_content}
+			where sb_seq = #{sb_seq}
+	
+	</update>
+	
+	<insert id="addSMComment" parameterType="com.ham.domain.MSCommentDTO">	
+		
+		insert into tblsmcomment values (smc_seq.nextVal, #{sm_seq}, #{m_id}, #{smc_content}, sysdate)
+		
+	</insert>
+	
+	<select id="getLastSMComment" resultType="com.ham.domain.MSCommentDTO">
+	
+		select smc.*, m.m_name from tblsmcomment smc
+			inner join tblspeakm sm on smc.sm_seq = sm.sm_seq 
+			inner join tblmember m on m.m_id = smc.m_id
+			where sm.sm_seq = ${sm_seq} and smc.smc_seq =  (select max(smc.smc_seq) as lastseq from tblsmcomment smc 
+			        inner join tblspeakm sm on smc.sm_seq = sm.sm_seq where sm.sm_seq = ${sm_seq})
+	
+	</select>
+	
+	<insert id="addSBComment" parameterType="com.ham.domain.BSCommentDTO">
+		
+		insert into tblsbcomment values (sbc_seq.nextVal, #{sb_seq}, #{b_id}, #{sbc_content}, sysdate)
+	
+	</insert>
+	
+	<select id="getLastSBComment" resultType="com.ham.domain.BSCommentDTO">
+	
+		select sbc.*, bd.bd_name from tblsbcomment sbc
+			inner join tblspeakb sb on sbc.sb_seq = sb.sb_seq 
+			inner join tblbdetail bd on bd.b_id = sbc.b_id
+			where sb.sb_seq = ${sb_seq} and sbc.sbc_seq =  (select max(sbc.sbc_seq) as lastseq from tblsbcomment sbc 
+			        inner join tblspeakb sb on sbc.sb_seq = sb.sb_seq where sb.sb_seq = ${sb_seq})
+	
+	</select>
+	
+	<select id="searchMResult" resultType="com.ham.domain.MemberSpeakDTO">
+	
+		select a.*, b.cnt as count from (select sm.*, m_name from tblspeakm sm
+		inner join tblmember m on sm.m_id=m.m_id) a 
+		inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
+		on a.sm_seq = b.sm_seq where a.sm_content like '%${word}%'
+	
+	</select>
+	
+	<select id="getSearchMBoardCnt" resultType="Integer">
+	
+		select count(*) as count from (select sm.*, m_name from tblspeakm sm
+		inner join tblmember m on sm.m_id=m.m_id) a 
+		inner join (select sm.sm_seq, count(smc.smc_content) as cnt from tblspeakm sm left outer join tblsmcomment smc on sm.sm_seq = smc.sm_seq group by sm.sm_seq) b
+		on a.sm_seq = b.sm_seq where a.sm_content like '%${word}%'
+	
+	</select>
+	
+	<select id="searchBResult" resultType="com.ham.domain.BusinessSpeakDTO">
+		
+		select t1.*, t2.cnt as count from
+        (select sb.*, m.bd_name from tblspeakb sb
+		inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
+        on sb.b_id = m.b_id) t1 
+		inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
+		on t1.sb_seq = t2.sb_seq where t1.sb_content like '%${word}%'
+	
+	</select>
+	
+	<select id="getSearchBBoardCnt" resultType="Integer">
+		
+		select count(*) as count from
+        (select sb.*, m.bd_name from tblspeakb sb
+		inner join (select b.*, bd_name from tblBusiness b inner join tblbdetail bd on b.b_id = bd.b_id) m
+        on sb.b_id = m.b_id) t1 
+		inner join (select sb.sb_seq, count(sbc.sbc_content) as cnt from tblspeakb sb left outer join tblsbcomment sbc on sb.sb_seq = sbc.sb_seq group by sb.sb_seq) t2
+		on t1.sb_seq = t2.sb_seq where t1.sb_content like '%${word}%'
+		
+	</select>
+</mapper>
